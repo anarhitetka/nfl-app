@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CardsContainer = styled.div`
   box-sizing: border-box;
@@ -24,6 +24,18 @@ const Heading = styled.h4`
   //   text-align: center;
 `;
 
+const LinkStyledComponent = styled(Link)`
+  text-decoration: none;
+  color: black;
+  &:hover,
+  &:focus {
+    color: rgb(213, 10, 10);
+  }
+  &:active {
+    color: grey;
+  }
+`;
+
 export default function Teams({ teamInfo }) {
   return (
     <CardsContainer>
@@ -41,12 +53,12 @@ export default function Teams({ teamInfo }) {
         } = team;
         return (
           <Card key={alternateIds.sdr}>
-            <Link to={`/${alternateIds.sdr}`}>
+            <LinkStyledComponent to={`/${alternateIds.sdr}`}>
               <img src={logos[0].href} height="100" alt="team logo" />
               <Heading>
                 {abbreviation}: {displayName}
               </Heading>
-            </Link>
+            </LinkStyledComponent>
           </Card>
         );
       })}
