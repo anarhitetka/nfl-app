@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import TeamCard from "./components/TeamCard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LayoutPage from "./components/LayoutPage";
+import Teams from "./components/Teams";
+import Team from "./components/Team";
 
 function App() {
   const [teamEndpoints, setTeamEndpoints] = useState([]);
@@ -35,11 +38,15 @@ function App() {
   console.log(teamData);
 
   return (
-    <>
-      <div>
-        <TeamCard teamInfo={teamData} />
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LayoutPage />}>
+          <Route index element={<Teams teamInfo={teamData} />} />
+          <Route path=":teamId" element={<Team teamInfo={teamData} />} />
+        </Route>
+        <Route path="*" element={<p>Page not found</p>} />
+      </Routes>
+    </Router>
   );
 }
 
