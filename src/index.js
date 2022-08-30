@@ -5,7 +5,8 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // disabled strict mode because useEffect in react18 runs twice instead of only once
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );
