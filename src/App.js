@@ -36,7 +36,9 @@ function App() {
 
   return (
     <>
-      <TeamCard teamInfo={teamData} />
+      <div>
+        <TeamCard teamInfo={teamData} />
+      </div>
     </>
   );
 }
