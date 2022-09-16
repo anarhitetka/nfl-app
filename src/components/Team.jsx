@@ -1,4 +1,7 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Game from "./Game";
 
 export default function Team({ teamInfo }) {
   const { teamId } = useParams();
@@ -10,10 +13,43 @@ export default function Team({ teamInfo }) {
     alternateColor,
     location,
     logos,
+    events,
     //   id,
     // alternateIds,
     venue,
   } = team;
+  const [eventsEndpoints, setEventsEndpoints] = useState([]);
+  const [eventsData, setEventsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getEventsEndpoints = async () => {
+      try {
+        const { data } = await axios(events.$ref);
+        let linksAll = [];
+        data.items.forEach((eventLink) => linksAll.push(eventLink.$ref));
+        setEventsEndpoints(linksAll);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getEventsEndpoints();
+  }, [events.$ref]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    Promise.all(
+      eventsEndpoints.map((eventEndpoint) => axios.get(eventEndpoint))
+    ).then((data) => {
+      data.map((event) => {
+        return setEventsData((prev) => {
+          return [...prev, event.data];
+        });
+      });
+      setIsLoading(false);
+    });
+  }, [eventsEndpoints]);
+
   return (
     <div>
       <img src={logos[0].href} height="100" alt="team logo" />
@@ -31,6 +67,19 @@ export default function Team({ teamInfo }) {
         indoor: {venue.indoor ? "yes" : "no"} <br />
         grass: {venue.grass ? "yes" : "no"}
       </p>
+      {isLoading ? "loading games" : ""}
+      <div>
+        <p>Games</p>
+        {isLoading
+          ? "loading games"
+          : eventsData.map((event) => {
+              return (
+                <div key={event.id}>
+                  <Game event={event} />
+                </div>
+              );
+            })}
+      </div>
       <p>
         <strong>Location:</strong> {location}
       </p>

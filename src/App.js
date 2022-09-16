@@ -6,6 +6,7 @@ import Teams from "./components/Teams";
 import Team from "./components/Team";
 
 function App() {
+  // TODO: extract fetching
   const [teamEndpoints, setTeamEndpoints] = useState([]);
   const [teamData, setTeamData] = useState([]);
 
@@ -35,7 +36,7 @@ function App() {
     });
   }, [teamEndpoints]);
 
-  console.log(teamData);
+  // console.log(teamData);
 
   return (
     <Router>
