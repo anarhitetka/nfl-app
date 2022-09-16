@@ -30,7 +30,7 @@ export default function Team({ teamInfo }) {
         data.items.forEach((eventLink) => linksAll.push(eventLink.$ref));
         setEventsEndpoints(linksAll);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
     getEventsEndpoints();
@@ -67,9 +67,19 @@ export default function Team({ teamInfo }) {
         indoor: {venue.indoor ? "yes" : "no"} <br />
         grass: {venue.grass ? "yes" : "no"}
       </p>
-      {isLoading ? "loading games" : ""}
+      <p>
+        <strong>Location:</strong> {location}
+      </p>
+      {venue.images.map((image) => {
+        return (
+          <img src={image.href} height="100" alt="venue" key={Math.random()} />
+        );
+      })}
+      <hr />
       <div>
-        <p>Games</p>
+        {isLoading && <p>Loading games...</p>}
+        <h2>Games:</h2>
+        <hr />
         {isLoading
           ? "loading games"
           : eventsData.map((event) => {
@@ -80,14 +90,6 @@ export default function Team({ teamInfo }) {
               );
             })}
       </div>
-      <p>
-        <strong>Location:</strong> {location}
-      </p>
-      {venue.images.map((image) => {
-        return (
-          <img src={image.href} height="100" alt="venue" key={Math.random()} />
-        );
-      })}
     </div>
   );
 }

@@ -36,19 +36,21 @@ export default function Game({ event }) {
   useEffect(() => {
     const getHomeTeamScore = async () => {
       try {
-        const { data } = await axios.get(homeTeamEndpoint);
+        const { data } = await axios(homeTeamEndpoint);
         setScoreHomeTeam(data.value);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
+        // console.log("Still fetching...");
       }
     };
 
     const getAwayTeamScore = async () => {
       try {
-        const { data } = await axios.get(awayTeamEndpoint);
+        const { data } = await axios(awayTeamEndpoint);
         setScoreAwayTeam(data.value);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
+        // console.log("Still fetching...");
       }
     };
 
@@ -58,13 +60,12 @@ export default function Game({ event }) {
 
   return (
     <div key={event.id}>
-      <p>
-        {event.shortName}: {event.name}
-      </p>
-      <p>date: {formatDate(event.date)}</p>
+      <h4>{event.shortName}</h4>
       {scoreIsFinal
         ? `Away team score: ${scoreAwayTeam}, Home team score: ${scoreHomeTeam}`
         : "Game pending"}
+      <p>{event.name}</p>
+      <p>date: {formatDate(event.date)}</p>
       <hr />
     </div>
   );
