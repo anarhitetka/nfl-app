@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutPage from "./components/LayoutPage";
 import Teams from "./components/Teams";
 import Team from "./components/Team";
+import WeeksList from "./components/WeeksList";
 
 function App() {
   // TODO: extract fetching
@@ -45,6 +46,7 @@ function App() {
           <Route index element={<Teams teamInfo={teamData} />} />
           <Route path=":teamId" element={<Team teamInfo={teamData} />} />
         </Route>
+        <Route path="weeks" element={<WeeksList />} />
         <Route path="*" element={<p>Page not found</p>} />
       </Routes>
     </Router>
