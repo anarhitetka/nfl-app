@@ -39,29 +39,32 @@ const LinkStyledComponent = styled(Link)`
 export default function Teams({ teamInfo }) {
   return (
     <CardsContainer>
-      {teamInfo.map((team) => {
-        const {
-          abbreviation,
-          displayName,
-          //   color,
-          //   alternateColor,
-          //   location,
-          logos,
-          //   id,
-          alternateIds,
-          //   venue,
-        } = team;
-        return (
-          <Card key={alternateIds.sdr}>
-            <LinkStyledComponent to={`/${alternateIds.sdr}`}>
-              <img src={logos[0].href} height="100" alt="team logo" />
-              <Heading>
-                {abbreviation}: {displayName}
-              </Heading>
-            </LinkStyledComponent>
-          </Card>
-        );
-      })}
+      {teamInfo
+        .filter((t) => t.displayName !== "AFC" && t.displayName !== "NFC")
+        .map((team) => {
+          const {
+            abbreviation,
+            displayName,
+            color,
+            // alternateColor,
+            //   location,
+            logos,
+            //   id,
+            alternateIds,
+            //   venue,
+          } = team;
+          return (
+            <Card key={alternateIds.sdr}>
+              <LinkStyledComponent to={`/${alternateIds.sdr}`}>
+                <p style={{ backgroundColor: "#" + color, color: "white" }}>
+                  {abbreviation}
+                </p>
+                <img src={logos[0].href} height="100" alt="team logo" />
+                <Heading>{displayName}</Heading>
+              </LinkStyledComponent>
+            </Card>
+          );
+        })}
     </CardsContainer>
   );
 }

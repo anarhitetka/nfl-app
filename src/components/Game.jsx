@@ -1,12 +1,32 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const GameContainer = styled.div`
+  width: 400px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+`;
 
 export default function Game({ event }) {
   const formatDate = function (dateStr) {
-    return `${new Date(dateStr).toDateString()} (Time Zone: ${
-      Intl.DateTimeFormat().resolvedOptions().timeZone
-    })`;
+    return `${new Date(dateStr).toLocaleString(undefined, {
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      dateStyle: "full",
+      timeStyle: "full",
+    })}`;
   };
+
+  // const formatDate = function (dateStr) {
+  //   const time = new Date(dateStr).toLocaleString(undefined, {
+  //     timeStyle: "full",
+  //   });
+  //   return `${new Date(dateStr).toDateString()} ${time} (Time Zone: ${
+  //     Intl.DateTimeFormat().resolvedOptions().timeZone
+  //   })`;
+  // };
 
   const [homeTeamEndpoint, setHomeTeamEndpoint] = useState();
   const [awayTeamEndpoint, setAwayTeamEndpoint] = useState();
@@ -58,15 +78,18 @@ export default function Game({ event }) {
     getAwayTeamScore();
   }, [homeTeamEndpoint, awayTeamEndpoint]);
 
+  const [awayTeam, homeTeam] = event.name.split(" at ");
+
   return (
-    <div key={event.id}>
+    <GameContainer key={event.id}>
       <h4>{event.shortName}</h4>
       {scoreIsFinal
         ? `Away team score: ${scoreAwayTeam}, Home team score: ${scoreHomeTeam}`
         : "Game pending"}
-      <p>{event.name}</p>
+      <p>
+        {awayTeam} at {homeTeam}
+      </p>
       <p>date: {formatDate(event.date)}</p>
-      <hr />
-    </div>
+    </GameContainer>
   );
 }

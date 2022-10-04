@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutPage from "./components/LayoutPage";
 import Teams from "./components/Teams";
 import Team from "./components/Team";
-import WeeksList from "./components/WeeksList";
+import Weeks from "./components/Weeks";
+import WeekGames from "./components/WeekGames";
 
 function App() {
   // TODO: extract fetching
@@ -15,9 +16,15 @@ function App() {
     const { data } = await axios(
       "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/teams/"
     );
+    // console.log(data.count);
     let linksTeams = [];
-    data.items.forEach((item) => linksTeams.push(item.$ref));
-    // array of strings (links for each team's endpoint)
+    for (let i = 0; i < data.count + 2; i++) {
+      linksTeams.push(
+        `http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/teams/${
+          i + 1
+        }`
+      );
+    }
     setTeamEndpoints(linksTeams);
   };
 
@@ -45,8 +52,10 @@ function App() {
         <Route path="/" element={<LayoutPage />}>
           <Route index element={<Teams teamInfo={teamData} />} />
           <Route path=":teamId" element={<Team teamInfo={teamData} />} />
+          <Route path="weeks" element={<Weeks />}>
+            <Route path=":weekNo" element={<WeekGames />} />
+          </Route>
         </Route>
-        <Route path="weeks" element={<WeeksList />} />
         <Route path="*" element={<p>Page not found</p>} />
       </Routes>
     </Router>

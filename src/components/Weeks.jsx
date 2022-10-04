@@ -1,17 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link, Outlet } from "react-router-dom";
 
-import WeekGames from "./WeekGames";
-
-export default function WeeksList() {
+export default function Weeks() {
   const [weeksEndpoints, setWeeksEndpoints] = useState([]);
   const [weeksData, setWeeksData] = useState([]);
 
-  const formatDate = function (dateStr) {
-    return `${new Date(dateStr).toDateString()} (Time Zone: ${
-      Intl.DateTimeFormat().resolvedOptions().timeZone
-    })`;
-  };
+  // const formatDate = function (dateStr) {
+  //   return `${new Date(dateStr).toLocaleString(undefined, {
+  //     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  //     dateStyle: "full",
+  //     timeStyle: "full",
+  //   })}`;
+  // };
 
   const getWeeksEndpoints = async () => {
     const { data } = await axios(
@@ -39,18 +40,27 @@ export default function WeeksList() {
   }, [weeksEndpoints]);
 
   // console.log(weeksData);
+
   return (
     <>
-      {weeksData.map((week) => {
-        return (
-          <div key={week.text}>
-            <h3>{week.text}</h3>
-            <p>Start date: {formatDate(week.startDate)}</p>
-            <p>End date: {formatDate(week.endDate)}</p>
-            <WeekGames events={week.events} number={week.number} />
-          </div>
-        );
-      })}
+      <div>
+        <div>
+          <ul>
+            {weeksData.map((week) => {
+              return (
+                <Link
+                  key={`${week.text}`}
+                  style={{ padding: "5px" }}
+                  to={`/weeks/${week.number}`}
+                >
+                  {week.text}
+                </Link>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+      <Outlet />
     </>
   );
 }

@@ -41,11 +41,14 @@ export default function Team({ teamInfo }) {
     Promise.all(
       eventsEndpoints.map((eventEndpoint) => axios.get(eventEndpoint))
     ).then((data) => {
+      let dataArr = [];
       data.map((event) => {
-        return setEventsData((prev) => {
-          return [...prev, event.data];
-        });
+        // return setEventsData((prev) => {
+        //   return [...prev, event.data];
+        // });
+        return dataArr.push(event.data);
       });
+      setEventsData(dataArr);
       setIsLoading(false);
     });
   }, [eventsEndpoints]);
