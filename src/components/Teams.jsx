@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+
+import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
 
 const CardsContainer = styled.div`
   box-sizing: border-box;
@@ -36,12 +38,14 @@ const LinkStyledComponent = styled(Link)`
   }
 `;
 
-export default function Teams({ teamInfo }) {
+export default function Teams() {
+  const teamInfo = useFetchMultipleEndpoints(
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams?limit=32"
+  );
   return (
-    <CardsContainer>
-      {teamInfo
-        .filter((t) => t.displayName !== "AFC" && t.displayName !== "NFC")
-        .map((team) => {
+    <>
+      <CardsContainer>
+        {teamInfo.data.map((team) => {
           const {
             abbreviation,
             displayName,
@@ -49,13 +53,13 @@ export default function Teams({ teamInfo }) {
             // alternateColor,
             //   location,
             logos,
-            //   id,
+            id,
             alternateIds,
             //   venue,
           } = team;
           return (
             <Card key={alternateIds.sdr}>
-              <LinkStyledComponent to={`/${alternateIds.sdr}`}>
+              <LinkStyledComponent to={`/teams/${id}`}>
                 <p style={{ backgroundColor: "#" + color, color: "white" }}>
                   {abbreviation}
                 </p>
@@ -65,6 +69,8 @@ export default function Teams({ teamInfo }) {
             </Card>
           );
         })}
-    </CardsContainer>
+      </CardsContainer>
+      <Outlet />
+    </>
   );
 }
