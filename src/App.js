@@ -23,7 +23,7 @@ function App() {
           <Route index path="/" element={<div>hi</div>} />
           <Route path="teams" element={<Teams />} />
           <Route path="teams/:teamId" element={<Team />} />
-          <Route path="weeks" element={<Weeks />}>
+          <Route path="weeks" element={<Weeks weekNo={weekNo} />}>
             <Route index element={<WeekSelected weekNo={weekNo} />} />
             <Route path=":weekNo" element={<WeekGames />} />
           </Route>
