@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutPage from "./components/LayoutPage";
+import Home from "./components/Home";
 import Teams from "./components/Teams";
 import Team from "./components/Team";
 import Weeks from "./components/Weeks";
 import WeekGames from "./components/WeekGames";
 import WeekSelected from "./components/WeekSelected";
+import ErrorPage from "./components/ErrorPage";
 
 import { useFetchMultipleEndpoints } from "./utils/useFetchMultipleEndpoints";
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
@@ -20,7 +22,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LayoutPage />}>
-          <Route index path="/" element={<div>hi</div>} />
+          <Route index path="/" element={<Home />} />
           <Route path="teams" element={<Teams />} />
           <Route path="teams/:teamId" element={<Team />} />
           <Route path="weeks" element={<Weeks weekNo={weekNo} />}>
@@ -28,7 +30,7 @@ function App() {
             <Route path=":weekNo" element={<WeekGames />} />
           </Route>
         </Route>
-        <Route path="*" element={<p>Page not found</p>} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
   );

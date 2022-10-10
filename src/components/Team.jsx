@@ -7,7 +7,8 @@ export default function Team() {
   const { teamId } = useParams();
 
   const teamData = useFetchSingleEndpoint(
-    `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/${teamId}`
+    `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/`,
+    teamId
   );
 
   const eventsData = useFetchMultipleEndpoints(

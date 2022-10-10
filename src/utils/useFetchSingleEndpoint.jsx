@@ -1,22 +1,27 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export function useFetchSingleEndpoint(endpoint) {
-  const [data, setData] = useState([]);
+export function useFetchSingleEndpoint(endpoint, id) {
+  const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const { data } = await axios(endpoint);
-        setData(data);
-        setIsLoading(false);
-      } catch (error) {
-        // console.error(error);
-      }
-    };
-    getData();
-  }, [endpoint]);
+    if (id) {
+      const getData = async () => {
+        try {
+          const { data } = await axios(endpoint + id);
+          setData(data);
+          setIsLoading(false);
+          // }
+        } catch (error) {
+          // console.error(error);
+          setError(error);
+        }
+      };
+      getData();
+    }
+  }, [endpoint, id]);
 
-  return { data, isLoading };
+  return { data, isLoading, error };
 }

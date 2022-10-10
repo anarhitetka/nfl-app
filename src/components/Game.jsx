@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { useFetchSingleEndpoint } from "../utils/useFetchSingleEndpoint";
+
 const GameContainer = styled.div`
   width: 400px;
   margin: 10px;
@@ -19,15 +21,6 @@ export default function Game({ event }) {
     })}`;
   };
 
-  // const formatDate = function (dateStr) {
-  //   const time = new Date(dateStr).toLocaleString(undefined, {
-  //     timeStyle: "full",
-  //   });
-  //   return `${new Date(dateStr).toDateString()} ${time} (Time Zone: ${
-  //     Intl.DateTimeFormat().resolvedOptions().timeZone
-  //   })`;
-  // };
-
   const [homeTeamEndpoint, setHomeTeamEndpoint] = useState();
   const [awayTeamEndpoint, setAwayTeamEndpoint] = useState();
 
@@ -35,6 +28,9 @@ export default function Game({ event }) {
   const [scoreAwayTeam, setScoreAwayTeam] = useState(0);
 
   const [scoreIsFinal, setScoreIsFinal] = useState(false);
+
+  const [homeTeamID, setHomeTeamID] = useState();
+  const [awayTeamID, setAwayTeamID] = useState();
 
   useEffect(() => {
     const getGameEndpoints = async () => {
@@ -44,6 +40,9 @@ export default function Game({ event }) {
         competitor.homeAway === "home"
           ? setHomeTeamEndpoint(competitor.score.$ref)
           : setAwayTeamEndpoint(competitor.score.$ref);
+        competitor.homeAway === "home"
+          ? setHomeTeamID(competitor.id)
+          : setAwayTeamID(competitor.id);
       });
       data.competitions[0].boxscoreAvailable
         ? setScoreIsFinal(true)
@@ -60,7 +59,6 @@ export default function Game({ event }) {
         setScoreHomeTeam(data.value);
       } catch (error) {
         // console.error(error);
-        // console.log("Still fetching...");
       }
     };
 
@@ -70,13 +68,22 @@ export default function Game({ event }) {
         setScoreAwayTeam(data.value);
       } catch (error) {
         // console.error(error);
-        // console.log("Still fetching...");
       }
     };
 
     getHomeTeamScore();
     getAwayTeamScore();
   }, [homeTeamEndpoint, awayTeamEndpoint]);
+
+  const awayTeamData = useFetchSingleEndpoint(
+    `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/`,
+    awayTeamID
+  );
+
+  const homeTeamData = useFetchSingleEndpoint(
+    `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/`,
+    homeTeamID
+  );
 
   const [awayTeam, homeTeam] = event.name.split(" at ");
 
@@ -89,6 +96,23 @@ export default function Game({ event }) {
       <p>
         {awayTeam} at {homeTeam}
       </p>
+
+      {!awayTeamData.isLoading && (
+        <img
+          src={awayTeamData.data.team.logos[0].href}
+          height="100"
+          alt="team logo"
+        />
+      )}
+
+      {!homeTeamData.isLoading && (
+        <img
+          src={homeTeamData.data.team.logos[0].href}
+          height="100"
+          alt="team logo"
+        />
+      )}
+
       <p>date: {formatDate(event.date)}</p>
     </GameContainer>
   );

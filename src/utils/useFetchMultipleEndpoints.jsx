@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export function useFetchMultipleEndpoints(endpoint) {
   const [endpoints, setEndpoints] = useState([]);
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getEndpoints = async () => {
