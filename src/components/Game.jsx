@@ -13,14 +13,6 @@ const GameContainer = styled.div`
 `;
 
 export default function Game({ event }) {
-  const formatDate = function (dateStr) {
-    return `${new Date(dateStr).toLocaleString(undefined, {
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      dateStyle: "full",
-      timeStyle: "full",
-    })}`;
-  };
-
   const [homeTeamEndpoint, setHomeTeamEndpoint] = useState();
   const [awayTeamEndpoint, setAwayTeamEndpoint] = useState();
 
@@ -32,6 +24,23 @@ export default function Game({ event }) {
   const [homeTeamID, setHomeTeamID] = useState();
   const [awayTeamID, setAwayTeamID] = useState();
 
+  // const [awayTeam, homeTeam] = event.name.split(" at ");
+
+  // FORMAT DATE FN
+  const formatDate = function (dateStr) {
+    return `${new Date(dateStr).toLocaleString(undefined, {
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      // dateStyle: "medium",
+      // timeStyle: "short",
+      weekday: "short",
+      timeZoneName: "short",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })}`;
+  };
+
+  // FETCH ENDPOINTS FOR GAME
   useEffect(() => {
     const getGameEndpoints = async () => {
       const { data } = await axios(event.$ref);
@@ -52,6 +61,7 @@ export default function Game({ event }) {
     getGameEndpoints();
   }, [event.$ref]);
 
+  // FETCH SCORES
   useEffect(() => {
     const getHomeTeamScore = async () => {
       try {
@@ -75,45 +85,67 @@ export default function Game({ event }) {
     getAwayTeamScore();
   }, [homeTeamEndpoint, awayTeamEndpoint]);
 
+  // FETCH TEAM DATA
   const awayTeamData = useFetchSingleEndpoint(
     `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/`,
     awayTeamID
   );
+  // console.log(awayTeamData.data.team.record.items[0].summary);
 
   const homeTeamData = useFetchSingleEndpoint(
     `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/`,
     homeTeamID
   );
-
-  const [awayTeam, homeTeam] = event.name.split(" at ");
-
+  // console.log(event);
   return (
     <GameContainer key={event.id}>
-      <h4>{event.shortName}</h4>
-      {scoreIsFinal
-        ? `Away team score: ${scoreAwayTeam}, Home team score: ${scoreHomeTeam}`
-        : "Game pending"}
-      <p>
-        {awayTeam} at {homeTeam}
-      </p>
+      <h4>{event.name}</h4>
+      <p>{formatDate(event.date)}</p>
+      <p>{scoreIsFinal ? `FINAL SCORE` : "Game pending"}</p>
 
-      {!awayTeamData.isLoading && (
-        <img
-          src={awayTeamData.data.team.logos[0].href}
-          height="100"
-          alt="team logo"
-        />
-      )}
+      <div>
+        {!awayTeamData.isLoading && (
+          <>
+            <img
+              src={awayTeamData.data.team.logos[0].href}
+              height="30"
+              alt="team logo"
+            />
+            <span>{awayTeamData.data.team.abbreviation}</span>
+          </>
+        )}
+        <span>
+          {" "}
+          :{" "}
+          {scoreIsFinal
+            ? scoreAwayTeam
+            : awayTeamData.isLoading
+            ? "loading stats"
+            : awayTeamData.data.team.record.items[0].summary}
+        </span>
+      </div>
 
-      {!homeTeamData.isLoading && (
-        <img
-          src={homeTeamData.data.team.logos[0].href}
-          height="100"
-          alt="team logo"
-        />
-      )}
-
-      <p>date: {formatDate(event.date)}</p>
+      <div>
+        {!homeTeamData.isLoading && (
+          <>
+            <img
+              src={homeTeamData.data.team.logos[0].href}
+              height="30"
+              alt="team logo"
+            />
+            <span>{homeTeamData.data.team.abbreviation}</span>
+          </>
+        )}
+        <span>
+          {" "}
+          :{" "}
+          {scoreIsFinal
+            ? scoreHomeTeam
+            : homeTeamData.isLoading
+            ? "loading stats"
+            : homeTeamData.data.team.record.items[0].summary}
+        </span>
+      </div>
     </GameContainer>
   );
 }
