@@ -31,7 +31,7 @@ export function useFetchMultipleEndpoints(endpoint) {
           return dataArr.push(dataItem.data);
         });
         setData(dataArr);
-        setIsLoading(false);
+        if (dataArr.length > 0) setIsLoading(false);
       }
     );
   }, [endpoints]);

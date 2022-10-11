@@ -8,22 +8,43 @@ const GamesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 export default function WeekSelected({ weekNo }) {
-  const gamesData = useFetchMultipleEndpoints(
+  const allGamesData = useFetchMultipleEndpoints(
     `http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/weeks/${weekNo}/events`
   );
 
+  // TODO: group games by day of the week:
+
+  // const dates = allGamesData.data.map((game) => {
+  //   return {
+  //     gameId: game.id,
+  //     gameDay: new Date(game.date).getDay().toString(),
+  //     gameTime: new Date(game.date).getHours(),
+  //   };
+  // });
+
+  // const groupBy = (arr, key) => {
+  //   return arr.reduce((result, currentVal) => {
+  //     (result[currentVal[key]] = result[currentVal[key]] || []).push(
+  //       currentVal
+  //     );
+  //     return result;
+  //   }, {});
+  // };
+
+  // const gamesByDay = groupBy(dates, "gameDay");
+
   return (
     <>
-      <h3>Week {weekNo}</h3>
-      {gamesData.isLoading ? (
+      {allGamesData.isLoading ? (
         <CircularProgress />
       ) : (
         <GamesContainer>
-          {gamesData.data &&
-            gamesData.data.map((event) => {
+          {allGamesData.data &&
+            allGamesData.data.map((event) => {
               return (
                 <Game
                   event={event}
