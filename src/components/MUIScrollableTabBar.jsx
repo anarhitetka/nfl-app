@@ -13,7 +13,7 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
   const [value, setValue] = React.useState(0);
 
   useEffect(() => {
-    if (!isNaN(currentWeek)) {
+    if (currentWeek !== 0) {
       setValue(Number(currentWeek) - 1);
     }
     if (!isNaN(weekNo)) {
@@ -68,7 +68,7 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
             <Tab
               label={
                 <Box>
-                  <Typography variant="button">Week {week.number}</Typography>
+                  <Typography variant="button">{week.text}</Typography>
                   <br />
                   <Typography variant="caption">
                     {formatDate(week.startDate)} - {formatDate(week.endDate)}

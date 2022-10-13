@@ -1,7 +1,6 @@
 import { Gronk } from "../assets/Gronk";
 import { NFLLogo } from "../assets/NFLLogo";
 import styled from "styled-components";
-import { height } from "@mui/system";
 
 const StyledDiv = styled.div`
   display: flex;
