@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { CircularProgress } from "@mui/material";
@@ -29,6 +30,11 @@ const StyledTeamDiv = styled.div`
     width: 100%;
     padding: 5px 10px;
   }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 export default function Game({ event }) {
@@ -132,13 +138,17 @@ export default function Game({ event }) {
             <StyledTeamDiv>
               {!awayTeamData.isLoading && (
                 <>
-                  <img
-                    src={awayTeamData.data.team.logos[0].href}
-                    height="25"
-                    alt="team logo"
-                  />
+                  <StyledLink to={`/teams/${awayTeamID}`}>
+                    <img
+                      src={awayTeamData.data.team.logos[0].href}
+                      height="25"
+                      alt="team logo"
+                    />
+                  </StyledLink>
                   <div>
-                    <span>{awayTeamData.data.team.abbreviation}</span>
+                    <StyledLink to={`/teams/${awayTeamID}`}>
+                      <span>{awayTeamData.data.team.abbreviation}</span>
+                    </StyledLink>
                     <span>
                       {scoreIsFinal
                         ? scoreAwayTeam
@@ -154,13 +164,17 @@ export default function Game({ event }) {
             <StyledTeamDiv>
               {!homeTeamData.isLoading && (
                 <>
-                  <img
-                    src={homeTeamData.data.team.logos[0].href}
-                    height="25"
-                    alt="team logo"
-                  />
+                  <StyledLink to={`/teams/${homeTeamID}`}>
+                    <img
+                      src={homeTeamData.data.team.logos[0].href}
+                      height="25"
+                      alt="team logo"
+                    />
+                  </StyledLink>
                   <div>
-                    <span>{homeTeamData.data.team.abbreviation}</span>
+                    <StyledLink to={`/teams/${homeTeamID}`}>
+                      <span>{homeTeamData.data.team.abbreviation}</span>
+                    </StyledLink>
                     <span>
                       {scoreIsFinal
                         ? scoreHomeTeam

@@ -1,4 +1,4 @@
-export function Gronk({ size = 300, color = "#d50a0a" }) {
+export function Gronk({ size = 300, color = "#013369" }) {
   return (
     <svg
       version="1.0"
