@@ -92,7 +92,7 @@ export default function Team() {
             eventsData.data.map((event) => {
               return (
                 <div key={event.id}>
-                  <Game event={event} key={event.id} />
+                  <Game event={event} key={event.id} weekNo={true} />
                 </div>
               );
             })
