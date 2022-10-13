@@ -3,33 +3,61 @@ import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
 import { useFetchSingleEndpoint } from "../utils/useFetchSingleEndpoint";
 import Game from "./Game";
 
+import styled from "styled-components";
+
+import { CircularProgress } from "@mui/material";
+
+const GamesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const StyledDivTeamHeader = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    margin-left: 30px;
+  }
+`;
+
+const StyledHeadingH2 = styled.h2`
+  text-align: center;
+`;
+
 export default function Team() {
   const { teamId } = useParams();
 
   const teamData = useFetchSingleEndpoint(
-    `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/${teamId}`
+    `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/`,
+    teamId
   );
 
   const eventsData = useFetchMultipleEndpoints(
     `http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/teams/${teamId}/events`
   );
-
   return (
     <div>
       {teamData.isLoading ? (
-        "loading team info"
+        <CircularProgress />
       ) : (
-        <div>
-          <img src={teamData.data.logos[0].href} height="100" alt="team logo" />
-          <h1>
-            {teamData.data.abbreviation}: {teamData.data.displayName}
-          </h1>
-          colors:
-          <p style={{ backgroundColor: "#" + teamData.data.color }}>.</p>
-          <p style={{ backgroundColor: "#" + teamData.data.alternateColor }}>
-            .
-          </p>
-          <p>
+        <div
+          style={{ backgroundColor: "#" + teamData.data.color, color: "white" }}
+        >
+          <StyledDivTeamHeader>
+            <h1>{teamData.data.displayName}</h1>
+            <img
+              src={teamData.data.logos[0].href}
+              height="150"
+              alt="team logo"
+            />
+          </StyledDivTeamHeader>
+
+          {/* VENUE INFO  */}
+          {/* <p>
             <strong>Venue:</strong>
             <br />
             {teamData.data.venue.fullName} <br />
@@ -49,24 +77,27 @@ export default function Team() {
                 key={Math.random()}
               />
             );
-          })}
-          <hr />
+          })} */}
+          {/* <hr /> */}
         </div>
       )}
 
       <div>
-        {eventsData.isLoading && <p>Loading games...</p>}
-        <h2>Games:</h2>
-        <hr />
-        {eventsData.isLoading
-          ? "loading games"
-          : eventsData.data.map((event) => {
+        {eventsData.isLoading && <CircularProgress />}
+        <StyledHeadingH2>Schedule</StyledHeadingH2>
+        <GamesContainer>
+          {eventsData.isLoading ? (
+            <CircularProgress />
+          ) : (
+            eventsData.data.map((event) => {
               return (
                 <div key={event.id}>
-                  <Game event={event} />
+                  <Game event={event} key={event.id} />
                 </div>
               );
-            })}
+            })
+          )}
+        </GamesContainer>
       </div>
     </div>
   );

@@ -1,31 +1,26 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+
 import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
 
-export default function Weeks() {
+import MUIScrollableTabBar from "./MUIScrollableTabBar";
+
+const StyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export default function Weeks({ weekNo }) {
   const weeksData = useFetchMultipleEndpoints(
     "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/weeks/"
   );
 
   return (
-    <>
-      <div>
-        <div>
-          <ul>
-            {weeksData.data.map((week) => {
-              return (
-                <Link
-                  key={`${week.text}`}
-                  style={{ padding: "5px" }}
-                  to={`/weeks/${week.number}`}
-                >
-                  {week.text}
-                </Link>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+    <div>
+      <StyledDiv>
+        <MUIScrollableTabBar weeksData={weeksData} currentWeek={weekNo} />
+      </StyledDiv>
       <Outlet />
-    </>
+    </div>
   );
 }
