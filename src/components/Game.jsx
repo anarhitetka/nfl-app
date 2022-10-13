@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
   color: black;
 `;
 
-export default function Game({ event }) {
+export default function Game({ event, weekNo }) {
   const [homeTeamScoreEndpoint, setHomeTeamScoreEndpoint] = useState();
   const [awayTeamScoreEndpoint, setAwayTeamScoreEndpoint] = useState();
 
@@ -136,7 +136,7 @@ export default function Game({ event }) {
             </div>
 
             <StyledTeamDiv>
-              {!awayTeamData.isLoading && (
+              {!awayTeamData.isLoading && weekNo <= 18 && (
                 <>
                   <StyledLink to={`/teams/${awayTeamID}`}>
                     <img
@@ -162,7 +162,7 @@ export default function Game({ event }) {
             </StyledTeamDiv>
 
             <StyledTeamDiv>
-              {!homeTeamData.isLoading && (
+              {!homeTeamData.isLoading && weekNo <= 18 && (
                 <>
                   <StyledLink to={`/teams/${homeTeamID}`}>
                     <img

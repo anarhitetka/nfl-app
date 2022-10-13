@@ -8,15 +8,19 @@ import WeekGames from "./components/WeekGames";
 import WeekSelected from "./components/WeekSelected";
 import ErrorPage from "./components/ErrorPage";
 
-import { useFetchMultipleEndpoints } from "./utils/useFetchMultipleEndpoints";
+import { useFetchCombine } from "./utils/useFetchCombine";
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
 
 function App() {
-  const weeksData = useFetchMultipleEndpoints(
-    "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/weeks/"
-  );
+  ////////////////////////////////////////////
+  // fetch regular season and postseason weeks data (without preseason (type 1) or postseason (type 4))
+  const allWeeksData = useFetchCombine([
+    "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/weeks/",
+    "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/3/weeks",
+  ]);
 
-  const weekNo = setCurrentWeekNo({ weeksData });
+  const weekNo = setCurrentWeekNo(allWeeksData);
+  ////////////////////////////////////////////
 
   return (
     <Router>
@@ -25,7 +29,10 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="teams" element={<Teams />} />
           <Route path="teams/:teamId" element={<Team />} />
-          <Route path="weeks" element={<Weeks weekNo={weekNo} />}>
+          <Route
+            path="weeks"
+            element={<Weeks weekNo={weekNo} allWeeksData={allWeeksData} />}
+          >
             <Route index element={<WeekSelected weekNo={weekNo} />} />
             <Route path=":weekNo" element={<WeekGames />} />
           </Route>
