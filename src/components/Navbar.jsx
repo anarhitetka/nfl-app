@@ -1,21 +1,21 @@
 import { NavLink } from "react-router-dom";
-import { StyledNav, StyledButton } from "./Navbar.styled.js";
+import * as S from "./Navbar.styled.js";
 
 export default function Navbar() {
   return (
-    <StyledNav>
+    <S.Nav>
       <NavLink to="/">
-        <StyledButton>NFL APP</StyledButton>
+        <S.NavButton>NFL APP</S.NavButton>
       </NavLink>
 
       <div>
         <NavLink to="/weeks">
-          <StyledButton>Games</StyledButton>
+          <S.NavButton>Games</S.NavButton>
         </NavLink>
         <NavLink to="/teams">
-          <StyledButton>Teams</StyledButton>
+          <S.NavButton>Teams</S.NavButton>
         </NavLink>
       </div>
-    </StyledNav>
+    </S.Nav>
   );
 }

@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 import { CircularProgress } from "@mui/material";
 
-const GamesContainer = styled.div`
+const S = {};
+S.GamesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -44,7 +45,7 @@ export default function WeekSelected({ weekNo }) {
       {allGamesData.isLoading ? (
         <CircularProgress />
       ) : (
-        <GamesContainer>
+        <S.GamesContainer>
           {allGamesData.data &&
             allGamesData.data.map((event) => {
               return (
@@ -55,7 +56,7 @@ export default function WeekSelected({ weekNo }) {
                 />
               );
             })}
-        </GamesContainer>
+        </S.GamesContainer>
       )}
     </>
   );

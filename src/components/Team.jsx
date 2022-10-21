@@ -1,32 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
 import { useFetchSingleEndpoint } from "../utils/useFetchSingleEndpoint";
-import Game from "./Game";
-
-import styled from "styled-components";
-
 import { CircularProgress } from "@mui/material";
-
-const GamesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
-const StyledDivTeamHeader = styled.div`
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    margin-left: 30px;
-  }
-`;
-
-const StyledHeadingH2 = styled.h2`
-  text-align: center;
-`;
+import Game from "./Game";
+import * as S from "./Team.styled";
 
 export default function Team() {
   const { teamId } = useParams();
@@ -47,14 +24,14 @@ export default function Team() {
         <div
           style={{ backgroundColor: "#" + teamData.data.color, color: "white" }}
         >
-          <StyledDivTeamHeader>
+          <S.TeamHeader>
             <h1>{teamData.data.displayName}</h1>
             <img
               src={teamData.data.logos[0].href}
               height="150"
               alt="team logo"
             />
-          </StyledDivTeamHeader>
+          </S.TeamHeader>
 
           {/* VENUE INFO  */}
           {/* <p>
@@ -84,8 +61,8 @@ export default function Team() {
 
       <div>
         {eventsData.isLoading && <CircularProgress />}
-        <StyledHeadingH2>Schedule</StyledHeadingH2>
-        <GamesContainer>
+        <S.HeadingH2>Schedule</S.HeadingH2>
+        <S.GamesContainer>
           {eventsData.isLoading ? (
             <CircularProgress />
           ) : (
@@ -97,7 +74,7 @@ export default function Team() {
               );
             })
           )}
-        </GamesContainer>
+        </S.GamesContainer>
       </div>
     </div>
   );

@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import MUIScrollableTabBar from "./MUIScrollableTabBar";
 
-const StyledDiv = styled.div`
+const S = {};
+S.TabBar = styled.div`
   display: flex;
   justify-content: center;
 `;
@@ -11,9 +12,9 @@ const StyledDiv = styled.div`
 export default function Weeks({ weekNo, allWeeksData }) {
   return (
     <div>
-      <StyledDiv>
+      <S.TabBar>
         <MUIScrollableTabBar weeksData={allWeeksData} currentWeek={weekNo} />
-      </StyledDiv>
+      </S.TabBar>
       <Outlet />
     </div>
   );

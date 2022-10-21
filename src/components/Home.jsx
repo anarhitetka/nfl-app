@@ -2,7 +2,8 @@ import { Gronk } from "../assets/Gronk";
 import { NFLLogo } from "../assets/NFLLogo";
 import styled from "styled-components";
 
-const StyledDiv = styled.div`
+const S = {};
+S.Container = styled.div`
   display: flex;
   flex-flow: column;
   height: 90%;
@@ -20,10 +21,10 @@ const StyledDiv = styled.div`
 
 export default function Home() {
   return (
-    <StyledDiv>
+    <S.Container>
       <NFLLogo size={250} />
       <div></div>
       <Gronk size={250} />
-    </StyledDiv>
+    </S.Container>
   );
 }

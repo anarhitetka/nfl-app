@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledNav = styled.nav`
+export const Nav = styled.nav`
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -19,7 +19,7 @@ export const StyledNav = styled.nav`
   }
 `;
 
-export const StyledButton = styled.button`
+export const NavButton = styled.button`
   background-color: #ffffff;
   border: 1px solid #013369;
   border-radius: 8px;

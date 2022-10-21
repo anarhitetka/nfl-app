@@ -1,41 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-
 import { CircularProgress } from "@mui/material";
-
 import { useFetchSingleEndpoint } from "../utils/useFetchSingleEndpoint";
 
-const GameContainer = styled.div`
-  width: 200px;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 5px;
-`;
-
-const StyledH4 = styled.h4`
-  margin: 0;
-`;
-
-const StyledTeamDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 5px 10px;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
+import * as S from "./Game.styled.js";
 
 export default function Game({ event, weekNo }) {
   const [homeTeamScoreEndpoint, setHomeTeamScoreEndpoint] = useState();
@@ -120,14 +88,14 @@ export default function Game({ event, weekNo }) {
   );
 
   return (
-    <GameContainer key={event.id}>
+    <S.GameContainer key={event.id}>
       {/* TODO: Refactor into separate components */}
 
       {awayTeamData.isLoading || homeTeamData.isLoading ? (
         <CircularProgress size={20} />
       ) : (
         <>
-          <StyledH4>{event.name}</StyledH4>
+          <S.GameHeading>{event.name}</S.GameHeading>
 
           <div>
             <div>
@@ -135,20 +103,20 @@ export default function Game({ event, weekNo }) {
               <p>{scoreIsFinal ? `FINAL SCORE` : "Game pending"}</p>
             </div>
 
-            <StyledTeamDiv>
+            <S.TeamContainer>
               {!awayTeamData.isLoading && weekNo <= 18 && (
                 <>
-                  <StyledLink to={`/teams/${awayTeamID}`}>
+                  <S.TeamLink to={`/teams/${awayTeamID}`}>
                     <img
                       src={awayTeamData.data.team.logos[0].href}
                       height="25"
                       alt="team logo"
                     />
-                  </StyledLink>
+                  </S.TeamLink>
                   <div>
-                    <StyledLink to={`/teams/${awayTeamID}`}>
+                    <S.TeamLink to={`/teams/${awayTeamID}`}>
                       <span>{awayTeamData.data.team.abbreviation}</span>
-                    </StyledLink>
+                    </S.TeamLink>
                     <span>
                       {scoreIsFinal
                         ? scoreAwayTeam
@@ -159,22 +127,22 @@ export default function Game({ event, weekNo }) {
                   </div>
                 </>
               )}
-            </StyledTeamDiv>
+            </S.TeamContainer>
 
-            <StyledTeamDiv>
+            <S.TeamContainer>
               {!homeTeamData.isLoading && weekNo <= 18 && (
                 <>
-                  <StyledLink to={`/teams/${homeTeamID}`}>
+                  <S.TeamLink to={`/teams/${homeTeamID}`}>
                     <img
                       src={homeTeamData.data.team.logos[0].href}
                       height="25"
                       alt="team logo"
                     />
-                  </StyledLink>
+                  </S.TeamLink>
                   <div>
-                    <StyledLink to={`/teams/${homeTeamID}`}>
+                    <S.TeamLink to={`/teams/${homeTeamID}`}>
                       <span>{homeTeamData.data.team.abbreviation}</span>
-                    </StyledLink>
+                    </S.TeamLink>
                     <span>
                       {scoreIsFinal
                         ? scoreHomeTeam
@@ -185,10 +153,10 @@ export default function Game({ event, weekNo }) {
                   </div>
                 </>
               )}
-            </StyledTeamDiv>
+            </S.TeamContainer>
           </div>
         </>
       )}
-    </GameContainer>
+    </S.GameContainer>
   );
 }
