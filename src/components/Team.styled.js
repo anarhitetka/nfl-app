@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
-export const GamesContainer = styled.div`
+export const TeamDetails = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  // flex-direction: row;
+  justify-content: space-around;
   margin-top: 20px;
+`;
+
+export const GamesContainer = styled.div``;
+
+export const VenueDetails = styled.div`
+  width: 60%;
 `;
 
 export const TeamHeader = styled.div`

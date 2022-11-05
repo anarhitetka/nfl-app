@@ -18,6 +18,7 @@ export default function Team() {
   );
   return (
     <div>
+      {/* TEAM HEADER  */}
       {teamData.isLoading ? (
         <CircularProgress />
       ) : (
@@ -32,49 +33,62 @@ export default function Team() {
               alt="team logo"
             />
           </S.TeamHeader>
-
-          {/* VENUE INFO  */}
-          {/* <p>
-            <strong>Venue:</strong>
-            <br />
-            {teamData.data.venue.fullName} <br />
-            capacity: {teamData.data.venue.capacity} <br />
-            indoor: {teamData.data.venue.indoor ? "yes" : "no"} <br />
-            grass: {teamData.data.venue.grass ? "yes" : "no"}
-          </p>
-          <p>
-            <strong>Location:</strong> {teamData.data.location}
-          </p>
-          {teamData.data.venue.images.map((image) => {
-            return (
-              <img
-                src={image.href}
-                height="100"
-                alt="venue"
-                key={Math.random()}
-              />
-            );
-          })} */}
-          {/* <hr /> */}
         </div>
       )}
 
+      {/* TEAM DETAILS  */}
       <div>
         {eventsData.isLoading && <CircularProgress />}
-        <S.HeadingH2>Schedule</S.HeadingH2>
-        <S.GamesContainer>
-          {eventsData.isLoading ? (
-            <CircularProgress />
-          ) : (
-            eventsData.data.map((event) => {
-              return (
-                <div key={event.id}>
-                  <Game event={event} key={event.id} weekNo={true} />
-                </div>
-              );
-            })
-          )}
-        </S.GamesContainer>
+        <S.TeamDetails>
+          {/* TEAM SCHEDULE  */}
+          <S.GamesContainer>
+            <S.HeadingH2>Schedule</S.HeadingH2>
+            {eventsData.isLoading ? (
+              <CircularProgress />
+            ) : (
+              eventsData.data.map((event) => {
+                return (
+                  <div key={event.id}>
+                    <Game
+                      event={event}
+                      key={event.id}
+                      weekNo={true}
+                      teamId={teamId}
+                      type="preview"
+                    />
+                  </div>
+                );
+              })
+            )}
+          </S.GamesContainer>
+          <>
+            {/* VENUE INFO  */}
+            {teamData.isLoading ? (
+              <CircularProgress />
+            ) : (
+              <S.VenueDetails>
+                <p>
+                  <strong>Venue: </strong>
+                  {teamData.data.venue.fullName} <br />
+                  {teamData.data.venue.capacity} seats (
+                  {teamData.data.venue.indoor ? "indoor" : "outdoor"}
+                  {teamData.data.venue.grass ? "  - grass" : ""})
+                </p>
+                <p>
+                  <strong>Location:</strong> {teamData.data.location}
+                </p>
+                {teamData.data.venue.images.map((image) => {
+                  return (
+                    <div key={Math.random()}>
+                      <img src={image.href} height="200" alt="venue" />
+                      <br />
+                    </div>
+                  );
+                })}
+              </S.VenueDetails>
+            )}
+          </>
+        </S.TeamDetails>
       </div>
     </div>
   );

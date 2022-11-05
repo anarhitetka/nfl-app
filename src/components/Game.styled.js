@@ -29,4 +29,6 @@ export const TeamContainer = styled.div`
 export const TeamLink = styled(Link)`
   text-decoration: none;
   color: black;
+  display: flex;
+  align-items: center;
 `;

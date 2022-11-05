@@ -8,23 +8,13 @@ export default function Teams() {
     "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams?limit=32"
   );
 
-  // console.log(teamInfo.data);
   return (
     <>
       {/* TODO: divide teams into groups AFC and NFC  */}
       <S.TeamsContainer>
         {teamInfo.data.map((team) => {
-          const {
-            abbreviation,
-            displayName,
-            color,
-            // alternateColor,
-            //   location,
-            logos,
-            id,
-            alternateIds,
-            //   venue,
-          } = team;
+          const { abbreviation, displayName, color, logos, id, alternateIds } =
+            team;
           return (
             <S.TeamCard key={alternateIds.sdr}>
               <S.TeamLink to={`/teams/${id}`}>
