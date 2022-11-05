@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 import { CircularProgress } from "@mui/material";
 
-const GamesContainer = styled.div`
+const S = {};
+S.GamesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -18,33 +19,14 @@ export default function WeekSelected({ weekNo }) {
     }/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}/events`
   );
 
-  // TODO: group games by day of the week:
-
-  // const dates = allGamesData.data.map((game) => {
-  //   return {
-  //     gameId: game.id,
-  //     gameDay: new Date(game.date).getDay().toString(),
-  //     gameTime: new Date(game.date).getHours(),
-  //   };
-  // });
-
-  // const groupBy = (arr, key) => {
-  //   return arr.reduce((result, currentVal) => {
-  //     (result[currentVal[key]] = result[currentVal[key]] || []).push(
-  //       currentVal
-  //     );
-  //     return result;
-  //   }, {});
-  // };
-
-  // const gamesByDay = groupBy(dates, "gameDay");
+  // TODO: group games by day of the week
 
   return (
     <>
       {allGamesData.isLoading ? (
         <CircularProgress />
       ) : (
-        <GamesContainer>
+        <S.GamesContainer>
           {allGamesData.data &&
             allGamesData.data.map((event) => {
               return (
@@ -52,10 +34,11 @@ export default function WeekSelected({ weekNo }) {
                   event={event}
                   key={`${event.id}-${Math.random().toString()}`}
                   weekNo={weekNo}
+                  type="details"
                 />
               );
             })}
-        </GamesContainer>
+        </S.GamesContainer>
       )}
     </>
   );

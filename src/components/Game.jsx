@@ -1,69 +1,22 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-import { CircularProgress } from "@mui/material";
-
 import { useFetchSingleEndpoint } from "../utils/useFetchSingleEndpoint";
 
-const GameContainer = styled.div`
-  width: 200px;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 5px;
-`;
+import GamePreview from "./GamePreview";
+import GameDetails from "./GameDetails";
 
-const StyledH4 = styled.h4`
-  margin: 0;
-`;
-
-const StyledTeamDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 5px 10px;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
-
-export default function Game({ event, weekNo }) {
+export default function Game({ event, weekNo, teamId, type }) {
   const [homeTeamScoreEndpoint, setHomeTeamScoreEndpoint] = useState();
   const [awayTeamScoreEndpoint, setAwayTeamScoreEndpoint] = useState();
 
-  const [scoreHomeTeam, setScoreHomeTeam] = useState(0);
-  const [scoreAwayTeam, setScoreAwayTeam] = useState(0);
+  const [scoreHomeTeam, setScoreHomeTeam] = useState(null);
+  const [scoreAwayTeam, setScoreAwayTeam] = useState(null);
 
   const [scoreIsFinal, setScoreIsFinal] = useState(false);
 
   const [homeTeamID, setHomeTeamID] = useState();
   const [awayTeamID, setAwayTeamID] = useState();
 
-  // FORMAT DATE FN
-  const formatDate = function (dateStr) {
-    return `${new Date(dateStr).toLocaleString(undefined, {
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      dateStyle: "medium",
-      timeStyle: "short",
-      // weekday: "short",
-      // timeZoneName: "short",
-      // day: "2-digit",
-      // month: "short",
-      // year: "numeric",
-    })}`;
-  };
-
-  // FETCH ENDPOINTS FOR GAME
   useEffect(() => {
     const getGameEndpoints = async () => {
       const { data } = await axios(event.$ref);
@@ -84,7 +37,6 @@ export default function Game({ event, weekNo }) {
     getGameEndpoints();
   }, [event.$ref]);
 
-  // FETCH SCORES
   useEffect(() => {
     const getHomeTeamScore = async () => {
       try {
@@ -108,7 +60,6 @@ export default function Game({ event, weekNo }) {
     getAwayTeamScore();
   }, [homeTeamScoreEndpoint, awayTeamScoreEndpoint]);
 
-  // FETCH TEAM DATA
   const awayTeamData = useFetchSingleEndpoint(
     `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/`,
     awayTeamID
@@ -120,75 +71,32 @@ export default function Game({ event, weekNo }) {
   );
 
   return (
-    <GameContainer key={event.id}>
-      {/* TODO: Refactor into separate components */}
-
-      {awayTeamData.isLoading || homeTeamData.isLoading ? (
-        <CircularProgress size={20} />
+    <>
+      {type === "preview" ? (
+        <GamePreview
+          awayTeamData={awayTeamData}
+          homeTeamData={homeTeamData}
+          event={event}
+          teamId={teamId}
+          awayTeamID={awayTeamID}
+          homeTeamID={homeTeamID}
+          scoreIsFinal={scoreIsFinal}
+          scoreAwayTeam={scoreAwayTeam}
+          scoreHomeTeam={scoreHomeTeam}
+        />
       ) : (
-        <>
-          <StyledH4>{event.name}</StyledH4>
-
-          <div>
-            <div>
-              <p>{formatDate(event.date)}</p>
-              <p>{scoreIsFinal ? `FINAL SCORE` : "Game pending"}</p>
-            </div>
-
-            <StyledTeamDiv>
-              {!awayTeamData.isLoading && weekNo <= 18 && (
-                <>
-                  <StyledLink to={`/teams/${awayTeamID}`}>
-                    <img
-                      src={awayTeamData.data.team.logos[0].href}
-                      height="25"
-                      alt="team logo"
-                    />
-                  </StyledLink>
-                  <div>
-                    <StyledLink to={`/teams/${awayTeamID}`}>
-                      <span>{awayTeamData.data.team.abbreviation}</span>
-                    </StyledLink>
-                    <span>
-                      {scoreIsFinal
-                        ? scoreAwayTeam
-                        : awayTeamData.isLoading
-                        ? "loading stats"
-                        : awayTeamData.data.team.record.items[0].summary}
-                    </span>
-                  </div>
-                </>
-              )}
-            </StyledTeamDiv>
-
-            <StyledTeamDiv>
-              {!homeTeamData.isLoading && weekNo <= 18 && (
-                <>
-                  <StyledLink to={`/teams/${homeTeamID}`}>
-                    <img
-                      src={homeTeamData.data.team.logos[0].href}
-                      height="25"
-                      alt="team logo"
-                    />
-                  </StyledLink>
-                  <div>
-                    <StyledLink to={`/teams/${homeTeamID}`}>
-                      <span>{homeTeamData.data.team.abbreviation}</span>
-                    </StyledLink>
-                    <span>
-                      {scoreIsFinal
-                        ? scoreHomeTeam
-                        : homeTeamData.isLoading
-                        ? "loading stats"
-                        : homeTeamData.data.team.record.items[0].summary}
-                    </span>
-                  </div>
-                </>
-              )}
-            </StyledTeamDiv>
-          </div>
-        </>
+        <GameDetails
+          awayTeamData={awayTeamData}
+          homeTeamData={homeTeamData}
+          event={event}
+          awayTeamID={awayTeamID}
+          homeTeamID={homeTeamID}
+          scoreIsFinal={scoreIsFinal}
+          scoreAwayTeam={scoreAwayTeam}
+          scoreHomeTeam={scoreHomeTeam}
+          weekNo={weekNo}
+        />
       )}
-    </GameContainer>
+    </>
   );
 }
