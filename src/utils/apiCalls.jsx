@@ -11,11 +11,10 @@ const responseBody = (response) => response.data;
 
 const requests = {
     get: (url) => instance.get(url).then(responseBody),
-    // getAll: (url) => instance.get(url)
-    // Promise.all(url.map((endpoint) => axios.get(endpoint))).then(responseBody)
 };
 
 export const ApiCalls = {
+    getAllTeamsEndpoints: () => requests.get(`/teams?limit=32`),
     getTeamData: (teamId) => requests.get(`/teams/${teamId}`),
     getTeamEvents: (teamId) => requests.get(`/seasons/2022/teams/${teamId}/events`),
     getDataFromEndpoint: (endpoint) => requests.get(endpoint),

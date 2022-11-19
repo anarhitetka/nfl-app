@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ApiCalls } from "../utils/apiCalls";
 
 import { Outlet } from "react-router-dom";
 import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
@@ -6,9 +7,26 @@ import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
 import * as S from "./Teams.styled.js";
 
 export default function Teams() {
-  const teamInfo = useFetchMultipleEndpoints(
-    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams?limit=32"
-  );
+  // const teamInfo = useFetchMultipleEndpoints(
+  //   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams?limit=32"
+  // );
+
+  const [allTeamsEndpoints, setAllTeamsEndpoints] = useState([]);
+
+  useEffect(() => {
+    ApiCalls.getAllTeamsEndpoints().then(data =>
+      setAllTeamsEndpoints(data.items));
+  }, []);
+
+  const [allTeamsData, setAllTeamsData] = useState([]);
+
+  useEffect(() => {
+    setAllTeamsData([]);
+    allTeamsEndpoints.forEach(endpoint => {
+      ApiCalls.getDataFromEndpoint(endpoint.$ref).then(data =>
+        setAllTeamsData(prev => [...prev, data]))
+    });
+  }, [allTeamsEndpoints]);
 
   //////////////////////////////////////
   const afc = useFetchMultipleEndpoints(
@@ -41,7 +59,7 @@ export default function Teams() {
     <>
       {/* TODO: divide teams into groups AFC and NFC  */}
       <S.TeamsContainer>
-        {teamInfo.data.map((team) => {
+        {allTeamsData.map((team) => {
           const { abbreviation, displayName, color, logos, id, alternateIds } =
             team;
           return (

@@ -17,7 +17,6 @@ export default function Team() {
     );
   }, [teamId]);
 
-  /////////////////////////////////////////
   // GET ENDPOINTS FOR THE EVENTS OF THE TEAM:
   const [eventsEndpoints, setEventsEndpoints] = useState([]);
 
@@ -37,10 +36,6 @@ export default function Team() {
       ApiCalls.getDataFromEndpoint(endpoint.$ref).then(data => setEventsData((prev) => [...prev, data]))
     });
   }, [eventsEndpoints]);
-
-  ////////////////////////////////////////////////////
-
-  // const eventsData = GetSomeData(teamId);
 
   return (
     <div>
