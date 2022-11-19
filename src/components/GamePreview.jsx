@@ -12,6 +12,7 @@ export default function GamePreview({
   scoreIsFinal,
   scoreAwayTeam,
   scoreHomeTeam,
+  errorInFetching
 }) {
   const formatDateShort = function (dateStr) {
     return `${new Date(dateStr).toLocaleString(undefined, {
@@ -59,8 +60,8 @@ export default function GamePreview({
                         {scoreAwayTeam < scoreHomeTeam
                           ? "LOST"
                           : scoreAwayTeam === scoreHomeTeam
-                          ? "TIE"
-                          : "WON"}
+                            ? "TIE"
+                            : "WON"}
                       </>
                     ) : (
                       ""
@@ -83,8 +84,8 @@ export default function GamePreview({
                         {scoreAwayTeam > scoreHomeTeam
                           ? "LOST"
                           : scoreAwayTeam === scoreHomeTeam
-                          ? "TIE"
-                          : "WON"}
+                            ? "TIE"
+                            : "WON"}
                       </>
                     ) : (
                       ""

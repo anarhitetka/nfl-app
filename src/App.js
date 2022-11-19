@@ -8,19 +8,18 @@ import WeekGames from "./components/WeekGames";
 import WeekSelected from "./components/WeekSelected";
 import ErrorPage from "./components/ErrorPage";
 
-import { useFetchCombine } from "./utils/useFetchCombine";
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
+import { ApiCalls } from "./utils/apiCalls";
 
 function App() {
-  ////////////////////////////////////////////
-  // fetch regular season and postseason weeks data (without preseason (type 1) or postseason (type 4))
-  const allWeeksData = useFetchCombine([
-    "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/weeks/",
-    "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/3/weeks",
-  ]);
+
+  // NB: preseason = type 1, regular season = type 2, postseason = type 3, offseason type = 4
+  const weeksRegularSeason = ApiCalls.getWeeksInfoForSeasonType('2');
+  const weeksPostSeason = ApiCalls.getWeeksInfoForSeasonType('3');
+
+  const allWeeksData = [...weeksRegularSeason.data, ...weeksPostSeason.data];
 
   const weekNo = setCurrentWeekNo(allWeeksData);
-  ////////////////////////////////////////////
 
   return (
     <Router>

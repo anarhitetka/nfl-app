@@ -12,6 +12,7 @@ export default function GameDetails({
   scoreAwayTeam,
   scoreHomeTeam,
   weekNo,
+  errorInFetching
 }) {
   const formatDate = function (dateStr) {
     return `${new Date(dateStr).toLocaleString(undefined, {
@@ -53,8 +54,8 @@ export default function GameDetails({
                       {scoreIsFinal
                         ? scoreAwayTeam
                         : awayTeamData.isLoading
-                        ? "loading stats"
-                        : awayTeamData.data.team.record.items[0].summary}
+                          ? "loading stats"
+                          : awayTeamData.data.team.record.items[0].summary}
                     </span>
                   </div>
                 </>
@@ -79,8 +80,8 @@ export default function GameDetails({
                       {scoreIsFinal
                         ? scoreHomeTeam
                         : homeTeamData.isLoading
-                        ? "loading stats"
-                        : homeTeamData.data.team.record.items[0].summary}
+                          ? "loading stats"
+                          : homeTeamData.data.team.record.items[0].summary}
                     </span>
                   </div>
                 </>

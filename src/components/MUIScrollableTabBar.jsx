@@ -63,7 +63,7 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
           },
         }}
       >
-        {weeksData.data.map((week) => {
+        {weeksData.map((week) => {
           return (
             <Tab
               label={

@@ -1,4 +1,4 @@
-import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
+import { ApiCalls } from "../utils/apiCalls";
 import Game from "./Game";
 import styled from "styled-components";
 
@@ -13,11 +13,8 @@ S.GamesContainer = styled.div`
 `;
 
 export default function WeekSelected({ weekNo }) {
-  const allGamesData = useFetchMultipleEndpoints(
-    `http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/${
-      weekNo <= 18 ? 2 : 3
-    }/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}/events`
-  );
+
+  const allGamesData = ApiCalls.getEventsForWeek(weekNo);
 
   // TODO: group games by day of the week
 
