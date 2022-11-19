@@ -1,34 +1,53 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetchMultipleEndpoints } from "../utils/useFetchMultipleEndpoints";
-import { useFetchSingleEndpoint } from "../utils/useFetchSingleEndpoint";
+import { ApiCalls } from "../utils/apiCalls";
 import { CircularProgress } from "@mui/material";
 import Game from "./Game";
 import * as S from "./Team.styled";
 
+
 export default function Team() {
   const { teamId } = useParams();
 
-  const teamData = useFetchSingleEndpoint(
-    `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/`,
-    teamId
-  );
+  // GET DATA ABOUT THE TEAM:
+  const [teamData, setTeamData] = useState();
 
-  const eventsData = useFetchMultipleEndpoints(
-    `http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/teams/${teamId}/events`
-  );
+  useEffect(() => {
+    ApiCalls.getTeamData(teamId).then((data) =>
+      setTeamData(data)
+    );
+  }, [teamId]);
+
+  // GET ENDPOINTS FOR THE EVENTS OF THE TEAM:
+  const [eventsEndpoints, setEventsEndpoints] = useState([]);
+
+  useEffect(() => {
+    ApiCalls.getTeamEvents(teamId).then((data) =>
+      setEventsEndpoints(data.items)
+    )
+  }, [teamId]);
+
+  // GET DATA FOR ALL EVENTS FOR THE TEAM FROM EVENTS ENDPOINTS:
+  const [eventsData, setEventsData] = useState([]);
+  useEffect(() => {
+    eventsEndpoints.forEach(endpoint => {
+      ApiCalls.getDataFromEndpoint(endpoint.$ref).then(data => setEventsData((prev) => [...prev, data]))
+    })
+  }, [eventsEndpoints]);
+
   return (
     <div>
       {/* TEAM HEADER  */}
-      {teamData.isLoading ? (
+      {!teamData ? (
         <CircularProgress />
       ) : (
         <div
-          style={{ backgroundColor: "#" + teamData.data.color, color: "white" }}
+          style={{ backgroundColor: "#" + teamData.color, color: "white" }}
         >
           <S.TeamHeader>
-            <h1>{teamData.data.displayName}</h1>
+            <h1>{teamData.displayName}</h1>
             <img
-              src={teamData.data.logos[0].href}
+              src={teamData.logos[0].href}
               height="150"
               alt="team logo"
             />
@@ -38,46 +57,43 @@ export default function Team() {
 
       {/* TEAM DETAILS  */}
       <div>
-        {eventsData.isLoading && <CircularProgress />}
+        {!eventsData && <CircularProgress />}
         <S.TeamDetails>
           {/* TEAM SCHEDULE  */}
           <S.GamesContainer>
             <S.HeadingH2>Schedule</S.HeadingH2>
-            {eventsData.isLoading ? (
+            {!eventsData ? (
               <CircularProgress />
             ) : (
-              eventsData.data.map((event) => {
+              eventsData.map((event) => {
                 return (
-                  <div key={event.id}>
-                    <Game
-                      event={event}
-                      key={event.id}
-                      weekNo={true}
-                      teamId={teamId}
-                      type="preview"
-                    />
-                  </div>
+                  <Game
+                    event={event}
+                    key={`game-${event.id}-team-${teamId}`}
+                    weekNo={true}
+                    teamId={teamId}
+                    type="preview" />
                 );
               })
             )}
           </S.GamesContainer>
           <>
             {/* VENUE INFO  */}
-            {teamData.isLoading ? (
+            {!teamData ? (
               <CircularProgress />
             ) : (
               <S.VenueDetails>
                 <p>
                   <strong>Venue: </strong>
-                  {teamData.data.venue.fullName} <br />
-                  {teamData.data.venue.capacity} seats (
-                  {teamData.data.venue.indoor ? "indoor" : "outdoor"}
-                  {teamData.data.venue.grass ? "  - grass" : ""})
+                  {teamData.venue.fullName} <br />
+                  {teamData.venue.capacity} seats (
+                  {teamData.venue.indoor ? "indoor" : "outdoor"}
+                  {teamData.venue.grass ? "  - grass" : ""})
                 </p>
                 <p>
-                  <strong>Location:</strong> {teamData.data.location}
+                  <strong>Location:</strong> {teamData.location}
                 </p>
-                {teamData.data.venue.images.map((image) => {
+                {teamData.venue.images.map((image) => {
                   return (
                     <div key={Math.random()}>
                       <img src={image.href} height="200" alt="venue" />
@@ -90,6 +106,6 @@ export default function Team() {
           </>
         </S.TeamDetails>
       </div>
-    </div>
+    </div >
   );
 }
