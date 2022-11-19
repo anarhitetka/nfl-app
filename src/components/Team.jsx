@@ -5,7 +5,6 @@ import { CircularProgress } from "@mui/material";
 import Game from "./Game";
 import * as S from "./Team.styled";
 
-
 export default function Team() {
   const { teamId } = useParams();
 
@@ -18,22 +17,30 @@ export default function Team() {
     );
   }, [teamId]);
 
+  /////////////////////////////////////////
   // GET ENDPOINTS FOR THE EVENTS OF THE TEAM:
   const [eventsEndpoints, setEventsEndpoints] = useState([]);
 
   useEffect(() => {
+    setEventsEndpoints([]);
     ApiCalls.getTeamEvents(teamId).then((data) =>
       setEventsEndpoints(data.items)
-    )
+    );
   }, [teamId]);
 
-  // GET DATA FOR ALL EVENTS FOR THE TEAM FROM EVENTS ENDPOINTS:
+  // // GET DATA FOR ALL EVENTS FOR THE TEAM FROM EVENTS ENDPOINTS:
   const [eventsData, setEventsData] = useState([]);
+
   useEffect(() => {
+    setEventsData([]);
     eventsEndpoints.forEach(endpoint => {
       ApiCalls.getDataFromEndpoint(endpoint.$ref).then(data => setEventsData((prev) => [...prev, data]))
-    })
+    });
   }, [eventsEndpoints]);
+
+  ////////////////////////////////////////////////////
+
+  // const eventsData = GetSomeData(teamId);
 
   return (
     <div>
