@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const TeamDetails = styled.div`
   display: flex;
   flex-wrap: wrap;
-  // flex-direction: row;
   justify-content: space-around;
   margin-top: 20px;
 `;
@@ -19,9 +18,11 @@ export const TeamHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   img {
     margin-left: 30px;
   }
+  flex-wrap: wrap;
 `;
 
 export const HeadingH2 = styled.h2`
