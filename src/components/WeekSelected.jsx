@@ -3,6 +3,7 @@ import Game from "./Game";
 import styled from "styled-components";
 
 import { CircularProgress } from "@mui/material";
+import { groupByDayOfTheWeek } from "../utils/groupByDayOfTheWeek";
 
 const S = {};
 S.GamesContainer = styled.div`
@@ -16,15 +17,12 @@ export default function WeekSelected({ weekNo }) {
 
   const allGamesData = ApiCalls.getEventsForWeek(weekNo);
   const teamsOnBye = ApiCalls.getTeamsOnByeForWeekNo(weekNo);
-  console.log(teamsOnBye);
-
-  // TODO: group games by day of the week
+  const groupGamesByDayOfTheWeek = groupByDayOfTheWeek(allGamesData.data);
 
   return (
     <>
       <div>
-        {/* Each team has one bye week between Weeks 6 and 14 (regular season) */}
-        {weekNo >= 6 && weekNo <= 14 ? (
+        {!teamsOnBye.isLoading && teamsOnBye.data.length !== 0 ? (
           teamsOnBye.isLoading ? (
             <CircularProgress />
           ) : (
@@ -45,17 +43,26 @@ export default function WeekSelected({ weekNo }) {
           <CircularProgress />
         ) : (
           <S.GamesContainer>
-            {allGamesData.data &&
-              allGamesData.data.map((event) => {
-                return (
-                  <Game
-                    event={event}
-                    key={`${event.id}-${Math.random().toString()}`}
-                    weekNo={weekNo}
-                    type="details"
-                  />
-                );
-              })}
+            {Object.keys(groupGamesByDayOfTheWeek).map((key) => {
+              return (
+                <div key={key}>
+                  <p>
+                    {key}:
+                  </p>
+                  {groupGamesByDayOfTheWeek[key].map(game => {
+                    return (
+                      <Game
+                        event={game}
+                        key={`${game.id}-${Math.random().toString()}`}
+                        weekNo={weekNo}
+                        type="details"
+                      />
+                    )
+                  })}
+
+                </div>
+              )
+            })}
           </S.GamesContainer>
         )
       }
