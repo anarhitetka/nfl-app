@@ -10,6 +10,10 @@ export default function Team() {
   const teamData = ApiCalls.getTeamData(teamId);
   const eventsData = ApiCalls.getTeamEvents(teamId);
 
+  const eventsRegularSeasonOnly = eventsData.data.filter(event => {
+    return event.week.$ref.includes('types/2');
+  });
+
   return (
     <div>
       {/* TEAM HEADER  */}
@@ -42,7 +46,7 @@ export default function Team() {
             {eventsData.isLoading ? (
               <CircularProgress />
             ) : (
-              eventsData.data.map((event) => {
+              eventsRegularSeasonOnly.map((event) => {
                 return (
                   <Game
                     event={event}
