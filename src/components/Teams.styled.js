@@ -1,8 +1,39 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import backgroundImg from "../assets/ballnfl.jpg"
 
 export const TeamsContainer = styled.div`
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #D9DCDF;
+  background-image: url(${backgroundImg});
+  background-size: cover;
+`;
+
+export const DivisionContainer = styled.div`
+  border-radius: 3px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  margin: 15px;
+  box-shadow: 4px 5px 23px 4px black;
+  background-color: white;
+`;
+
+export const DivisionHeading = styled.h4`
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #013369;
+  margin: 0;
+  padding: 5px;
+`;
+
+export const DivisionTeams = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -29,12 +60,10 @@ export const HeadingH4 = styled.h4`
 export const TeamLink = styled(Link)`
   box-sizing: border-box;
   border: 3px solid transparent;
-
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-
   height: 100%;
   text-decoration: none;
   color: black;
@@ -45,12 +74,6 @@ export const TeamLink = styled(Link)`
   &:active {
     color: grey;
   }
-  // &:hover {
-  //   img {
-  //     height: 77px;
-  //   }
-  // }
-
   p {
     width: 100%;
   }

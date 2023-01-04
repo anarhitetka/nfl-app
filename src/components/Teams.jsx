@@ -24,13 +24,11 @@ export default function Teams() {
         {allTeamsByGroup.map(group => {
 
           return (
-            <div key={group.id} style={{ border: '1px solid black', display: "flex", flexDirection: "column" }}>
+            <S.DivisionContainer key={group.id}>
 
-              <div>
-                <S.HeadingH4>{group.groupName}</S.HeadingH4>
-              </div>
+              <S.DivisionHeading>{group.groupName} Teams</S.DivisionHeading>
 
-              <div style={{ display: "flex", flexDirection: "row", flexWrap: 'wrap' }}>
+              <S.DivisionTeams>
 
                 {group.teams.map(team => {
 
@@ -51,11 +49,12 @@ export default function Teams() {
 
                 })}
 
-              </div>
+              </S.DivisionTeams>
 
-            </div>
+            </S.DivisionContainer>
           )
         })}
+
       </S.TeamsContainer>
       <Outlet />
     </>
