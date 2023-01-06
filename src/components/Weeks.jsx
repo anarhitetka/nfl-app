@@ -9,13 +9,17 @@ S.TabBar = styled.div`
   justify-content: center;
 `;
 
+S.MainContainer = styled.div`
+  background-color: white;
+`;
+
 export default function Weeks({ weekNo, allWeeksData }) {
   return (
-    <div>
+    <S.MainContainer>
       <S.TabBar>
         <MUIScrollableTabBar weeksData={allWeeksData} currentWeek={weekNo} />
       </S.TabBar>
       <Outlet />
-    </div>
+    </S.MainContainer>
   );
 }

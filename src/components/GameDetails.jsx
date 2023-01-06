@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import LinearProgress from '@mui/material/LinearProgress';
 
 import * as S from "./Game.styled.js";
 
@@ -24,11 +24,23 @@ export default function GameDetails({
 
   return (
     <>
-      <S.GameHeading>{formatDateGetTimeOnly(event.date)}, {event.name.toUpperCase()}: {scoreIsFinal ? <span>FINAL</span> : <em>GAME PENDING</em>}</S.GameHeading>
+      <S.GameHeading>
+        {formatDateGetTimeOnly(event.date)}
+        <span>, {
+          event.shortName === "TBD @ TBD"
+            ? event.shortName.toUpperCase()
+            : event.name.toUpperCase()
+        }</span>: {
+          scoreIsFinal
+            ? "FINAL"
+            : <em>GAME PENDING</em>}
+      </S.GameHeading>
 
       <S.GameContainerLong key={event.id}>
         {awayTeamData.isLoading || homeTeamData.isLoading ? (
-          <CircularProgress size={20} />
+          <div style={{ padding: "10px" }}>
+            <LinearProgress />
+          </div>
         ) : (
           <>
             <S.TeamsScoresRow>
@@ -36,6 +48,8 @@ export default function GameDetails({
               <S.TeamContainer>
                 {!awayTeamData.isLoading && weekNo <= 18 && (
                   <>
+
+                    {/* LINK TO TEAM / LOGO  */}
                     <S.TeamLink to={`/teams/${awayTeamID}`}>
                       <img
                         src={awayTeamData.data.team.logos[0].href}
@@ -43,10 +57,24 @@ export default function GameDetails({
                         alt="team logo"
                       />
                     </S.TeamLink>
+
                     <div>
+
+                      {/* LINK TO TEAM / ABBREVIATION + STATS  */}
                       <S.TeamLink to={`/teams/${awayTeamID}`}>
-                        <span>{awayTeamData.data.team.abbreviation}</span>
+                        <span>{awayTeamData.data.team.abbreviation}&nbsp;&nbsp;</span>
+                        {/* STATS  */}
+                        <S.TeamStats>
+                          {scoreIsFinal
+                            && !awayTeamData.isLoading
+                            && `(${awayTeamData.data.team.record.items[0].summary})`
+                          }
+                        </S.TeamStats>
                       </S.TeamLink>
+
+
+
+                      {/* SCORE  */}
                       <span>
                         {scoreIsFinal
                           ? <span>{scoreAwayTeam}</span>
@@ -54,15 +82,26 @@ export default function GameDetails({
                             ? "loading stats"
                             : awayTeamData.data.team.record.items[0].summary}
                       </span>
+
                     </div>
+
                   </>
                 )}
               </S.TeamContainer>
+
+              {
+                event.shortName === "TBD @ TBD" || event.shortName === "AFC @ NFC" || event.shortName === "NFC @ AFC"
+                  ? <em style={{ padding: "5px" }}>TBD</em>
+                  : <S.AtSignGameScore>@</S.AtSignGameScore>
+              }
+
 
               <S.TeamContainer>
                 {!homeTeamData.isLoading && weekNo <= 18 && (
                   <>
                     <div>
+
+                      {/* SCORE  */}
                       <span>
                         {scoreIsFinal
                           ? <span>{scoreHomeTeam}</span>
@@ -70,10 +109,25 @@ export default function GameDetails({
                             ? "loading stats"
                             : homeTeamData.data.team.record.items[0].summary}
                       </span>
+
+
+
+                      {/* LINK TO TEAM / STATS + ABBREVIATION  */}
                       <S.TeamLink to={`/teams/${homeTeamID}`}>
-                        <span>{homeTeamData.data.team.abbreviation}</span>
+                        {/* STATS  */}
+                        <S.TeamStats>
+                          {scoreIsFinal
+                            && !homeTeamData.isLoading
+                            && `(${homeTeamData.data.team.record.items[0].summary})`
+                          }
+                        </S.TeamStats>
+
+                        <span>&nbsp;&nbsp;{homeTeamData.data.team.abbreviation}</span>
                       </S.TeamLink>
+
                     </div>
+
+                    {/* LINK TO TEAM / LOGO  */}
                     <S.TeamLink to={`/teams/${homeTeamID}`}>
                       <img
                         src={homeTeamData.data.team.logos[0].href}
@@ -81,6 +135,7 @@ export default function GameDetails({
                         alt="team logo"
                       />
                     </S.TeamLink>
+
                   </>
                 )}
               </S.TeamContainer>

@@ -7,7 +7,7 @@ import { groupByDayOfTheWeek } from "../utils/groupByDayOfTheWeek";
 
 const S = {};
 S.TeamsOnByeContainer = styled.div`
-  text-align: center;
+  text-align: left;
   padding: 15px 0 0 0;
   margin: auto 10%;
   font-size: 12px;
@@ -21,7 +21,7 @@ S.AllGamesContainer = styled.div`
   margin-top: 20px;
 `;
 S.DayHeading = styled.h4`
-  padding-left: 10%;
+  padding-left: 9vw;
   margin: 25px 0 15px 0;
   color: #013369;
 `;
@@ -46,7 +46,7 @@ export default function WeekSelected({ weekNo }) {
   };
 
   return (
-    <>
+    <div style={{ minHeight: "90vh" }}>
       <S.TeamsOnByeContainer>
         {!teamsOnBye.isLoading && teamsOnBye.data.length !== 0 ? (
           teamsOnBye.isLoading ? (
@@ -61,19 +61,21 @@ export default function WeekSelected({ weekNo }) {
               })}
             </div>
           )
-        ) : "NO TEAMS ON BYE FOR SELECTED WEEK"}
+        ) : <em>NO TEAMS ON BYE FOR SELECTED WEEK</em>}
       </S.TeamsOnByeContainer>
 
       {
         allGamesData.isLoading ? (
-          <CircularProgress />
+          <div style={{ textAlign: "center", padding: "20px" }}>
+            <CircularProgress />
+          </div>
         ) : (
           <S.AllGamesContainer>
             {Object.keys(groupGamesByDayOfTheWeek).map((key) => {
               return (
                 <div key={key}>
                   <S.DayHeading>
-                    {key.toUpperCase()}: {formatDate(groupGamesByDayOfTheWeek[key][0].date).toUpperCase()}
+                    {key.toUpperCase()}, {formatDate(groupGamesByDayOfTheWeek[key][0].date).toUpperCase()}
                   </S.DayHeading>
                   <S.GamesByDayGroup>
                     {groupGamesByDayOfTheWeek[key].map(game => {
@@ -93,6 +95,6 @@ export default function WeekSelected({ weekNo }) {
           </S.AllGamesContainer>
         )
       }
-    </>
+    </div>
   );
 }

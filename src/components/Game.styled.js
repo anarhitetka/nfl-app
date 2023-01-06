@@ -24,6 +24,11 @@ export const GameHeading = styled.div`
   text-align: left;
   font-size: 13px;
   color: #013369; 
+  @media (max-width: 500px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 export const TeamContainer = styled.div`
@@ -51,11 +56,18 @@ export const TeamContainer = styled.div`
       display: none;
     }
   }
+  @media (max-width: 450px) {
+    div > span > span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const TeamsScoresRow = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TeamLink = styled(Link)`
@@ -63,4 +75,25 @@ export const TeamLink = styled(Link)`
   color: #013369;
   display: flex;
   align-items: center;
+`;
+
+export const AtSignGameScore = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  @media (max-width: 450px) {
+    font-size: 1rem;
+  }
+`;
+
+export const TeamStats = styled.span`
+  font-size: 0.9rem;
+  @media (max-width: 450px) {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
