@@ -6,7 +6,8 @@ const S = {};
 S.Container = styled.div`
   display: flex;
   flex-flow: column;
-  height: 90%;
+  padding-top: 15vh;
+  height: 91vh;
   align-items: center;
   div {
     height: 100px;
@@ -24,7 +25,7 @@ export default function Home() {
     <S.Container>
       <NFLLogo size={250} />
       <div></div>
-      <Gronk size={250} />
+      <Gronk size={250} color="white" />
     </S.Container>
   );
 }

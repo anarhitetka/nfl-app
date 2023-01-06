@@ -57,9 +57,7 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
         }}
         sx={{
           "& button:hover": {
-            borderRadius: "8px 8px 0 0",
-            backgroundColor: "#013369",
-            color: "white",
+            color: "#002147",
           },
         }}
       >
