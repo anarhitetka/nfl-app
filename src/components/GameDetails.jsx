@@ -14,82 +14,80 @@ export default function GameDetails({
   weekNo,
   errorInFetching
 }) {
-  const formatDate = function (dateStr) {
+  const formatDateGetTimeOnly = function (dateStr) {
     return `${new Date(dateStr).toLocaleString(undefined, {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      dateStyle: "medium",
+      // dateStyle: "medium",
       timeStyle: "short",
     })}`;
   };
 
   return (
-    <S.GameContainer key={event.id}>
-      {awayTeamData.isLoading || homeTeamData.isLoading ? (
-        <CircularProgress size={20} />
-      ) : (
-        <>
-          <S.GameHeading>{event.name}</S.GameHeading>
+    <>
+      <S.GameHeading>{formatDateGetTimeOnly(event.date)}, {event.name.toUpperCase()}: {scoreIsFinal ? <span>FINAL</span> : <em>GAME PENDING</em>}</S.GameHeading>
 
-          <div>
-            <div>
-              <p>{formatDate(event.date)}</p>
-              <p>{scoreIsFinal ? `FINAL SCORE` : "Game pending"}</p>
-            </div>
+      <S.GameContainerLong key={event.id}>
+        {awayTeamData.isLoading || homeTeamData.isLoading ? (
+          <CircularProgress size={20} />
+        ) : (
+          <>
+            <S.TeamsScoresRow>
 
-            <S.TeamContainer>
-              {!awayTeamData.isLoading && weekNo <= 18 && (
-                <>
-                  <S.TeamLink to={`/teams/${awayTeamID}`}>
-                    <img
-                      src={awayTeamData.data.team.logos[0].href}
-                      height="25"
-                      alt="team logo"
-                    />
-                  </S.TeamLink>
-                  <div>
+              <S.TeamContainer>
+                {!awayTeamData.isLoading && weekNo <= 18 && (
+                  <>
                     <S.TeamLink to={`/teams/${awayTeamID}`}>
-                      <span>{awayTeamData.data.team.abbreviation}</span>
+                      <img
+                        src={awayTeamData.data.team.logos[0].href}
+                        height="25"
+                        alt="team logo"
+                      />
                     </S.TeamLink>
-                    <span>
-                      {scoreIsFinal
-                        ? scoreAwayTeam
-                        : awayTeamData.isLoading
-                          ? "loading stats"
-                          : awayTeamData.data.team.record.items[0].summary}
-                    </span>
-                  </div>
-                </>
-              )}
-            </S.TeamContainer>
+                    <div>
+                      <S.TeamLink to={`/teams/${awayTeamID}`}>
+                        <span>{awayTeamData.data.team.abbreviation}</span>
+                      </S.TeamLink>
+                      <span>
+                        {scoreIsFinal
+                          ? <span>{scoreAwayTeam}</span>
+                          : awayTeamData.isLoading
+                            ? "loading stats"
+                            : awayTeamData.data.team.record.items[0].summary}
+                      </span>
+                    </div>
+                  </>
+                )}
+              </S.TeamContainer>
 
-            <S.TeamContainer>
-              {!homeTeamData.isLoading && weekNo <= 18 && (
-                <>
-                  <S.TeamLink to={`/teams/${homeTeamID}`}>
-                    <img
-                      src={homeTeamData.data.team.logos[0].href}
-                      height="25"
-                      alt="team logo"
-                    />
-                  </S.TeamLink>
-                  <div>
+              <S.TeamContainer>
+                {!homeTeamData.isLoading && weekNo <= 18 && (
+                  <>
+                    <div>
+                      <span>
+                        {scoreIsFinal
+                          ? <span>{scoreHomeTeam}</span>
+                          : homeTeamData.isLoading
+                            ? "loading stats"
+                            : homeTeamData.data.team.record.items[0].summary}
+                      </span>
+                      <S.TeamLink to={`/teams/${homeTeamID}`}>
+                        <span>{homeTeamData.data.team.abbreviation}</span>
+                      </S.TeamLink>
+                    </div>
                     <S.TeamLink to={`/teams/${homeTeamID}`}>
-                      <span>{homeTeamData.data.team.abbreviation}</span>
+                      <img
+                        src={homeTeamData.data.team.logos[0].href}
+                        height="25"
+                        alt="team logo"
+                      />
                     </S.TeamLink>
-                    <span>
-                      {scoreIsFinal
-                        ? scoreHomeTeam
-                        : homeTeamData.isLoading
-                          ? "loading stats"
-                          : homeTeamData.data.team.record.items[0].summary}
-                    </span>
-                  </div>
-                </>
-              )}
-            </S.TeamContainer>
-          </div>
-        </>
-      )}
-    </S.GameContainer>
+                  </>
+                )}
+              </S.TeamContainer>
+            </S.TeamsScoresRow>
+          </>
+        )}
+      </S.GameContainerLong>
+    </>
   );
 }
