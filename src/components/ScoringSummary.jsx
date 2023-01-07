@@ -43,7 +43,7 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
     const [homeTeam] = teams.filter(team => team.team.id === homeTeamID);
 
     return (
-        <>
+        <S.SummaryContainer>
             {Object.keys(plays).map(key => {
                 return (
                     <div key={`quarter${key}`}>
@@ -83,6 +83,6 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
                     </div>
                 );
             })}
-        </>
+        </S.SummaryContainer>
     );
 }

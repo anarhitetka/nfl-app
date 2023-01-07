@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const SummaryContainer = styled.div`
+    max-height: 60vh;
+    overflow-y: scroll;
+`;
+
 export const QuarterHeaderRow = styled.div`
     display: flex;
     justify-content: space-between;
