@@ -80,7 +80,7 @@ export default function GameDetails({
                           ? <span>{scoreAwayTeam}</span>
                           : awayTeamData.isLoading
                             ? "loading stats"
-                            : awayTeamData.data.team.record.items[0].summary}
+                            : <S.StatsForPendingGame>{awayTeamData.data.team.record.items[0].summary}</S.StatsForPendingGame>}
                       </span>
 
                     </div>
@@ -107,7 +107,7 @@ export default function GameDetails({
                           ? <span>{scoreHomeTeam}</span>
                           : homeTeamData.isLoading
                             ? "loading stats"
-                            : homeTeamData.data.team.record.items[0].summary}
+                            : <S.StatsForPendingGame>{homeTeamData.data.team.record.items[0].summary}</S.StatsForPendingGame>}
                       </span>
 
 

@@ -243,4 +243,7 @@ export const ApiCalls = {
     // GET DATA ABOUT EVENT - home team / away team:
     getTeamsInfoForEvent: (eventUrl) => requests.useGetHomeAndAwayTeamData(eventUrl),
 
+    // GET GAME SUMMARY
+    getGameSummary: (eventId) => requests.useGet(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=${eventId}`),
+
 };
