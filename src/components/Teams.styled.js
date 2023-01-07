@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import backgroundImg from "../assets/ballnfl.jpg"
 
 export const TeamsContainer = styled.div`
   box-sizing: border-box;
@@ -8,9 +7,6 @@ export const TeamsContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #D9DCDF;
-  background-image: url(${backgroundImg});
-  background-size: cover;
 `;
 
 export const DivisionContainer = styled.div`

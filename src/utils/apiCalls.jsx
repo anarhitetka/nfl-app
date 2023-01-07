@@ -220,7 +220,7 @@ export const ApiCalls = {
 
     // GET TEAMS ON BYE FOR {weekNo}
     // Each team has one bye week between Weeks 6 and 14 (regular season)
-    getTeamsOnByeForWeekNo: (weekNo) => requests.useGetAllTeamsOnBye(`https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/weeks/${weekNo}`),
+    getTeamsOnByeForWeekNo: (weekNo) => requests.useGetAllTeamsOnBye(`https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/${weekNo <= 18 ? 2 : 3}/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}`),
 
     // GET INFO FOR ALL WEEKS IN the / preseason type 1, regular season type 2, postseason type 3, offseason type 4:
     getWeeksInfoForSeasonType: (seasonType) => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/${seasonType}/weeks/`),
@@ -242,5 +242,8 @@ export const ApiCalls = {
 
     // GET DATA ABOUT EVENT - home team / away team:
     getTeamsInfoForEvent: (eventUrl) => requests.useGetHomeAndAwayTeamData(eventUrl),
+
+    // GET GAME SUMMARY
+    getGameSummary: (eventId) => requests.useGet(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=${eventId}`),
 
 };

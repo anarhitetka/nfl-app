@@ -1,4 +1,7 @@
-import { CircularProgress } from "@mui/material";
+import { useState } from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
+import Button from '@mui/material/Button';
+import MUIModalGameSummary from './MUIModalGameSummary.jsx';
 
 import * as S from "./Game.styled.js";
 
@@ -14,6 +17,11 @@ export default function GamePreview({
   scoreHomeTeam,
   errorInFetching
 }) {
+  const [openSummaryModal, setOpenSummaryModal] = useState(false);
+  const handleOpenSummaryModal = () => setOpenSummaryModal(true);
+  const handleCloseSummaryModal = () => setOpenSummaryModal(false);
+
+
   const formatDateShort = function (dateStr) {
     return `${new Date(dateStr).toLocaleString(undefined, {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -27,82 +35,112 @@ export default function GamePreview({
     })}`;
   };
 
+  const weekNumber = event.week.$ref.substring(
+    event.week.$ref.lastIndexOf("/") + 1,
+    event.week.$ref.indexOf("?")
+  );
+
   return (
     <>
       <S.GameContainer>
         {awayTeamData.isLoading || homeTeamData.isLoading ? (
-          <CircularProgress size={20} />
+          <LinearProgress />
         ) : (
           <>
-            <p style={{ textAlign: "end", margin: 0, paddingBottom: "5px" }}>
-              {formatDate(event.date)}
-            </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
+
+            <S.DateInfoRow>
+              <p><span>Week {weekNumber}:</span>{" "}
+                {formatDate(event.date)}{" "}
+              </p>
+              {/* <button onClick={openGameDetailsModal}>Game Summary</button> */}
+
+              <S.LinkToEspn target="blank" href={`https://www.espn.com/nfl/game/_/gameId/${event.id}`}>ESPN</S.LinkToEspn>
+            </S.DateInfoRow>
+
+            <S.ScoreRowGamePreview>
               {teamId === awayTeamID ? (
-                <>
-                  <span>@</span>
-                  <S.TeamLink to={`/teams/${homeTeamID}`}>
-                    <img
-                      src={homeTeamData.data.team.logos[0].href}
-                      height="25"
-                      alt="team logo"
-                    />
-                  </S.TeamLink>
+                <S.ScoreRowCompetitorDetails>
+                  <div>
+                    <span>@</span>
+                    <S.TeamLink to={`/teams/${homeTeamID}`}>
+                      <img
+                        src={homeTeamData.data.team.logos[0].href}
+                        height="25"
+                        alt="team logo"
+                      />
+                      <span>{homeTeamData.data.team.nickname}</span>
+                    </S.TeamLink>
+                  </div>
+
                   <span>
                     {scoreIsFinal ? (
                       <>
                         {scoreAwayTeam < scoreHomeTeam
-                          ? "LOST"
+                          ? <S.TextColorLost>LOST</S.TextColorLost>
                           : scoreAwayTeam === scoreHomeTeam
                             ? "TIE"
-                            : "WON"}
+                            : <S.TextColorWon>WON</S.TextColorWon>}
                       </>
                     ) : (
                       ""
                     )}
                   </span>
-                </>
+                </S.ScoreRowCompetitorDetails>
               ) : (
-                <>
-                  <span>vs</span>
-                  <S.TeamLink to={`/teams/${awayTeamID}`}>
-                    <img
-                      src={awayTeamData.data.team.logos[0].href}
-                      height="25"
-                      alt="team logo"
-                    />
-                  </S.TeamLink>
+                <S.ScoreRowCompetitorDetails>
+                  <div>
+                    <span>vs</span>
+                    <S.TeamLink to={`/teams/${awayTeamID}`}>
+                      <img
+                        src={awayTeamData.data.team.logos[0].href}
+                        height="25"
+                        alt="team logo"
+                      />
+                      <span>{awayTeamData.data.team.nickname}</span>
+                    </S.TeamLink>
+                  </div>
+
                   <span>
                     {scoreIsFinal ? (
                       <>
                         {scoreAwayTeam > scoreHomeTeam
-                          ? "LOST"
+                          ? <S.TextColorLost>LOST</S.TextColorLost>
                           : scoreAwayTeam === scoreHomeTeam
                             ? "TIE"
-                            : "WON"}
+                            : <S.TextColorWon>WON</S.TextColorWon>}
                       </>
                     ) : (
                       ""
                     )}
                   </span>
-                </>
+                </S.ScoreRowCompetitorDetails>
               )}
               {scoreIsFinal ? (
-                <span>
+                <S.ScoreRowScores>
                   {scoreAwayTeam > scoreHomeTeam
                     ? ` ${scoreAwayTeam}-${scoreHomeTeam}`
                     : ` ${scoreHomeTeam}-${scoreAwayTeam}`}
-                </span>
+                </S.ScoreRowScores>
               ) : (
                 <span>{formatDateShort(event.date)}</span>
               )}
-            </div>
+            </S.ScoreRowGamePreview>
+
+            {/* MODAL GAME SUMMARY */}
+            <Button
+              onClick={handleOpenSummaryModal}
+            >
+              See Game Summary
+            </Button>
+            <MUIModalGameSummary
+              open={openSummaryModal}
+              handleClose={handleCloseSummaryModal}
+              eventId={event.id}
+              gameName={event.name}
+              awayTeamID={awayTeamID}
+              homeTeamID={homeTeamID}
+            />
+
           </>
         )}
       </S.GameContainer>

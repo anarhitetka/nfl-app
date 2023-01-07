@@ -4,12 +4,15 @@ export const TeamDetails = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 20px;
+  padding-top: 20px;
 `;
 
-export const GamesContainer = styled.div``;
+export const GamesContainer = styled.div`
+  height: 65vh;
+  overflow-y: scroll;
+`;
 
-export const VenueDetails = styled.div`
+export const SummaryDetails = styled.div`
   width: 60%;
 `;
 
@@ -20,7 +23,7 @@ export const TeamHeader = styled.div`
   align-items: center;
   text-align: center;
   img {
-    margin-left: 30px;
+    margin: auto 30px;
   }
   flex-wrap: wrap;
 `;

@@ -8,7 +8,8 @@ export const Nav = styled.nav`
   align-items: center;
   width: 100%;
   padding: 10px;
-  @media (max-width: 370px) {
+  background-color:  rgba(33,33,33,0.7);
+  @media (max-width: 385px) {
     justify-content: center;
     align-items: center;
 
@@ -36,11 +37,13 @@ export const NavButton = styled.button`
   &:hover {
     background-color: #013369;
     color: white;
+    box-shadow: -3px -1px 27px 7px rgba(0,0,0,0.95);
+
   }
   &:active {
     background-color: #012852;
   }
-  @media (max-width: 370px) {
+  @media (max-width: 385px) {
     width: 80vw;
   }
 `;
