@@ -46,7 +46,7 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
         <S.SummaryContainer>
             {Object.keys(plays).map(key => {
                 return (
-                    <div key={`quarter${key}`}>
+                    <div key={`quarter${key}`} >
                         <S.QuarterHeaderRow>
                             <p>{key.toUpperCase()}</p>
                             <p>
@@ -61,17 +61,23 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
                             return (
                                 <div key={play.id}>
                                     <S.PlayRow>
-                                        <div>
-                                            <img
-                                                src={play.team.logo}
-                                                height="25"
-                                                alt="team logo"
-                                            />
-                                            <p>{play.type.abbreviation}</p>
-                                            <p>{play.clock.displayValue}</p>
+                                        <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <div>
+                                                <img
+                                                    src={play.team.logo}
+                                                    height="25"
+                                                    alt="team logo"
+                                                />
+                                            </div>
+                                            <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                                <div>
+                                                    <p>{play.type.abbreviation}</p>
+                                                    <p>{play.clock.displayValue}</p>
+                                                </div>
+                                                <p className="play-text">{play.text.toUpperCase()}</p>
+                                            </div>
                                         </div>
-                                        <p className="play-text">{play.text.toUpperCase()}</p>
-                                        <p>
+                                        <p className="scores">
                                             <span>{play.awayScore}</span>
                                             <span>{play.homeScore}</span>
                                         </p>

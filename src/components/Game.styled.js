@@ -12,6 +12,8 @@ export const GameHeading = styled.div`
       display: none;
     }
   }
+  display: flex;
+  justify-content: space-between;
 `;
 
 // game container for game details component 
@@ -114,6 +116,16 @@ export const AtSignGameScore = styled.span`
   font-size: 1.2rem;
   @media (max-width: 450px) {
     font-size: 1rem;
+  }
+`;
+
+export const PlayByPlayLink = styled(Link)`
+  /* text-decoration: none; */
+  color: #1B65B4;
+  font-style: italic;
+  font-size: 0.8rem;
+  :hover {
+    color: #02264C;
   }
 `;
 
