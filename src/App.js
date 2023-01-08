@@ -6,6 +6,7 @@ import Team from "./components/Team";
 import Weeks from "./components/Weeks";
 import WeekGames from "./components/WeekGames";
 import WeekSelected from "./components/WeekSelected";
+import GamePlayByPlay from "./components/GamePlayByPlay";
 import ErrorPage from "./components/ErrorPage";
 
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
@@ -28,6 +29,7 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="teams" element={<Teams />} />
           <Route path="teams/:teamId" element={<Team />} />
+          <Route path="games/:eventId" element={<GamePlayByPlay />} />
           <Route
             path="weeks"
             element={<Weeks weekNo={weekNo} allWeeksData={allWeeksData} />}

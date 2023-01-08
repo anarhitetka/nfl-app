@@ -25,15 +25,23 @@ export default function GameDetails({
   return (
     <>
       <S.GameHeading>
-        {formatDateGetTimeOnly(event.date)}
-        <span>, {
-          event.shortName === "TBD @ TBD"
-            ? event.shortName.toUpperCase()
-            : event.name.toUpperCase()
-        }</span>: {
-          scoreIsFinal
-            ? "FINAL"
-            : <em>GAME PENDING</em>}
+        <div>
+          {formatDateGetTimeOnly(event.date)}
+          <span>, {
+            event.shortName === "TBD @ TBD"
+              ? event.shortName.toUpperCase()
+              : event.name.toUpperCase()
+          }</span>: {
+            scoreIsFinal
+              ? "FINAL "
+              : <em>GAME PENDING </em>}
+        </div>
+        <S.PlayByPlayLink to={`/games/${event.id}`} state={{
+          from: {
+            gameName: event.name, awayTeamID, homeTeamID, awayTeamData,
+            homeTeamData
+          }
+        }}>SEE PLAY BY PLAY &gt;</S.PlayByPlayLink>
       </S.GameHeading>
 
       <S.GameContainerLong key={event.id}>
