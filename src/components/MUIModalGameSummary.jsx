@@ -59,7 +59,7 @@ S.CloseButton = styled.button`
 `;
 
 
-export default function MUIModalGameSummary({ open, handleClose, eventId, gameName, awayTeamID, homeTeamID }) {
+export default function MUIModalGameSummary({ open, handleClose, eventId, gameName, awayTeamID, homeTeamID, awayTeamData, homeTeamData }) {
     const gameSummaryData = ApiCalls.getGameSummary(eventId);
 
     return (
@@ -103,7 +103,7 @@ export default function MUIModalGameSummary({ open, handleClose, eventId, gameNa
                                         {gameSummaryData.data.article?.links?.web.href &&
                                             <div><a href={gameSummaryData.data.article?.links?.web.href} target="blank">Read more at ESPN</a></div>
                                         }
-                                        <Link to={`/games/${eventId}`} state={{ from: { gameName, awayTeamID, homeTeamID } }} >See full details about game</Link>
+                                        <Link to={`/games/${eventId}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >See full details about game</Link>
 
                                     </>
                                 )

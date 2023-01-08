@@ -139,8 +139,9 @@ export default function GamePreview({
               gameName={event.name}
               awayTeamID={awayTeamID}
               homeTeamID={homeTeamID}
+              homeTeamData={homeTeamData}
+              awayTeamData={awayTeamData}
             />
-
           </>
         )}
       </S.GameContainer>
