@@ -246,4 +246,7 @@ export const ApiCalls = {
     // GET GAME SUMMARY
     getGameSummary: (eventId) => requests.useGet(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=${eventId}`),
 
+    // GET TEAM RECORDS (playoff status, stats, records...)
+    getTeamRecords: (teamId) => requests.useGet(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/teams/${teamId}/record?lang=en&region=us`),
+
 };
