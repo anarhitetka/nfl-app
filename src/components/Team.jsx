@@ -3,6 +3,7 @@ import { ApiCalls } from "../utils/apiCalls";
 import { CircularProgress } from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
 import Game from "./Game";
+import TeamRecordsTabsMUI from "./TeamRecordsTabsMUI";
 import * as S from "./Team.styled";
 
 export default function Team() {
@@ -10,6 +11,7 @@ export default function Team() {
 
   const teamData = ApiCalls.getTeamData(teamId);
   const eventsData = ApiCalls.getTeamEvents(teamId);
+  const teamRecords = ApiCalls.getTeamRecords(teamId);
 
   const eventsRegularSeasonOnly = eventsData.data.filter(event => {
     return event.week.$ref.includes('types/2');
@@ -69,8 +71,20 @@ export default function Team() {
 
             )}
           </div>
+
+          {/* TEAM RECORDS TABBED COMPONENT  */}
+          <div style={{ minWidth: "60%", paddingTop: "15px" }}>
+            {teamRecords.isLoading ? (
+              <CircularProgress />
+            ) : (
+              <TeamRecordsTabsMUI teamRecords={teamRecords.data.items} />
+            )}
+
+          </div>
+
+
+          {/* STATS SUMMARY VENUE INFO  */}
           <>
-            {/* STATS SUMMARY VENUE INFO  */}
             {teamData.isLoading ? (
               <LinearProgress />
             ) : (
@@ -107,7 +121,7 @@ export default function Team() {
                 {teamData.data.team.franchise.venue.images.map((image) => {
                   return (
                     <div key={Math.random()}>
-                      <img src={image.href} height="200" alt="venue" />
+                      {/* <img src={image.href} height="200" alt="venue" /> */}
                       <br />
                     </div>
                   );
