@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import getCurrentSeason from './getCurrentSeason';
 
 // previous:
 // const instance = axios.create({
@@ -9,6 +10,9 @@ import { useEffect, useState } from 'react';
 //     headers: { 'Content-Type': 'application/json' }
 // });
 // const responseBody = (response) => response.data;
+
+const _site = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl';
+const _core = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl';
 
 const requests = {
     // get: (url) => instance.get(url).then(responseBody),
@@ -205,48 +209,48 @@ const requests = {
 export const ApiCalls = {
 
     // previous:
-    // getTeamEvents: (teamId) => requests.get(`/seasons/2022/teams/${teamId}/events`),
+    // getTeamEvents: (teamId) => requests.get(`/seasons/${getCurrentSeason()}/teams/${teamId}/events`),
     // getDataFromEndpoint: (endpoint) => requests.get(endpoint),
 
     // GET TEAM DATA:
-    getTeamData: (teamId) => requests.useGetWithId(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${teamId}`, teamId),
+    getTeamData: (teamId) => requests.useGetWithId(`${_site}/teams/${teamId}`, teamId),
 
     // GET ALL EVENTS FOR TEAM WITH {teamId}:
-    getTeamEvents: (teamId) => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/teams/${teamId}/events`),
+    getTeamEvents: (teamId) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/teams/${teamId}/events`),
 
     // GET ALL EVENTS FOR A SELECTED WEEK {weekNo}:
-    getEventsForWeek: (weekNo) => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/${weekNo <= 18 ? 2 : 3
+    getEventsForWeek: (weekNo) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/${weekNo <= 18 ? 2 : 3
         }/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}/events`),
 
     // GET TEAMS ON BYE FOR {weekNo}
     // Each team has one bye week between Weeks 6 and 14 (regular season)
-    getTeamsOnByeForWeekNo: (weekNo) => requests.useGetAllTeamsOnBye(`https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/${weekNo <= 18 ? 2 : 3}/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}`),
+    getTeamsOnByeForWeekNo: (weekNo) => requests.useGetAllTeamsOnBye(`${_core}/seasons/${getCurrentSeason()}/types/${weekNo <= 18 ? 2 : 3}/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}`),
 
     // GET INFO FOR ALL WEEKS IN the / preseason type 1, regular season type 2, postseason type 3, offseason type 4:
-    getWeeksInfoForSeasonType: (seasonType) => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/${seasonType}/weeks/`),
+    getWeeksInfoForSeasonType: (seasonType) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/${seasonType}/weeks/`),
 
     // GET ALL TEAMS DATA:
-    getAllTeamsData: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams?limit=32`),
+    getAllTeamsData: () => requests.useGetAll(`${_core}/teams?limit=32`),
 
     // GET TEAMS BY GROUPS:
     // AFC:
-    getAfcEastTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/4/teams`),
-    getAfcNorthTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/12/teams`),
-    getAfcSouthTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/13/teams`),
-    getAfcWestTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/6/teams`),
+    getAfcEastTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/4/teams`),
+    getAfcNorthTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/12/teams`),
+    getAfcSouthTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/13/teams`),
+    getAfcWestTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/6/teams`),
     // NFC:
-    getNfcEastTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/1/teams`),
-    getNfcNorthTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/10/teams`),
-    getNfcSouthTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/11/teams`),
-    getNfcWestTeams: () => requests.useGetAll(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/groups/3/teams`),
+    getNfcEastTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/1/teams`),
+    getNfcNorthTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/10/teams`),
+    getNfcSouthTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/11/teams`),
+    getNfcWestTeams: () => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/2/groups/3/teams`),
 
     // GET DATA ABOUT EVENT - home team / away team:
     getTeamsInfoForEvent: (eventUrl) => requests.useGetHomeAndAwayTeamData(eventUrl),
 
     // GET GAME SUMMARY
-    getGameSummary: (eventId) => requests.useGet(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=${eventId}`),
+    getGameSummary: (eventId) => requests.useGet(`${_site}/summary?event=${eventId}`),
 
     // GET TEAM RECORDS (playoff status, stats, records...)
-    getTeamRecords: (teamId) => requests.useGet(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/types/2/teams/${teamId}/record?lang=en&region=us`),
+    getTeamRecords: (teamId) => requests.useGet(`${_core}/seasons/${getCurrentSeason()}/types/2/teams/${teamId}/record?lang=en&region=us`),
 
 };
