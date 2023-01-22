@@ -58,6 +58,10 @@ export const TeamContainer = styled.div`
     font-size: 1.3rem;
     color: #013369;
   }
+  .right-tbd {
+    width: 100%;
+    text-align: right;
+  }
   @media (max-width: 450px) {
     div > span > span {
       font-size: 1rem;
@@ -77,7 +81,11 @@ export const TeamContainer = styled.div`
       display: flex;
       flex-direction: row-reverse;
     }
+    .right-tbd {
+      text-align: left;
+    }
   }
+  
 `;
 
 export const TeamLink = styled(Link)`

@@ -61,101 +61,114 @@ export default function GameDetails({
             <S.TeamsScoresRow>
               <S.TeamContainer>
                 {!awayTeamData.isLoading &&
-                  weekNo <= 23 &&
-                  awayTeamData.data.team.abbreviation !== "TBD" && (
+                  weekNo <= 23 && (
                     <>
-                      {/* LINK TO TEAM / LOGO  */}
-                      <S.TeamLink to={`/teams/${awayTeamID}`}>
-                        <img
-                          src={awayTeamData.data.team.logos[0].href}
-                          height="25"
-                          alt="team logo"
-                        />
-                      </S.TeamLink>
 
-                      <div>
-                        {/* LINK TO TEAM / ABBREVIATION + STATS  */}
-                        <S.TeamLink to={`/teams/${awayTeamID}`}>
-                          <span>
-                            {awayTeamData.data.team.abbreviation}&nbsp;&nbsp;
-                          </span>
-                          {/* STATS  */}
-                          <S.TeamStats>
-                            {scoreIsFinal &&
-                              !awayTeamData.isLoading &&
-                              `(${awayTeamData.data.team.record.items[0].summary})`}
-                          </S.TeamStats>
-                        </S.TeamLink>
+                      {awayTeamData.data.team.logos ? (
+                        <>
+                          {/* LINK TO TEAM / LOGO  */}
+                          <S.TeamLink to={`/teams/${awayTeamID}`}>
+                            <img
+                              src={awayTeamData.data.team.logos[0].href}
+                              height="25"
+                              alt="team logo"
+                            />
+                          </S.TeamLink>
 
-                        {/* SCORE  */}
+                          <div>
+                            {/* LINK TO TEAM / ABBREVIATION + STATS  */}
+                            <S.TeamLink to={`/teams/${awayTeamID}`}>
+                              <span>
+                                {awayTeamData.data.team.abbreviation}&nbsp;&nbsp;
+                              </span>
+                              {/* STATS  */}
+                              <S.TeamStats>
+                                {scoreIsFinal &&
+                                  !awayTeamData.isLoading &&
+                                  `(${awayTeamData.data.team.record.items[0].summary})`}
+                              </S.TeamStats>
+                            </S.TeamLink>
+
+                            {/* SCORE  */}
+                            <span>
+                              {scoreIsFinal ? (
+                                <span>{scoreAwayTeam}</span>
+                              ) : awayTeamData.isLoading ? (
+                                "loading stats"
+                              ) : awayTeamData.data.team.record.items ? (
+                                <S.StatsForPendingGame>
+                                  {awayTeamData.data.team.record.items[0].summary}
+                                </S.StatsForPendingGame>
+                              ) : (
+                                ""
+                              )}
+                            </span>
+                          </div>
+                        </>
+
+                      ) : (
                         <span>
-                          {scoreIsFinal ? (
-                            <span>{scoreAwayTeam}</span>
-                          ) : awayTeamData.isLoading ? (
-                            "loading stats"
-                          ) : awayTeamData.data.team.record.items ? (
-                            <S.StatsForPendingGame>
-                              {awayTeamData.data.team.record.items[0].summary}
-                            </S.StatsForPendingGame>
-                          ) : (
-                            ""
-                          )}
+                          {awayTeamData.data.team.abbreviation}
                         </span>
-                      </div>
+                      )}
+
                     </>
                   )}
               </S.TeamContainer>
 
-              {event.shortName === "TBD @ TBD" ? (
-                <em style={{ padding: "5px" }}>TBD</em>
-              ) : (
-                <S.AtSignGameScore>@</S.AtSignGameScore>
-              )}
+              <S.AtSignGameScore>@</S.AtSignGameScore>
 
               <S.TeamContainer>
                 {!homeTeamData.isLoading &&
-                  weekNo <= 23 &&
-                  homeTeamData.data.team.abbreviation !== "TBD" && (
+                  weekNo <= 23 && (
                     <>
-                      <div>
-                        {/* SCORE  */}
-                        <span>
-                          {scoreIsFinal ? (
-                            <span>{scoreHomeTeam}</span>
-                          ) : homeTeamData.isLoading ? (
-                            "loading stats"
-                          ) : homeTeamData.data.team.record.items ? (
-                            <S.StatsForPendingGame>
-                              {homeTeamData.data.team.record.items[0].summary}
-                            </S.StatsForPendingGame>
-                          ) : (
-                            ""
-                          )}
-                        </span>
+                      {homeTeamData.data.team.logos ? (
+                        <>
+                          <div>
+                            {/* SCORE  */}
+                            <span>
+                              {scoreIsFinal ? (
+                                <span>{scoreHomeTeam}</span>
+                              ) : homeTeamData.isLoading ? (
+                                "loading stats"
+                              ) : homeTeamData.data.team.record.items ? (
+                                <S.StatsForPendingGame>
+                                  {homeTeamData.data.team.record.items[0].summary}
+                                </S.StatsForPendingGame>
+                              ) : (
+                                ""
+                              )}
+                            </span>
 
-                        {/* LINK TO TEAM / STATS + ABBREVIATION  */}
-                        <S.TeamLink to={`/teams/${homeTeamID}`}>
-                          {/* STATS  */}
-                          <S.TeamStats>
-                            {scoreIsFinal &&
-                              !homeTeamData.isLoading &&
-                              `(${homeTeamData.data.team.record.items[0].summary})`}
-                          </S.TeamStats>
+                            {/* LINK TO TEAM / STATS + ABBREVIATION  */}
+                            <S.TeamLink to={`/teams/${homeTeamID}`}>
+                              {/* STATS  */}
+                              <S.TeamStats>
+                                {scoreIsFinal &&
+                                  !homeTeamData.isLoading &&
+                                  `(${homeTeamData.data.team.record.items[0].summary})`}
+                              </S.TeamStats>
 
-                          <span>
-                            &nbsp;&nbsp;{homeTeamData.data.team.abbreviation}
-                          </span>
-                        </S.TeamLink>
-                      </div>
+                              <span>
+                                &nbsp;&nbsp;{homeTeamData.data.team.abbreviation}
+                              </span>
+                            </S.TeamLink>
+                          </div>
 
-                      {/* LINK TO TEAM / LOGO  */}
-                      <S.TeamLink to={`/teams/${homeTeamID}`}>
-                        <img
-                          src={homeTeamData.data.team.logos[0].href}
-                          height="25"
-                          alt="team logo"
-                        />
-                      </S.TeamLink>
+                          {/* LINK TO TEAM / LOGO  */}
+                          <S.TeamLink to={`/teams/${homeTeamID}`}>
+                            <img
+                              src={homeTeamData.data.team.logos[0].href}
+                              height="25"
+                              alt="team logo"
+                            />
+                          </S.TeamLink>
+                        </>
+                      ) : (
+                        <span className="right-tbd">{homeTeamData.data.team.abbreviation}</span>
+                      )}
+
+
                     </>
                   )}
               </S.TeamContainer>
