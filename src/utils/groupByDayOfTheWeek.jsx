@@ -7,6 +7,10 @@ function setDayOfTheWeek(dateStr) {
 }
 
 export function groupByDayOfTheWeek(dataArr) {
+    dataArr.sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+    });
+
     const groups = dataArr.reduce((accObj, arrItem) => {
         const dayOfTheWeek = setDayOfTheWeek(arrItem.date);
 
@@ -18,5 +22,6 @@ export function groupByDayOfTheWeek(dataArr) {
 
         return accObj;
     }, {});
+
     return groups;
 }
