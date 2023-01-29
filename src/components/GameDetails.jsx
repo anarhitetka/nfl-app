@@ -33,22 +33,25 @@ export default function GameDetails({
               ? event.shortName.toUpperCase()
               : event.name.toUpperCase()}
           </span>
-          : {scoreIsFinal ? "FINAL " : <em>GAME PENDING </em>}
+          : {scoreIsFinal ? <strong>FINAL </strong> : <em>GAME PENDING </em>}
         </div>
-        <S.PlayByPlayLink
-          to={`/games/${event.id}`}
-          state={{
-            from: {
-              gameName: event.name,
-              awayTeamID,
-              homeTeamID,
-              awayTeamData,
-              homeTeamData,
-            },
-          }}
-        >
-          SEE PLAY BY PLAY &gt;
-        </S.PlayByPlayLink>
+        {scoreIsFinal ? (
+          <S.PlayByPlayLink
+            to={`/games/${event.id}`}
+            state={{
+              from: {
+                gameName: event.name,
+                awayTeamID,
+                homeTeamID,
+                awayTeamData,
+                homeTeamData,
+              },
+            }}
+          >
+            SEE PLAY BY PLAY &gt;
+          </S.PlayByPlayLink>
+        ) : ""}
+
       </S.GameHeading>
 
       <S.GameContainerLong key={event.id}>
