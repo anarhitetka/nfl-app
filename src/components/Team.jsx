@@ -17,6 +17,10 @@ export default function Team() {
     return event.week.$ref.includes('types/2');
   });
 
+  const eventsPostSeason = eventsData.data.filter(event => {
+    return event.week.$ref.includes('types/3');
+  });
+
   return (
     <div>
       {/* TEAM HEADER  */}
@@ -56,6 +60,7 @@ export default function Team() {
               <CircularProgress />
             ) : (
               <S.GamesContainer>
+                REGULAR SEASON GAMES:
                 {eventsRegularSeasonOnly.map((event) => {
                   return (
                     <Game
@@ -67,6 +72,22 @@ export default function Team() {
                     />
                   );
                 })}
+                POST-SEASON GAMES:
+                {eventsPostSeason.length > 0 && (
+                  eventsPostSeason.map((event) => {
+                    return (
+                      <Game
+                        event={event}
+                        key={`game-${event.id}---team-${teamId}`}
+                        weekNo={true}
+                        teamId={teamId}
+                        type="preview"
+                      />
+
+                    );
+                  })
+                )}
+
               </S.GamesContainer>
 
             )}
