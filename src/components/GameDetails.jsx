@@ -33,8 +33,14 @@ export default function GameDetails({
               ? event.shortName.toUpperCase()
               : event.name.toUpperCase()}
           </span>
-          : {scoreIsFinal ? <strong>FINAL </strong> : <em>GAME PENDING </em>}
+          : {!scoreIsFinal
+            ? <em>GAME PENDING </em>
+            : event.competitions[0].liveAvailable
+              ? <strong>LIVE GAME </strong>
+              : <strong>FINAL </strong>
+          }
         </div>
+
         {scoreIsFinal ? (
           <S.PlayByPlayLink
             to={`/games/${event.id}`}
