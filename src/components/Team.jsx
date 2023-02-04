@@ -112,33 +112,33 @@ export default function Team() {
 
               <S.SummaryDetails>
                 {/* <h3>{teamData.data.team.standingSummary}</h3> */}
-                <h3>Summary</h3>
+                {/* <h3>Summary</h3> */}
                 {/* TOTAL  */}
-                <p>Total: {teamData.data.team.record.items[0].summary}</p>
+                {/* <p>Total: {teamData.data.team.record.items[0].summary}</p> */}
                 {/* HOME RECORD  */}
-                <p>{teamData.data.team.record.items[1].description}: {teamData.data.team.record.items[1].summary}</p>
+                {/* <p>{teamData.data.team.record.items[1].description}: {teamData.data.team.record.items[1].summary}</p> */}
                 {/* AWAY RECORD  */}
-                <p>{teamData.data.team.record.items[2].description}: {teamData.data.team.record.items[2].summary}</p>
+                {/* <p>{teamData.data.team.record.items[2].description}: {teamData.data.team.record.items[2].summary}</p> */}
                 {/* NEXT EVENT  */}
                 {/* <a target="blank" href={`https://www.espn.com/nfl/game/_/gameId/${teamData.data.team.nextEvent[0]?.id}`}>Link to next event on ESPN</a> */}
 
                 {/* EXTERNAL LINKS  */}
-                <p>External links (ESPN):</p>
+                {/* <p>External links (ESPN):</p>
                 {teamData.data.team.links.map(link => {
                   return <p key={link.href}><a href={link.href} target="blank">{link.text}</a></p>
-                })}
+                })} */}
 
                 {/* VENUE DETAILS  */}
-                <p>
+                {/* <p>
                   <strong>Venue: </strong>
                   {teamData.data.team.franchise.venue.fullName} <br />
                   {teamData.data.team.franchise.venue.capacity} seats (
                   {teamData.data.team.franchise.venue.indoor ? "indoor" : "outdoor"}
                   {teamData.data.team.franchise.venue.grass ? "  - grass" : ""})
-                </p>
-                <p>
+                </p> */}
+                {/* <p>
                   <strong>Location:</strong> {teamData.data.team.location}
-                </p>
+                </p> */}
                 {teamData.data.team.franchise.venue.images.map((image) => {
                   return (
                     <div key={Math.random()}>
