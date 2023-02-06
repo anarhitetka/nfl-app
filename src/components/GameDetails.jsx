@@ -33,11 +33,12 @@ export default function GameDetails({
               ? event.shortName.toUpperCase()
               : event.name.toUpperCase()}
           </span>
-          : {!scoreIsFinal
-            ? <em>GAME PENDING </em>
-            : event.competitions[0].liveAvailable
-              ? <strong>LIVE GAME </strong>
-              : <strong>FINAL </strong>
+          : {(event.shortName === 'AFC @ NFC' || event.shortName === "NFC @ AFC") ? "PROBOWL" :
+            !scoreIsFinal
+              ? <em>GAME PENDING </em>
+              : event.competitions[0].liveAvailable
+                ? <strong>LIVE GAME </strong>
+                : <strong>FINAL </strong>
           }
         </div>
 
@@ -100,17 +101,19 @@ export default function GameDetails({
 
                             {/* SCORE  */}
                             <span>
-                              {scoreIsFinal ? (
-                                <span>{scoreAwayTeam}</span>
-                              ) : awayTeamData.isLoading ? (
-                                "loading stats"
-                              ) : awayTeamData.data.team.record.items ? (
-                                <S.StatsForPendingGame>
-                                  {awayTeamData.data.team.record.items[0].summary}
-                                </S.StatsForPendingGame>
-                              ) : (
-                                ""
-                              )}
+                              {(event.shortName === 'AFC @ NFC' || event.shortName === 'NFC @ AFC')
+                                ? <span>{scoreAwayTeam}</span>
+                                : scoreIsFinal ? (
+                                  <span>{scoreAwayTeam}</span>
+                                ) : awayTeamData.isLoading ? (
+                                  "loading stats"
+                                ) : awayTeamData.data.team.record.items ? (
+                                  <S.StatsForPendingGame>
+                                    {awayTeamData.data.team.record.items[0].summary}
+                                  </S.StatsForPendingGame>
+                                ) : (
+                                  ""
+                                )}
                             </span>
                           </div>
                         </>
@@ -136,17 +139,19 @@ export default function GameDetails({
                           <div>
                             {/* SCORE  */}
                             <span>
-                              {scoreIsFinal ? (
-                                <span>{scoreHomeTeam}</span>
-                              ) : homeTeamData.isLoading ? (
-                                "loading stats"
-                              ) : homeTeamData.data.team.record.items ? (
-                                <S.StatsForPendingGame>
-                                  {homeTeamData.data.team.record.items[0].summary}
-                                </S.StatsForPendingGame>
-                              ) : (
-                                ""
-                              )}
+                              {(event.shortName === 'AFC @ NFC' || event.shortName === 'NFC @ AFC')
+                                ? <span>{scoreHomeTeam}</span>
+                                : scoreIsFinal ? (
+                                  <span>{scoreHomeTeam}</span>
+                                ) : homeTeamData.isLoading ? (
+                                  "loading stats"
+                                ) : homeTeamData.data.team.record.items ? (
+                                  <S.StatsForPendingGame>
+                                    {homeTeamData.data.team.record.items[0].summary}
+                                  </S.StatsForPendingGame>
+                                ) : (
+                                  ""
+                                )}
                             </span>
 
                             {/* LINK TO TEAM / STATS + ABBREVIATION  */}

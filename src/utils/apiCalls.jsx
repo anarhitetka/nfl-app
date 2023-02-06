@@ -126,6 +126,8 @@ const requests = {
                             : setAwayTeamID(competitor.id);
                     });
                     data.competitions[0].boxscoreAvailable
+                        // boxscoreAvailable is FALSE for probowl game after it has been played ! why?.. :|
+                        // data.competitions[0].summaryAvailable
                         ? setScoreIsFinal(true)
                         : setScoreIsFinal(false);
                 } catch (error) {

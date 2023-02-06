@@ -139,7 +139,7 @@ export default function Team() {
                 {/* <p>
                   <strong>Location:</strong> {teamData.data.team.location}
                 </p> */}
-                {teamData.data.team.franchise.venue.images.map((image) => {
+                {teamData.data.team.franchise.venue && teamData.data.team.franchise.venue.images.map((image) => {
                   return (
                     <div key={Math.random()}>
                       {/* <img src={image.href} height="200" alt="venue" /> */}
