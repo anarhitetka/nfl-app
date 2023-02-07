@@ -93,9 +93,11 @@ export default function GameDetails({
                               </span>
                               {/* STATS  */}
                               <S.TeamStats>
-                                {scoreIsFinal &&
+                                {awayTeamData.data.team.record.items &&
+                                  scoreIsFinal &&
                                   !awayTeamData.isLoading &&
-                                  `(${awayTeamData.data.team.record.items[0].summary})`}
+                                  `(${awayTeamData.data.team.record?.items[0].summary})`
+                                }
                               </S.TeamStats>
                             </S.TeamLink>
 
@@ -158,7 +160,8 @@ export default function GameDetails({
                             <S.TeamLink to={`/teams/${homeTeamID}`}>
                               {/* STATS  */}
                               <S.TeamStats>
-                                {scoreIsFinal &&
+                                {homeTeamData.data.team.record.items &&
+                                  scoreIsFinal &&
                                   !homeTeamData.isLoading &&
                                   `(${homeTeamData.data.team.record.items[0].summary})`}
                               </S.TeamStats>
