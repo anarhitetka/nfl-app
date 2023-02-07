@@ -1,6 +1,6 @@
-import { ApiCalls } from "../utils/apiCalls";
-import GamePreview from "./GamePreview";
-import GameDetails from "./GameDetails";
+import { ApiCalls } from "../../utils/apiCalls";
+import GamePreview from "./GamePreview/GamePreview";
+import GameDetails from "./GameDetails/GameDetails";
 
 export default function Game({ event, weekNo, teamId, type }) {
 

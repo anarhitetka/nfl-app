@@ -9,7 +9,8 @@ import { Typography } from "@mui/material";
 
 export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
   const { weekNo } = useParams();
-
+  // console.log(weekNo)
+  // console.log(weeksData);
   const [value, setValue] = React.useState(0);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
   return (
     <Box
       sx={{
+        // maxWidth: { xs: 300, sm: 600, md: 900, lg: 1100 },
         maxWidth: { xs: 300, sm: 600, md: 900, lg: 1100 },
         bgcolor: "background.paper",
       }}

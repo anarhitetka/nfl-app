@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { ApiCalls } from "../utils/apiCalls";
+import { ApiCalls } from "../../../utils/apiCalls";
 import { CircularProgress } from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
-import Game from "./Game";
-import TeamRecordsTabsMUI from "./TeamRecordsTabsMUI";
+import Game from "../../../components/Game/Game";
+import TeamRecordsTabsMUI from "./TabsStats/TeamRecordsTabsMUI";
 import * as S from "./Team.styled";
 
 export default function Team() {

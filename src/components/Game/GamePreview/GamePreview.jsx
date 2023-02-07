@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import Button from '@mui/material/Button';
-import MUIModalGameSummary from './MUIModalGameSummary.jsx';
+import MUIModalGameSummary from './ModalSummary/MUIModalGameSummary.jsx';
 
-import * as S from "./Game.styled.js";
+import * as S from "../Game.styled.js";
 
 export default function GamePreview({
   awayTeamData,

@@ -1,5 +1,5 @@
-import { Gronk } from "../assets/Gronk";
-import { NFLLogo } from "../assets/NFLLogo";
+import { Gronk } from "../../assets/Gronk";
+import { NFLLogo } from "../../assets/NFLLogo";
 import styled from "styled-components";
 
 const S = {};

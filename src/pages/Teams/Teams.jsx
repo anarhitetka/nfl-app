@@ -1,4 +1,4 @@
-import { ApiCalls } from "../utils/apiCalls";
+import { ApiCalls } from "../../utils/apiCalls";
 import { Outlet } from "react-router-dom";
 import * as S from "./Teams.styled.js";
 

@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LayoutPage from "./components/LayoutPage";
-import Home from "./components/Home";
-import Teams from "./components/Teams";
-import Team from "./components/Team";
-import Weeks from "./components/Weeks";
-import WeekGames from "./components/WeekGames";
-import WeekSelected from "./components/WeekSelected";
-import GamePlayByPlay from "./components/GamePlayByPlay";
-import ErrorPage from "./components/ErrorPage";
+import LayoutPage from "./UI/layout/LayoutPage";
+import Home from "./pages/Home/Home";
+import Teams from "./pages/Teams/Teams";
+import Team from "./pages/Teams/Team/Team";
+import Weeks from "./pages/Games/Weeks";
+import WeekGames from "./pages/Games/Week/WeekGames";
+import WeekSelected from "./pages/Games/Week/WeekSelected";
+import GamePlayByPlay from "./pages/GamePlayByPlay/GamePlayByPlay";
+import ErrorPage from "./pages/Error/ErrorPage";
 
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
 import { ApiCalls } from "./utils/apiCalls";
@@ -19,8 +19,9 @@ function App() {
   const weeksPostSeason = ApiCalls.getWeeksInfoForSeasonType('3');
 
   const allWeeksData = [...weeksRegularSeason.data, ...weeksPostSeason.data];
-
+  // console.log(allWeeksData)
   const weekNo = setCurrentWeekNo(allWeeksData);
+  // console.log(weekNo);
 
   return (
     <Router>

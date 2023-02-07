@@ -5,8 +5,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
-import ScoringSummary from './ScoringSummary';
-import { ApiCalls } from "../utils/apiCalls";
+import ScoringSummary from '../../../GameScoringSummary/ScoringSummary';
+import { ApiCalls } from "../../../../utils/apiCalls";
 
 const style = {
     position: 'absolute',
