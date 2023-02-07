@@ -6,7 +6,7 @@ import Team from "./pages/Teams/Team/Team";
 import Weeks from "./pages/Games/Weeks";
 import WeekGames from "./pages/Games/Week/WeekGames";
 import WeekSelected from "./pages/Games/Week/WeekSelected";
-import GamePlayByPlay from "./pages/GamePlayByPlay/GamePlayByPlay";
+import GamePlayByPlay from "./pages/Games/GamePlayByPlay/GamePlayByPlay";
 import ErrorPage from "./pages/Error/ErrorPage";
 
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";

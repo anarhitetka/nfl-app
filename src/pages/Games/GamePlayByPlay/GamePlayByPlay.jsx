@@ -1,7 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
-import { ApiCalls } from "../../utils/apiCalls";
+import { ApiCalls } from "../../../utils/apiCalls";
 import LinearProgress from '@mui/material/LinearProgress';
-import ScoringSummary from '../../components/GameScoringSummary/ScoringSummary';
+import ScoringSummary from '../../../components/GameScoringSummary/ScoringSummary';
 
 import * as S from './GamePlayByPlay.styled';
 
