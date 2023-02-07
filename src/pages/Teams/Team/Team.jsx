@@ -72,7 +72,7 @@ export default function Team() {
                     />
                   );
                 })}
-                POST-SEASON GAMES:
+                {eventsPostSeason.length > 0 && "POST-SEASON GAMES:"}
                 {eventsPostSeason.length > 0 && (
                   eventsPostSeason.map((event) => {
                     return (
