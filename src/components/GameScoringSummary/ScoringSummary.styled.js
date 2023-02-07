@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const SummaryContainer = styled.div`
-    max-height: 60vh;
-    /* overflow-y: scroll; */
     scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: rebeccapurple green;
@@ -38,7 +36,6 @@ export const PlayRow = styled.div`
     div > div {
         display: flex;
         flex-direction: row;
-        /* width: 25%; */
         font-size: 0.8rem;
     }
     p {

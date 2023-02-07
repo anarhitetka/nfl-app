@@ -5,7 +5,6 @@ import ScoringSummary from '../../../components/GameScoringSummary/ScoringSummar
 
 import * as S from './GamePlayByPlay.styled';
 
-
 export default function GamePlayByPlay() {
     const { eventId } = useParams();
 
@@ -21,10 +20,8 @@ export default function GamePlayByPlay() {
     return (
         <div style={{ backgroundColor: "white", minHeight: "100vh", padding: "0 10px", textAlign: "center" }}>
             <div>
-
                 <S.TeamHeader>
                     <div className="main-header-teams">
-
                         <div
                             style={{ backgroundColor: "#" + awayTeamData.data.team.color, color: "white" }}
                         >
@@ -40,6 +37,7 @@ export default function GamePlayByPlay() {
                         </div>
 
                         @
+
                         <div style={{ backgroundColor: "#" + homeTeamData.data.team.color, color: "white" }}>
                             <h5>{homeTeamData.data.team.displayName}</h5>
                             <S.TeamLink to={`/teams/${homeTeamID}`}>
@@ -52,8 +50,6 @@ export default function GamePlayByPlay() {
                             <p>{homeTeamData.data.team.standingSummary}</p>
                         </div>
                     </div>
-
-
                 </S.TeamHeader>
             </div>
 
@@ -63,6 +59,9 @@ export default function GamePlayByPlay() {
                         ? <LinearProgress />
                         : (
                             <>
+                                <h3>
+                                    {gameSummaryData.data.article?.headline}
+                                </h3>
                                 {gameSummaryData.data.scoringPlays
                                     ? <ScoringSummary
                                         scoringPlays={gameSummaryData.data.scoringPlays}
@@ -72,18 +71,6 @@ export default function GamePlayByPlay() {
                                     />
                                     : <div>no summary available</div>
                                 }
-
-                                {/* ARTICLE SHORT INFO + LINK TO ESPN */}
-                                <div>
-                                    {gameSummaryData.data.article?.links?.web.href &&
-                                        <S.EspnArticle><a href={gameSummaryData.data.article?.links?.web.href} target="blank">See article on ESPN </a>
-                                            <span>
-                                                {gameSummaryData.data.article?.headline}
-                                            </span>
-                                        </S.EspnArticle>
-                                    }
-                                </div>
-
                             </>
                         )
                 } </div>
