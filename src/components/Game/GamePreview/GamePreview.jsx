@@ -1,9 +1,10 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import Button from '@mui/material/Button';
-import MUIModalGameSummary from './ModalSummary/MUIModalGameSummary.jsx';
+// import MUIModalGameSummary from './ModalSummary/MUIModalGameSummary.jsx';
 
 import * as S from "../Game.styled.js";
+import { Link } from 'react-router-dom';
 
 export default function GamePreview({
   awayTeamData,
@@ -17,9 +18,9 @@ export default function GamePreview({
   scoreHomeTeam,
   errorInFetching
 }) {
-  const [openSummaryModal, setOpenSummaryModal] = useState(false);
-  const handleOpenSummaryModal = () => setOpenSummaryModal(true);
-  const handleCloseSummaryModal = () => setOpenSummaryModal(false);
+  // const [openSummaryModal, setOpenSummaryModal] = useState(false);
+  // const handleOpenSummaryModal = () => setOpenSummaryModal(true);
+  // const handleCloseSummaryModal = () => setOpenSummaryModal(false);
 
 
   const formatDateShort = function (dateStr) {
@@ -126,13 +127,16 @@ export default function GamePreview({
               )}
             </S.ScoreRowGamePreview>
 
+            <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >
+              <Button>See Game Summary</Button>
+            </Link>
             {/* MODAL GAME SUMMARY */}
-            <Button
+            {/* <Button
               onClick={handleOpenSummaryModal}
             >
               See Game Summary
-            </Button>
-            <MUIModalGameSummary
+            </Button> */}
+            {/* <MUIModalGameSummary
               open={openSummaryModal}
               handleClose={handleCloseSummaryModal}
               eventId={event.id}
@@ -141,7 +145,7 @@ export default function GamePreview({
               homeTeamID={homeTeamID}
               homeTeamData={homeTeamData}
               awayTeamData={awayTeamData}
-            />
+            /> */}
           </>
         )}
       </S.GameContainer>

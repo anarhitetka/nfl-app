@@ -57,12 +57,6 @@ S.CloseButton = styled.button`
 	&:after { transform: rotate(-45deg); }
 
 `;
-S.StyledLink = styled(Link)`
-    text-decoration: none;
-    font-weight: 600;
-
-`;
-
 
 export default function MUIModalGameSummary({ open, handleClose, eventId, gameName, awayTeamID, homeTeamID, awayTeamData, homeTeamData }) {
     const gameSummaryData = ApiCalls.getGameSummary(eventId);
@@ -92,7 +86,7 @@ export default function MUIModalGameSummary({ open, handleClose, eventId, gameNa
                         {gameSummaryData.data.article?.description}{" "}
                     </div>
                     {/* LINK TO GAME PAGE  */}
-                    <S.StyledLink to={`/games/${eventId}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >Go to game details page</S.StyledLink>
+                    <Link to={`/games/${eventId}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >Go to game details page</Link>
                     {/* SUMMARY OF GAME  */}
                     <div>
                         {
