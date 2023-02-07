@@ -57,6 +57,11 @@ S.CloseButton = styled.button`
 	&:after { transform: rotate(-45deg); }
 
 `;
+S.StyledLink = styled(Link)`
+    text-decoration: none;
+    font-weight: 600;
+
+`;
 
 
 export default function MUIModalGameSummary({ open, handleClose, eventId, gameName, awayTeamID, homeTeamID, awayTeamData, homeTeamData }) {
@@ -71,17 +76,30 @@ export default function MUIModalGameSummary({ open, handleClose, eventId, gameNa
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={{ ...style, width: '70%' }}>
+                    {/* GAME NAME  */}
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             {gameName}
                         </Typography>
-                        <S.CloseButton onClick={handleClose}>Close</S.CloseButton>  </div>
+                        <S.CloseButton onClick={handleClose}>Close</S.CloseButton>
+                    </div>
+                    {/* ARTICLE HEADLINE + LINK TO ESPN */}
+                    <div style={{ fontWeight: 600 }}>
+                        <a href={gameSummaryData.data.article?.links?.web.href} target="blank" style={{ color: "black" }}> {gameSummaryData.data.article?.headline} (ESPN)</a>
+
+                    </div>
+                    <div>
+                        {gameSummaryData.data.article?.description}{" "}
+                    </div>
+                    {/* LINK TO GAME PAGE  */}
+                    <S.StyledLink to={`/games/${eventId}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >Go to game details page</S.StyledLink>
+                    {/* SUMMARY OF GAME  */}
                     <div>
                         {
                             gameSummaryData.isLoading
                                 ? <LinearProgress />
                                 : (
-                                    <>
+                                    <div style={{ overflowY: "scroll" }}>
                                         {gameSummaryData.data.scoringPlays
                                             ? <ScoringSummary
                                                 scoringPlays={gameSummaryData.data.scoringPlays}
@@ -91,26 +109,12 @@ export default function MUIModalGameSummary({ open, handleClose, eventId, gameNa
                                             />
                                             : <div>no summary available</div>
                                         }
-
-                                        {/* ARTICLE SHORT INFO + LINK TO ESPN  */}
-                                        <div>
-                                            {gameSummaryData.data.article?.description}{" "}
-                                        </div>
-                                        <div>
-                                            {gameSummaryData.data.article?.headline}
-                                        </div>
-
-                                        {gameSummaryData.data.article?.links?.web.href &&
-                                            <div><a href={gameSummaryData.data.article?.links?.web.href} target="blank">Read more at ESPN</a></div>
-                                        }
-                                        <Link to={`/games/${eventId}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >See full details about game</Link>
-
-                                    </>
+                                    </div>
                                 )
                         }
                     </div>
                 </Box>
             </Modal>
-        </div>
+        </div >
     );
 }
