@@ -1,5 +1,4 @@
 import { ApiCalls } from "../../utils/apiCalls";
-import { Outlet } from "react-router-dom";
 import * as S from "./Teams.styled.js";
 
 export default function Teams() {
@@ -56,7 +55,6 @@ export default function Teams() {
         })}
 
       </S.TeamsContainer>
-      <Outlet />
     </>
   );
 }
