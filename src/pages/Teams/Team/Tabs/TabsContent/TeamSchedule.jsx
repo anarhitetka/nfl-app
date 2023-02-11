@@ -32,20 +32,22 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
                 })}
             </S.SeasonContainer>
             {eventsPostSeason.length > 0 && <S.SeasonHeading>Post season</S.SeasonHeading>}
-            {eventsPostSeason.length > 0 && (
-                eventsPostSeason.map((event) => {
-                    return (
-                        <Game
-                            event={event}
-                            key={`game-${event.id}---team-${teamId}`}
-                            weekNo={true}
-                            teamId={teamId}
-                            type="preview"
-                        />
+            <S.SeasonContainer>
+                {eventsPostSeason.length > 0 && (
+                    eventsPostSeason.map((event) => {
+                        return (
+                            <Game
+                                event={event}
+                                key={`game-${event.id}---team-${teamId}`}
+                                weekNo={true}
+                                teamId={teamId}
+                                type="preview"
+                            />
 
-                    );
-                })
-            )}
+                        );
+                    })
+                )}
+            </S.SeasonContainer>
         </div>
     )
 }
