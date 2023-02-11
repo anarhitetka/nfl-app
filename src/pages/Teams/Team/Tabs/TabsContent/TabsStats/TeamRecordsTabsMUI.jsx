@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
-import { cleanUpJsonTeamRecords } from '../../../../utils/cleanUpDataHelpers';
+import { cleanUpJsonTeamRecords } from '../../../../../../utils/cleanUpDataHelpers';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -42,7 +42,7 @@ export default function TeamRecordsTabsMUI({ teamRecords: teamRecordsAll }) {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', backgroundColor: "white" }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
                     value={value}

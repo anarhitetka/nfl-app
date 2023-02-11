@@ -1,10 +1,8 @@
 import { useParams } from "react-router-dom";
 import { ApiCalls } from "../../../utils/apiCalls";
-import { CircularProgress } from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
-import Game from "../../../components/Game/Game";
-import TeamRecordsTabsMUI from "./TabsStats/TeamRecordsTabsMUI";
 import * as S from "./Team.styled";
+import Tabs from "./Tabs/Tabs";
 
 export default function Team() {
   const { teamId } = useParams();
@@ -13,7 +11,7 @@ export default function Team() {
   const eventsData = ApiCalls.getTeamEvents(teamId);
   const teamRecords = ApiCalls.getTeamRecords(teamId);
 
-  const eventsRegularSeasonOnly = eventsData.data.filter(event => {
+  const eventsRegularSeason = eventsData.data.filter(event => {
     return event.week.$ref.includes('types/2');
   });
 
@@ -22,7 +20,7 @@ export default function Team() {
   });
 
   return (
-    <div>
+    <S.TeamPageContainer>
       {/* TEAM HEADER  */}
       {teamData.isLoading ? (
         <LinearProgress />
@@ -49,109 +47,13 @@ export default function Team() {
 
       )}
 
-      {/* TEAM DETAILS  */}
-      <div style={{ backgroundColor: "white" }}>
-        {eventsData.isLoading && <LinearProgress />}
-        <S.TeamDetails>
-          {/* TEAM SCHEDULE  */}
-          <div>
-            <S.HeadingH2>Schedule</S.HeadingH2>
-            {eventsData.isLoading ? (
-              <CircularProgress />
-            ) : (
-              <S.GamesContainer>
-                REGULAR SEASON GAMES:
-                {eventsRegularSeasonOnly.map((event) => {
-                  return (
-                    <Game
-                      event={event}
-                      key={`game-${event.id}-team-${teamId}`}
-                      weekNo={true}
-                      teamId={teamId}
-                      type="preview"
-                    />
-                  );
-                })}
-                {eventsPostSeason.length > 0 && "POST-SEASON GAMES:"}
-                {eventsPostSeason.length > 0 && (
-                  eventsPostSeason.map((event) => {
-                    return (
-                      <Game
-                        event={event}
-                        key={`game-${event.id}---team-${teamId}`}
-                        weekNo={true}
-                        teamId={teamId}
-                        type="preview"
-                      />
-
-                    );
-                  })
-                )}
-
-              </S.GamesContainer>
-
-            )}
-          </div>
-
-          {/* TEAM RECORDS TABBED COMPONENT  */}
-          <div style={{ minWidth: "60%", paddingTop: "15px" }}>
-            {teamRecords.isLoading ? (
-              <CircularProgress />
-            ) : (
-              <TeamRecordsTabsMUI teamRecords={teamRecords.data.items} />
-            )}
-
-          </div>
-
-
-          {/* STATS SUMMARY VENUE INFO  */}
-          <>
-            {teamData.isLoading ? (
-              <LinearProgress />
-            ) : (
-
-              <S.SummaryDetails>
-                {/* <h3>{teamData.data.team.standingSummary}</h3> */}
-                {/* <h3>Summary</h3> */}
-                {/* TOTAL  */}
-                {/* <p>Total: {teamData.data.team.record.items[0].summary}</p> */}
-                {/* HOME RECORD  */}
-                {/* <p>{teamData.data.team.record.items[1].description}: {teamData.data.team.record.items[1].summary}</p> */}
-                {/* AWAY RECORD  */}
-                {/* <p>{teamData.data.team.record.items[2].description}: {teamData.data.team.record.items[2].summary}</p> */}
-                {/* NEXT EVENT  */}
-                {/* <a target="blank" href={`https://www.espn.com/nfl/game/_/gameId/${teamData.data.team.nextEvent[0]?.id}`}>Link to next event on ESPN</a> */}
-
-                {/* EXTERNAL LINKS  */}
-                {/* <p>External links (ESPN):</p>
-                {teamData.data.team.links.map(link => {
-                  return <p key={link.href}><a href={link.href} target="blank">{link.text}</a></p>
-                })} */}
-
-                {/* VENUE DETAILS  */}
-                {/* <p>
-                  <strong>Venue: </strong>
-                  {teamData.data.team.franchise.venue.fullName} <br />
-                  {teamData.data.team.franchise.venue.capacity} seats (
-                  {teamData.data.team.franchise.venue.indoor ? "indoor" : "outdoor"}
-                  {teamData.data.team.franchise.venue.grass ? "  - grass" : ""})
-                </p> */}
-                {/* <p>
-                  <strong>Location:</strong> {teamData.data.team.location}
-                </p> */}
-                {teamData.data.team.franchise.venue && teamData.data.team.franchise.venue.images.map((image) => {
-                  return (
-                    <div key={Math.random()}>
-                      {/* <img src={image.href} height="200" alt="venue" /> */}
-                      {/* <br /> */}
-                    </div>
-                  );
-                })}
-              </S.SummaryDetails>
-            )}
-          </>
-        </S.TeamDetails>
-      </div>
-    </div>
+      {/* TABS  */}
+      <Tabs
+        teamId={teamId}
+        eventsRegularSeason={eventsRegularSeason}
+        eventsPostSeason={eventsPostSeason}
+        teamRecords={teamRecords.data.items}
+      />
+    </S.TeamPageContainer>
   );
 }
