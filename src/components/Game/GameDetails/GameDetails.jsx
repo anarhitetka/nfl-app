@@ -129,7 +129,7 @@ export default function GameDetails({
                   )}
               </S.TeamContainer>
 
-              <S.AtSignGameScore>@</S.AtSignGameScore>
+              <S.AtSignGameScore><p>@</p></S.AtSignGameScore>
 
               <S.TeamContainer>
                 {!homeTeamData.isLoading &&

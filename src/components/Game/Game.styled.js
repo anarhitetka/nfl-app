@@ -61,7 +61,7 @@ export const TeamContainer = styled.div`
   }
   div > span > span {
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #013369;
   }
   .right-tbd {
@@ -127,9 +127,9 @@ export const TeamLink = styled(Link)`
 `;
 
 export const TeamStats = styled.span`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   @media (max-width: 450px) {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   @media (max-width: 400px) {
     display: none;
@@ -147,13 +147,17 @@ export const StatsForPendingGame = styled.p`
   }
 `;
 
-export const AtSignGameScore = styled.span`
+export const AtSignGameScore = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #013369;
+  p {
+    margin: 0;
+    padding-bottom: 3px;
+  }
   @media (max-width: 450px) {
     font-size: 1rem;
   }
@@ -225,7 +229,7 @@ export const ScoreRowCompetitorDetails = styled.div`
 `;
 
 export const ScoreRowScores = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
 `;

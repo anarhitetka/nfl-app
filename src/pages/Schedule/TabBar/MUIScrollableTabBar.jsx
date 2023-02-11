@@ -65,11 +65,12 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
         {weeksData.map((week) => {
           return (
             <Tab
+              sx={{ p: 2 }}
               label={
                 <Box>
-                  <Typography variant="button">{week.text}</Typography>
+                  <Typography variant="button" sx={{ fontSize: 12, }}>{week.text}</Typography>
                   <br />
-                  <Typography variant="caption">
+                  <Typography variant="caption" sx={{ fontSize: 10, }}>
                     {formatDate(week.startDate)} - {formatDate(week.endDate)}
                   </Typography>
                 </Box>
