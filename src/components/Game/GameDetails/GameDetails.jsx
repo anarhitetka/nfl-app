@@ -24,43 +24,6 @@ export default function GameDetails({
 
   return (
     <>
-      <S.GameHeading>
-        <div>
-          {formatDateGetTimeOnly(event.date)}
-          <span>
-            ,{" "}
-            {event.shortName === "TBD @ TBD"
-              ? event.shortName.toUpperCase()
-              : event.name.toUpperCase()}
-          </span>
-          : {(event.shortName === 'AFC @ NFC' || event.shortName === "NFC @ AFC") ? "PROBOWL" :
-            !scoreIsFinal
-              ? <em>GAME PENDING </em>
-              : event.competitions[0].liveAvailable
-                ? <strong>LIVE GAME </strong>
-                : <strong>FINAL </strong>
-          }
-        </div>
-
-        {scoreIsFinal ? (
-          <S.PlayByPlayLink
-            to={`/games/${event.id}`}
-            state={{
-              from: {
-                gameName: event.name,
-                awayTeamID,
-                homeTeamID,
-                awayTeamData,
-                homeTeamData,
-              },
-            }}
-          >
-            SEE PLAY BY PLAY &gt;
-          </S.PlayByPlayLink>
-        ) : ""}
-
-      </S.GameHeading>
-
       <S.GameContainerLong key={event.id}>
         {awayTeamData.isLoading || homeTeamData.isLoading ? (
           <div style={{ padding: "10px" }}>
@@ -68,12 +31,48 @@ export default function GameDetails({
           </div>
         ) : (
           <>
+            <S.GameHeading>
+              <div>
+                {formatDateGetTimeOnly(event.date)}
+                <span>
+                  ,{" "}
+                  {event.shortName === "TBD @ TBD"
+                    ? event.shortName.toUpperCase()
+                    : event.name.toUpperCase()}
+                </span>
+                : {(event.shortName === 'AFC @ NFC' || event.shortName === "NFC @ AFC") ? "PROBOWL" :
+                  !scoreIsFinal
+                    ? <em>GAME PENDING </em>
+                    : event.competitions[0].liveAvailable
+                      ? <strong>LIVE GAME </strong>
+                      : <strong>FINAL </strong>
+                }
+              </div>
+
+              {scoreIsFinal ? (
+                <S.PlayByPlayLink
+                  to={`/games/${event.id}`}
+                  state={{
+                    from: {
+                      gameName: event.name,
+                      awayTeamID,
+                      homeTeamID,
+                      awayTeamData,
+                      homeTeamData,
+                    },
+                  }}
+                >
+                  PLAY BY PLAY
+                </S.PlayByPlayLink>
+              ) : ""}
+
+            </S.GameHeading>
             <S.TeamsScoresRow>
               <S.TeamContainer>
                 {!awayTeamData.isLoading &&
                   weekNo <= 23 && (
                     <>
-
+                      <span className="tooltip">{awayTeamData.data.team.displayName}</span>
                       {awayTeamData.data.team.logos ? (
                         <>
                           {/* LINK TO TEAM / LOGO  */}
@@ -136,6 +135,7 @@ export default function GameDetails({
                 {!homeTeamData.isLoading &&
                   weekNo <= 23 && (
                     <>
+                      <span className="tooltip">{homeTeamData.data.team.displayName}</span>
                       {homeTeamData.data.team.logos ? (
                         <>
                           <div>
@@ -157,6 +157,7 @@ export default function GameDetails({
                             </span>
 
                             {/* LINK TO TEAM / STATS + ABBREVIATION  */}
+
                             <S.TeamLink to={`/teams/${homeTeamID}`}>
                               {/* STATS  */}
                               <S.TeamStats>

@@ -10,7 +10,10 @@ S.TabBar = styled.div`
 `;
 
 S.MainContainer = styled.div`
-  background-color: white;
+  background: #B5BFCA;
+  background: -webkit-linear-gradient(bottom right, #B5BFCA, #EEEEEE);
+  background: -moz-linear-gradient(bottom right, #B5BFCA, #EEEEEE);
+  background: linear-gradient(to top left, #B5BFCA, #EEEEEE);
 `;
 
 export default function Weeks({ weekNo, allWeeksData }) {

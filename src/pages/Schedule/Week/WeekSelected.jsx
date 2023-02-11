@@ -61,7 +61,7 @@ export default function WeekSelected({ weekNo }) {
               })}
             </div>
           )
-        ) : <em>NO TEAMS ON BYE FOR SELECTED WEEK</em>}
+        ) : (weekNo > 18 ? "" : <em>NO TEAMS ON BYE FOR SELECTED WEEK</em>)}
       </S.TeamsOnByeContainer>
 
       {

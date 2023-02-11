@@ -3,17 +3,23 @@ import { Link } from "react-router-dom";
 
 export const GameHeading = styled.div`
   width: 80vw;
-  margin: 5px 0;
+  margin: 0 0 10px 0;
   text-align: left;
   font-size: 13px;
   color: #013369; 
-  @media (max-width: 500px) {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #B5BFCA;
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 700px) {
     span {
       display: none;
     }
   }
-  display: flex;
-  justify-content: space-between;
+  @media (max-width: 370px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 // game container for game details component 
@@ -21,9 +27,9 @@ export const GameContainerLong = styled.div`
   text-align: center;
   width: 80vw;
   margin: 0 10px 10px 10px;
-  padding: 0 10px;
-  border: 1px solid #013369; 
+  padding: 10px;
   border-radius: 5px;
+  background-color: white;
   @media (max-width: 255px) {
     width: 70vw;
   }
@@ -61,6 +67,31 @@ export const TeamContainer = styled.div`
   .right-tbd {
     width: 100%;
     text-align: right;
+  }
+  position: relative;
+  .tooltip {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    max-width:200px; 
+    transform:translate(-50%, 0);
+    padding:5px 10px;
+    color:#444444;
+    background-color:#fff;
+    font-size:13px;
+    border-radius:3px;
+    z-index:99999999;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px rgba(0,0,0,0.3);
+    opacity:0; 
+    visibility: hidden;
+    transition:opacity 0.8s;
+  }
+  &:hover {
+    .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
   }
   @media (max-width: 450px) {
     div > span > span {
@@ -122,18 +153,24 @@ export const AtSignGameScore = styled.span`
   justify-content: center;
   font-weight: 600;
   font-size: 1.2rem;
+  color: #013369;
   @media (max-width: 450px) {
     font-size: 1rem;
   }
 `;
 
 export const PlayByPlayLink = styled(Link)`
-  /* text-decoration: none; */
   color: #1B65B4;
-  font-style: italic;
-  font-size: 0.8rem;
+  text-decoration: none;
+  font-size: 12px;
+  text-align: right;
+  min-width: 100px;
   :hover {
     color: #02264C;
+  }
+  @media (max-width: 370px) {
+    font-size: 10px;
+    text-align: left;
   }
 `;
 

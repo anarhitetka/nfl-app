@@ -40,9 +40,8 @@ export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
   return (
     <Box
       sx={{
-        // maxWidth: { xs: 300, sm: 600, md: 900, lg: 1100 },
         maxWidth: { xs: 300, sm: 600, md: 900, lg: 1100 },
-        bgcolor: "background.paper",
+        bgcolor: "none",
       }}
     >
       <Tabs
