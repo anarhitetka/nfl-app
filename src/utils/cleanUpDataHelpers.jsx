@@ -51,11 +51,11 @@ export function groupByDayOfTheWeek(dataArr) {
 ///////////
 
 const ENUMS_QUARTERS = {
-    first: "1st Quarter",
-    second: "2nd Quarter",
-    third: "3rd Quarter",
-    forth: "4th Quarter",
-    overtime: "Overtime"
+    first: "1st QTR",
+    second: "2nd QTR",
+    third: "3rd QTR",
+    forth: "4th QTR",
+    overtime: "OT"
 }
 
 export function groupScoringPlaysInGameByQuarter(arr) {

@@ -22,7 +22,6 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
                         </S.QuarterHeaderRow>
                         <hr style={{ margin: "0" }} />
 
-                        {/* ITERATE OVER ARRAY OF PLAYS  */}
                         {plays[key].map(play => {
                             return (
                                 <div key={play.id}>
@@ -33,12 +32,13 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
                                                     src={play.team.logo}
                                                     height="25"
                                                     alt="team logo"
+                                                    className="team-logo"
                                                 />
                                             </div>
                                             <div style={{ display: "flex", flexWrap: "wrap" }}>
                                                 <div>
-                                                    <p>{play.type.abbreviation}</p>
-                                                    <p>{play.clock.displayValue}</p>
+                                                    <p className="play-abbreviation">{play.scoringType.abbreviation}</p>
+                                                    <p className="play-clock">{play.clock.displayValue}</p>
                                                 </div>
                                                 <p className="play-text">{play.text.toUpperCase()}</p>
                                             </div>

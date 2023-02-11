@@ -18,40 +18,38 @@ export default function GamePlayByPlay() {
     const gameSummaryData = ApiCalls.getGameSummary(eventId);
 
     return (
-        <div style={{ backgroundColor: "white", minHeight: "100vh", padding: "0 10px", textAlign: "center" }}>
-            <div>
-                <S.TeamHeader>
-                    <div className="main-header-teams">
-                        <div
-                            style={{ backgroundColor: "#" + awayTeamData.data.team.color, color: "white" }}
-                        >
-                            <h5>{awayTeamData.data.team.displayName}</h5>
-                            <S.TeamLink to={`/teams/${awayTeamID}`}>
-                                <img
-                                    src={awayTeamData.data.team.logos[0].href}
-                                    height="150"
-                                    alt="team logo"
-                                />
-                            </S.TeamLink>
-                            <p>{awayTeamData.data.team.standingSummary}</p>
-                        </div>
+        <S.PlayByPlayPageContainer>
+            <S.TeamHeader>
+                <div className="main-header-teams">
+                    <S.SingleTeamHeaderCard>
+                        <h5>{awayTeamData.data.team.displayName}</h5>
+                        <S.TeamLink to={`/teams/${awayTeamID}`}>
+                            <img
+                                src={awayTeamData.data.team.logos[0].href}
+                                height="150"
+                                alt="team logo"
+                            />
+                        </S.TeamLink>
+                        <span className="tooltip">{awayTeamData.data.team.displayName}</span>
+                        <p>{awayTeamData.data.team.standingSummary}</p>
+                    </S.SingleTeamHeaderCard>
 
-                        @
+                    @
 
-                        <div style={{ backgroundColor: "#" + homeTeamData.data.team.color, color: "white" }}>
-                            <h5>{homeTeamData.data.team.displayName}</h5>
-                            <S.TeamLink to={`/teams/${homeTeamID}`}>
-                                <img
-                                    src={homeTeamData.data.team.logos[0].href}
-                                    height="150"
-                                    alt="team logo"
-                                />
-                            </S.TeamLink>
-                            <p>{homeTeamData.data.team.standingSummary}</p>
-                        </div>
-                    </div>
-                </S.TeamHeader>
-            </div>
+                    <S.SingleTeamHeaderCard>
+                        <h5>{homeTeamData.data.team.displayName}</h5>
+                        <S.TeamLink to={`/teams/${homeTeamID}`}>
+                            <img
+                                src={homeTeamData.data.team.logos[0].href}
+                                height="150"
+                                alt="team logo"
+                            />
+                        </S.TeamLink>
+                        <span className="tooltip">{homeTeamData.data.team.displayName}</span>
+                        <p>{homeTeamData.data.team.standingSummary}</p>
+                    </S.SingleTeamHeaderCard>
+                </div>
+            </S.TeamHeader>
 
             <div>
                 {
@@ -59,9 +57,9 @@ export default function GamePlayByPlay() {
                         ? <LinearProgress />
                         : (
                             <>
-                                <h3>
+                                <S.GameHeadline>
                                     {gameSummaryData.data.article?.headline}
-                                </h3>
+                                </S.GameHeadline>
                                 {gameSummaryData.data.scoringPlays
                                     ? <ScoringSummary
                                         scoringPlays={gameSummaryData.data.scoringPlays}
@@ -73,7 +71,8 @@ export default function GamePlayByPlay() {
                                 }
                             </>
                         )
-                } </div>
-        </div>
+                }
+            </div>
+        </S.PlayByPlayPageContainer>
     )
 }
