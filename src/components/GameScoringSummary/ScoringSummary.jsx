@@ -1,5 +1,5 @@
 import * as S from "./ScoringSummary.styled.js";
-import { groupScoringPlaysInGameByQuarter } from '../../utils/groupScoringPlaysInGameByQuarter.jsx';
+import { groupScoringPlaysInGameByQuarter } from '../../utils/cleanUpDataHelpers.jsx';
 
 export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTeamID }) {
 

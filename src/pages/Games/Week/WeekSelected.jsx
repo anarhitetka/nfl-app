@@ -3,7 +3,7 @@ import Game from "../../../components/Game/Game";
 import styled from "styled-components";
 
 import { CircularProgress } from "@mui/material";
-import { groupByDayOfTheWeek } from "../../../utils/groupByDayOfTheWeek";
+import { groupByDayOfTheWeek } from "../../../utils/cleanUpDataHelpers";
 
 const S = {};
 S.TeamsOnByeContainer = styled.div`
