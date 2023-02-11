@@ -9,7 +9,7 @@ export const Nav = styled.nav`
   width: 100%;
   padding: 10px 20px;
   background-color: #013369;
-  @media (max-width: 385px) {
+  @media (max-width: 320px) {
     justify-content: center;
     align-items: center;
     div {
@@ -42,7 +42,9 @@ export const NavButton = styled.button`
   &:active {
     border-bottom: none;
   }
-  @media (max-width: 385px) {
+  @media (max-width: 320px) {
     width: 80vw;
+    font-size: 12px;
+    line-height: 10px;
   }
 `;
