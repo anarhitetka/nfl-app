@@ -2,6 +2,7 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import * as S from "./TeamRecordsTabsMUI.styled";
 
 import { cleanUpJsonTeamRecords } from '../../../../../../utils/cleanUpDataHelpers';
 
@@ -62,31 +63,26 @@ export default function TeamRecordsTabsMUI({ teamRecords: teamRecordsAll }) {
                         )
                     })}
                 </Tabs>
-
             </Box>
-
             {teamRecords.map((record, i) => {
                 return (
                     <TabPanel value={value} index={i} key={`${record.id}-tab-content`}>
-
-                        <div style={{ height: "65vh", overflowY: "scroll" }}>
-                            <p>{record.description.toUpperCase()}: {record.value}</p>
+                        <S.Stats>
+                            <p className="record-description">{record.description.toUpperCase()}: {record.value}</p>
                             <div>
-                                STATS:
                                 {
                                     record.stats.map(stat => {
-                                        return (<div key={stat.id}>
-                                            <p>{stat.name} - {stat.abbreviation} : {stat.value} </p>
+                                        return (<div key={stat.id} className="stat-line">
+                                            <p >{stat.name} ({stat.abbreviation})</p>
+                                            <p className="stat-value">{stat.value}</p>
                                         </div>);
                                     })
                                 }
                             </div>
-                        </div>
-
+                        </S.Stats>
                     </TabPanel>
                 );
             })}
-
         </Box>
     );
 }
