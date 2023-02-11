@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/nfl-app/static/css/main.609eeb48.css",
-    "main.js": "/nfl-app/static/js/main.7bc878f0.js",
+    "main.js": "/nfl-app/static/js/main.0d7d0291.js",
     "static/media/ballnfl.jpg": "/nfl-app/static/media/ballnfl.b8f6f12e7ba1c49cb468.jpg",
     "index.html": "/nfl-app/index.html",
     "main.609eeb48.css.map": "/nfl-app/static/css/main.609eeb48.css.map",
-    "main.7bc878f0.js.map": "/nfl-app/static/js/main.7bc878f0.js.map"
+    "main.0d7d0291.js.map": "/nfl-app/static/js/main.0d7d0291.js.map"
   },
   "entrypoints": [
     "static/css/main.609eeb48.css",
-    "static/js/main.7bc878f0.js"
+    "static/js/main.0d7d0291.js"
   ]
 }
