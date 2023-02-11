@@ -143,7 +143,7 @@ export default function Team() {
                   return (
                     <div key={Math.random()}>
                       {/* <img src={image.href} height="200" alt="venue" /> */}
-                      <br />
+                      {/* <br /> */}
                     </div>
                   );
                 })}

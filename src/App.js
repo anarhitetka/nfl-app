@@ -3,10 +3,10 @@ import LayoutPage from "./components/layout/LayoutPage";
 import Home from "./pages/Home/Home";
 import Teams from "./pages/Teams/Teams";
 import Team from "./pages/Teams/Team/Team";
-import Weeks from "./pages/Games/Weeks";
-import WeekGames from "./pages/Games/Week/WeekGames";
-import WeekSelected from "./pages/Games/Week/WeekSelected";
-import GamePlayByPlay from "./pages/Games/GamePlayByPlay/GamePlayByPlay";
+import Weeks from "./pages/Schedule/Weeks";
+import WeekGames from "./pages/Schedule/Week/WeekGames";
+import WeekSelected from "./pages/Schedule/Week/WeekSelected";
+import GamePlayByPlay from "./pages/Schedule/GamePlayByPlay/GamePlayByPlay";
 import ErrorPage from "./pages/Error/ErrorPage";
 
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
