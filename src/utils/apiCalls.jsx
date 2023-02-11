@@ -4,8 +4,8 @@ import getCurrentSeason from './getCurrentSeason';
 
 // previous:
 // const instance = axios.create({
-//     baseURL: 'http://localhost:3000',
-//     // baseURL: 'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl',
+//     baseURL: 'https://localhost:3000',
+//     // baseURL: 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl',
 //     timeout: 16000,
 //     headers: { 'Content-Type': 'application/json' }
 // });
@@ -71,7 +71,7 @@ const requests = {
                     const { data } = await axios(url);
                     let endpointsArr = [];
                     data.items.forEach((item) => {
-                        endpointsArr.push(item.$ref);
+                        endpointsArr.push(item.$ref.replace("http://", "https://"));
                     });
                     setEndpoints(endpointsArr);
                 } catch (error) {
@@ -119,8 +119,8 @@ const requests = {
 
                     data.competitions[0].competitors.forEach((competitor) => {
                         competitor.homeAway === "home"
-                            ? setHomeTeamScoreEndpoint(competitor.score.$ref)
-                            : setAwayTeamScoreEndpoint(competitor.score.$ref);
+                            ? setHomeTeamScoreEndpoint(competitor.score.$ref.replace("http://", "https://"))
+                            : setAwayTeamScoreEndpoint(competitor.score.$ref.replace("http://", "https://"));
                         competitor.homeAway === "home"
                             ? setHomeTeamID(competitor.id)
                             : setAwayTeamID(competitor.id);
@@ -178,7 +178,7 @@ const requests = {
                     const { data } = await axios(url);
                     let endpointsArr = [];
                     data.teamsOnBye.forEach((item) => {
-                        endpointsArr.push(item.$ref);
+                        endpointsArr.push(item.$ref.replace("http://", "https://"));
                     });
                     setEndpoints(endpointsArr);
                 } catch (error) {
