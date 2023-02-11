@@ -17,13 +17,15 @@ const _core = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl';
 const requests = {
     // get: (url) => instance.get(url).then(responseBody),
     useGet: (url) => {
+        const urlSecure = url.replace("http://", "https://");
+
         const [data, setData] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
         const [error, setError] = useState("");
         useEffect(() => {
             const getData = async () => {
                 try {
-                    const { data } = await axios(url);
+                    const { data } = await axios(urlSecure);
                     setData(data);
                     setIsLoading(false);
                 } catch (error) {
@@ -32,10 +34,12 @@ const requests = {
                 }
             };
             getData();
-        }, [url]);
+        }, [urlSecure]);
         return { data, isLoading, error };
     },
     useGetWithId: (url, id) => {
+        const urlSecure = url.replace("http://", "https://");
+
         const [data, setData] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
         const [error, setError] = useState("");
@@ -44,7 +48,7 @@ const requests = {
             if (id) {
                 const getData = async () => {
                     try {
-                        const { data } = await axios(url);
+                        const { data } = await axios(urlSecure);
                         setData(data);
                         setIsLoading(false);
                     } catch (error) {
@@ -54,11 +58,13 @@ const requests = {
                 };
                 getData();
             }
-        }, [url, id]);
+        }, [urlSecure, id]);
 
         return { data, isLoading, error };
     },
     useGetAll: (url) => {
+        const urlSecure = url.replace("http://", "https://");
+
         const [endpoints, setEndpoints] = useState([]);
         const [data, setData] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
@@ -68,10 +74,11 @@ const requests = {
             const getEndpoints = async () => {
                 setEndpoints([]);
                 try {
-                    const { data } = await axios(url);
+                    const { data } = await axios(urlSecure);
                     let endpointsArr = [];
                     data.items.forEach((item) => {
-                        endpointsArr.push(item.$ref.replace("http://", "https://"));
+                        let secureHttps = item.$ref.replace("http://", "https://");
+                        endpointsArr.push(secureHttps);
                     });
                     setEndpoints(endpointsArr);
                 } catch (error) {
@@ -80,7 +87,7 @@ const requests = {
                 }
             };
             getEndpoints();
-        }, [url]);
+        }, [urlSecure]);
 
         useEffect(() => {
             setData([]);
@@ -89,6 +96,7 @@ const requests = {
                 (data) => {
                     let dataArr = [];
                     data.map((dataItem) => {
+                        dataItem.data.$ref.replace("http://", "https://");
                         return dataArr.push(dataItem.data);
                     });
                     setData(dataArr);
@@ -100,6 +108,8 @@ const requests = {
         return { data, isLoading, error };
     },
     useGetHomeAndAwayTeamData: (url) => {
+        const urlSecure = url.replace("http://", "https://");
+
         const [homeTeamScoreEndpoint, setHomeTeamScoreEndpoint] = useState();
         const [awayTeamScoreEndpoint, setAwayTeamScoreEndpoint] = useState();
 
@@ -115,7 +125,7 @@ const requests = {
         useEffect(() => {
             const getGameEndpoints = async () => {
                 try {
-                    const { data } = await axios(url);
+                    const { data } = await axios(urlSecure);
 
                     data.competitions[0].competitors.forEach((competitor) => {
                         competitor.homeAway === "home"
@@ -137,7 +147,7 @@ const requests = {
             };
 
             getGameEndpoints();
-        }, [url]);
+        }, [urlSecure]);
 
         useEffect(() => {
             const getHomeTeamScore = async () => {
@@ -166,6 +176,8 @@ const requests = {
         return { scoreAwayTeam, scoreHomeTeam, scoreIsFinal, homeTeamID, awayTeamID, error }
     },
     useGetAllTeamsOnBye: (url) => {
+        const urlSecure = url.replace("http://", "https://");
+
         const [endpoints, setEndpoints] = useState([]);
         const [data, setData] = useState([]);
         const [isLoading, setIsLoading] = useState(true);
@@ -175,7 +187,7 @@ const requests = {
             const getEndpoints = async () => {
                 setEndpoints([]);
                 try {
-                    const { data } = await axios(url);
+                    const { data } = await axios(urlSecure);
                     let endpointsArr = [];
                     data.teamsOnBye.forEach((item) => {
                         endpointsArr.push(item.$ref.replace("http://", "https://"));
@@ -187,7 +199,7 @@ const requests = {
                 }
             };
             getEndpoints();
-        }, [url]);
+        }, [urlSecure]);
 
         useEffect(() => {
             setData([]);

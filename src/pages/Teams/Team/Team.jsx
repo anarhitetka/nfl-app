@@ -12,11 +12,11 @@ export default function Team() {
   const teamRecords = ApiCalls.getTeamRecords(teamId);
 
   const eventsRegularSeason = eventsData.data.filter(event => {
-    return event.week.$ref.includes('types/2');
+    return event.week.$ref.replace("http://", "https://").includes('types/2');
   });
 
   const eventsPostSeason = eventsData.data.filter(event => {
-    return event.week.$ref.includes('types/3');
+    return event.week.$ref.replace("http://", "https://").includes('types/3');
   });
 
   return (

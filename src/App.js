@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import LayoutPage from "./components/layout/LayoutPage";
 import Home from "./pages/Home/Home";
 import Teams from "./pages/Teams/Teams";
@@ -24,7 +25,8 @@ function App() {
   // console.log(weekNo);
 
   return (
-    <Router>
+    // <Router>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LayoutPage />}>
           <Route index path="/" element={<Home />} />
@@ -41,7 +43,8 @@ function App() {
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </Router>
+    </HashRouter>
+    // </Router>
   );
 }
 
