@@ -18,7 +18,7 @@ export const TeamHeader = styled.div`
     margin: auto 30px;
   }
   flex-wrap: wrap;
-  @media (max-width: 420px) {
+  @media (max-width: 520px) {
     img {
       height: 70px;
     }

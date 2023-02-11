@@ -1,5 +1,4 @@
 import LinearProgress from '@mui/material/LinearProgress';
-import Button from '@mui/material/Button';
 import * as S from "./GamePreview.styled";
 import { Link } from 'react-router-dom';
 
@@ -35,7 +34,7 @@ export default function GamePreview({
 
   return (
     <>
-      <S.GameContainer style={{ width: "70vw" }}>
+      <S.GameContainer>
         {awayTeamData.isLoading || homeTeamData.isLoading ? (
           <LinearProgress />
         ) : (
@@ -45,7 +44,9 @@ export default function GamePreview({
               <p><span>Week {weekNumber}:</span>{" "}
                 {formatDate(event.date)}{" "}
               </p>
-              <S.LinkToEspn target="blank" href={`https://www.espn.com/nfl/game/_/gameId/${event.id}`}>ESPN</S.LinkToEspn>
+              <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >
+                <p className="play-by-play">PLAY BY PLAY</p>
+              </Link>
             </S.DateInfoRow>
 
             <S.ScoreRowGamePreview>
@@ -59,11 +60,20 @@ export default function GamePreview({
                         height="25"
                         alt="team logo"
                       />
-                      <span>{homeTeamData.data.team.nickname}</span>
+                      <span className="team-nickname">{homeTeamData.data.team.nickname}</span>
                     </S.TeamLink>
                   </div>
+                  <div className="score-won-lost">
+                    {scoreIsFinal ? (
+                      <S.ScoreRowScores>
+                        {scoreAwayTeam > scoreHomeTeam
+                          ? ` ${scoreAwayTeam}-${scoreHomeTeam}`
+                          : ` ${scoreHomeTeam}-${scoreAwayTeam}`}
+                      </S.ScoreRowScores>
+                    ) : (
+                      <span>{formatDateShort(event.date)}</span>
+                    )}
 
-                  <span>
                     {scoreIsFinal ? (
                       <>
                         {scoreAwayTeam < scoreHomeTeam
@@ -75,7 +85,7 @@ export default function GamePreview({
                     ) : (
                       ""
                     )}
-                  </span>
+                  </div>
                 </S.ScoreRowCompetitorDetails>
               ) : (
                 <S.ScoreRowCompetitorDetails>
@@ -87,11 +97,22 @@ export default function GamePreview({
                         height="25"
                         alt="team logo"
                       />
-                      <span>{awayTeamData.data.team.nickname}</span>
+                      <span className="team-nickname">{awayTeamData.data.team.nickname}</span>
                     </S.TeamLink>
                   </div>
 
-                  <span>
+                  <div className="score-won-lost">
+                    {scoreIsFinal ? (
+                      <S.ScoreRowScores>
+                        {scoreAwayTeam > scoreHomeTeam
+                          ? ` ${scoreAwayTeam}-${scoreHomeTeam}`
+                          : ` ${scoreHomeTeam}-${scoreAwayTeam}`}
+                      </S.ScoreRowScores>
+                    ) : (
+                      <span>{formatDateShort(event.date)}</span>
+                    )}
+
+
                     {scoreIsFinal ? (
                       <>
                         {scoreAwayTeam > scoreHomeTeam
@@ -103,23 +124,10 @@ export default function GamePreview({
                     ) : (
                       ""
                     )}
-                  </span>
+                  </div>
                 </S.ScoreRowCompetitorDetails>
               )}
-              {scoreIsFinal ? (
-                <S.ScoreRowScores>
-                  {scoreAwayTeam > scoreHomeTeam
-                    ? ` ${scoreAwayTeam}-${scoreHomeTeam}`
-                    : ` ${scoreHomeTeam}-${scoreAwayTeam}`}
-                </S.ScoreRowScores>
-              ) : (
-                <span>{formatDateShort(event.date)}</span>
-              )}
             </S.ScoreRowGamePreview>
-
-            <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >
-              <Button>See Game Summary</Button>
-            </Link>
           </>
         )}
       </S.GameContainer>

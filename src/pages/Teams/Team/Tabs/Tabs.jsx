@@ -20,6 +20,12 @@ S.TabsNavbar = styled.div`
         border-bottom: 2px solid grey;
         font-weight: 700;
     }
+    @media (max-width: 250px) {
+        p {
+            font-size: 13px;
+            padding: 15px 5px;
+        }
+    }
 `;
 
 export default function Tabs({
