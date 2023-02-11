@@ -1,9 +1,6 @@
-// import { useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import Button from '@mui/material/Button';
-// import MUIModalGameSummary from './ModalSummary/MUIModalGameSummary.jsx';
-
-import * as S from "../Game.styled.js";
+import * as S from "./GamePreview.styled";
 import { Link } from 'react-router-dom';
 
 export default function GamePreview({
@@ -18,11 +15,6 @@ export default function GamePreview({
   scoreHomeTeam,
   errorInFetching
 }) {
-  // const [openSummaryModal, setOpenSummaryModal] = useState(false);
-  // const handleOpenSummaryModal = () => setOpenSummaryModal(true);
-  // const handleCloseSummaryModal = () => setOpenSummaryModal(false);
-
-
   const formatDateShort = function (dateStr) {
     return `${new Date(dateStr).toLocaleString(undefined, {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -43,7 +35,7 @@ export default function GamePreview({
 
   return (
     <>
-      <S.GameContainer>
+      <S.GameContainer style={{ width: "70vw" }}>
         {awayTeamData.isLoading || homeTeamData.isLoading ? (
           <LinearProgress />
         ) : (
@@ -53,8 +45,6 @@ export default function GamePreview({
               <p><span>Week {weekNumber}:</span>{" "}
                 {formatDate(event.date)}{" "}
               </p>
-              {/* <button onClick={openGameDetailsModal}>Game Summary</button> */}
-
               <S.LinkToEspn target="blank" href={`https://www.espn.com/nfl/game/_/gameId/${event.id}`}>ESPN</S.LinkToEspn>
             </S.DateInfoRow>
 
@@ -130,22 +120,6 @@ export default function GamePreview({
             <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >
               <Button>See Game Summary</Button>
             </Link>
-            {/* MODAL GAME SUMMARY */}
-            {/* <Button
-              onClick={handleOpenSummaryModal}
-            >
-              See Game Summary
-            </Button> */}
-            {/* <MUIModalGameSummary
-              open={openSummaryModal}
-              handleClose={handleCloseSummaryModal}
-              eventId={event.id}
-              gameName={event.name}
-              awayTeamID={awayTeamID}
-              homeTeamID={homeTeamID}
-              homeTeamData={homeTeamData}
-              awayTeamData={awayTeamData}
-            /> */}
           </>
         )}
       </S.GameContainer>

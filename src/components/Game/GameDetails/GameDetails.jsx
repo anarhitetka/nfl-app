@@ -1,6 +1,6 @@
 import LinearProgress from "@mui/material/LinearProgress";
 
-import * as S from "../Game.styled.js";
+import * as S from "./GameDetails.styled";
 
 export default function GameDetails({
   event,
