@@ -15,6 +15,9 @@ export const Stats = styled.div`
             margin: 0;
             padding: 5px 0;
         }
+        @media (max-width:360px) {
+            flex-direction: column;
+        }
     }
     .stat-value {
         font-weight: 500;
