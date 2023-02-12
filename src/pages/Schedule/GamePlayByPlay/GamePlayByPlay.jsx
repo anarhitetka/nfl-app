@@ -34,7 +34,7 @@ export default function GamePlayByPlay() {
                         <p>{awayTeamData.data.team.standingSummary}</p>
                     </S.SingleTeamHeaderCard>
 
-                    @
+                    <span className="at-sign">@</span>
 
                     <S.SingleTeamHeaderCard>
                         <h5>{homeTeamData.data.team.displayName}</h5>
@@ -56,7 +56,7 @@ export default function GamePlayByPlay() {
                     gameSummaryData.isLoading
                         ? <LinearProgress />
                         : (
-                            <>
+                            <S.SummaryWrapper>
                                 <S.GameHeadline>
                                     {gameSummaryData.data.article?.headline}
                                 </S.GameHeadline>
@@ -69,7 +69,7 @@ export default function GamePlayByPlay() {
                                     />
                                     : <div>no summary available</div>
                                 }
-                            </>
+                            </S.SummaryWrapper>
                         )
                 }
             </div>

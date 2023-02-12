@@ -15,9 +15,14 @@ export const DateInfoRow = styled.div`
   border-bottom: 1px solid #B5BFCA;
   p {
     margin: 0;
+    padding: 0;
   }
-  p > span {
+  div > span {
     font-weight: 600;
+  }
+  .playoffs-game-name {
+    font-weight: 600;
+    color: #013369;
   }
   .play-by-play {
     color: #1B65B4;
@@ -28,12 +33,13 @@ export const DateInfoRow = styled.div`
     :hover {
       color: #02264C;
     }
-    @media (max-width: 365px) {
+    @media (max-width: 350px) {
       padding-top: 5px;
       text-align: left;
+      
     }
   }
-  @media (max-width: 365px) {
+  @media (max-width: 350px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -47,7 +53,7 @@ export const StyledLink = styled(Link)`
   :hover {
     color: #02264C;
   }
-  @media (max-width: 365px) {
+  @media (max-width: 350px) {
     padding-top: 5px;
     text-align: left;
   }
@@ -66,7 +72,7 @@ export const ScoreRowGamePreview = styled.div`
   div img {
     padding: 0 5px;
   }
-  @media (max-width: 365px) {
+  @media (max-width: 350px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -76,7 +82,7 @@ export const ScoreRowCompetitorDetails = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 365px) {
+  @media (max-width: 350px) {
     flex-direction: column;
     align-items: flex-start;
     .score-won-lost {
@@ -96,7 +102,7 @@ export const ScoreRowScores = styled.p`
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
-  @media (max-width: 365px) {
+  @media (max-width: 350px) {
     font-size: 15px;
   }
 `;
@@ -108,6 +114,19 @@ export const TeamLink = styled(Link)`
   span {
     font-weight: 600;
     padding-left: 10px;
+  }
+`;
+
+export const TextWonTieLost = styled.span`
+  margin-left: 10px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  .won {
+    color: green;
+  }
+  .lost {
+    color: red;
   }
 `;
 

@@ -1,8 +1,8 @@
 import LinearProgress from "@mui/material/LinearProgress";
 
-import * as S from "./GameDetails.styled";
+import * as S from "./GameOnWeekList.styled";
 
-export default function GameDetails({
+export default function GameOnWeekList({
   event,
   awayTeamData,
   homeTeamData,

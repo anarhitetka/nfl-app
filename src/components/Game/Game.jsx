@@ -1,8 +1,8 @@
 import { ApiCalls } from "../../utils/apiCalls";
-import GamePreview from "./GamePreview/GamePreview";
-import GameDetails from "./GameDetails/GameDetails";
+import GameOnTeamSchedule from "./GameOnTeamSchedule/GameOnTeamSchedule";
+import GameOnWeekList from "./GameOnWeekList/GameOnWeekList";
 
-export default function Game({ event, weekNo, teamId, type }) {
+export default function Game({ event, weekNo, teamId, type, postSeason }) {
 
   const {
     scoreAwayTeam, scoreHomeTeam, scoreIsFinal, homeTeamID, awayTeamID, error
@@ -13,8 +13,8 @@ export default function Game({ event, weekNo, teamId, type }) {
 
   return (
     <>
-      {type === "preview" ? (
-        <GamePreview
+      {type === "team-game" ? (
+        <GameOnTeamSchedule
           awayTeamData={awayTeamData}
           homeTeamData={homeTeamData}
           event={event}
@@ -25,9 +25,10 @@ export default function Game({ event, weekNo, teamId, type }) {
           scoreAwayTeam={scoreAwayTeam}
           scoreHomeTeam={scoreHomeTeam}
           error={error}
+          postSeason={postSeason}
         />
       ) : (
-        <GameDetails
+        <GameOnWeekList
           awayTeamData={awayTeamData}
           homeTeamData={homeTeamData}
           event={event}

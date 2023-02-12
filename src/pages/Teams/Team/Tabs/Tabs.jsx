@@ -1,32 +1,7 @@
 import { useState } from "react"
 import TeamSchedule from "./TabsContent/TeamSchedule";
 import TeamStats from "./TabsContent/TeamStats";
-import styled from "styled-components";
-
-const S = {};
-S.TabsNavbar = styled.div`
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid grey;
-    background-color: white;
-    p {
-        width: 100px;
-        padding: 15px;
-        margin: 0px;
-        text-align: center;
-        cursor: pointer;
-    }
-    .active {
-        border-bottom: 2px solid grey;
-        font-weight: 700;
-    }
-    @media (max-width: 250px) {
-        p {
-            font-size: 13px;
-            padding: 15px 5px;
-        }
-    }
-`;
+import * as S from "./Tabs.styled";
 
 export default function Tabs({
     teamId,
@@ -40,7 +15,7 @@ export default function Tabs({
     const handleTabStats = () => setActiveTab("team-stats");
 
     return (
-        <div>
+        <S.TabsComponentWrapper>
             <S.TabsNavbar>
                 <p
                     className={activeTab === 'team-schedule' ? "active" : ""}
@@ -52,7 +27,7 @@ export default function Tabs({
                 </p>
 
             </S.TabsNavbar>
-            <div>
+            <S.TabContent>
                 {activeTab === "team-schedule"
                     ? (
                         <TeamSchedule eventsRegularSeason={eventsRegularSeason} teamId={teamId} eventsPostSeason={eventsPostSeason} />
@@ -60,7 +35,7 @@ export default function Tabs({
                     : (
                         <TeamStats teamRecords={teamRecords} />
                     )}
-            </div>
-        </div>
+            </S.TabContent>
+        </S.TabsComponentWrapper>
     )
 }

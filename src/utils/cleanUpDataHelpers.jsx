@@ -94,3 +94,27 @@ export function groupScoringPlaysInGameByQuarter(arr) {
 }
 
 //////////////
+
+export function formatPlayoffsGamesNames(weekNum) {
+    let playoffGameName;
+    switch (weekNum) {
+        case 1:
+            playoffGameName = "Wild Card";
+            break;
+        case 2:
+            playoffGameName = "Divisional Round";
+            break;
+        case 3:
+            playoffGameName = "Conf Championship";
+            break;
+        case 4:
+            playoffGameName = "ProBowl";
+            break;
+        case 5:
+            playoffGameName = "Super Bowl";
+            break;
+        default:
+            playoffGameName = null;
+    }
+    return playoffGameName;
+}

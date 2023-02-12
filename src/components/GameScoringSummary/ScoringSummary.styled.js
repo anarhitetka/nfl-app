@@ -6,6 +6,10 @@ export const SummaryContainer = styled.div`
     margin: 0 10px;
     border-radius: 3px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3); 
+    @media (min-width: 1000px) {
+        width: 900px;
+
+    }
 `;
 
 export const QuarterHeaderRow = styled.div`

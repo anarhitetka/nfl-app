@@ -6,6 +6,9 @@ S.SeasonHeading = styled.h4`
   padding-left: 9vw;
   margin: 25px 0 15px 0;
   color: #013369;
+  @media (min-width: 1000px) {
+    padding-left: 30px;
+  }
 `;
 S.SeasonContainer = styled.div`
     margin: 10px;
@@ -26,7 +29,8 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
                             key={`game-${event.id}-team-${teamId}`}
                             weekNo={true}
                             teamId={teamId}
-                            type="preview"
+                            type="team-game"
+                            postSeason={false}
                         />
                     );
                 })}
@@ -41,7 +45,8 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
                                 key={`game-${event.id}---team-${teamId}`}
                                 weekNo={true}
                                 teamId={teamId}
-                                type="preview"
+                                type="team-game"
+                                postSeason={true}
                             />
 
                         );

@@ -28,7 +28,7 @@ export const GameHeading = styled.div`
       display: none;
     }
   }
-  @media (max-width: 370px) {
+  @media (max-width: 350px) {
     flex-direction: column;
     width: 100%;
   }
@@ -44,7 +44,7 @@ export const PlayByPlayLink = styled(Link)`
   :hover {
     color: #02264C;
   }
-  @media (max-width: 370px) {
+  @media (max-width: 260px) {
     font-size: 10px;
     text-align: left;
   }

@@ -1,8 +1,9 @@
 import LinearProgress from '@mui/material/LinearProgress';
-import * as S from "./GamePreview.styled";
+import * as S from "./GameOnTeamSchedule.styled";
 import { Link } from 'react-router-dom';
+import { formatPlayoffsGamesNames } from '../../../utils/cleanUpDataHelpers';
 
-export default function GamePreview({
+export default function GameOnTeamSchedule({
   awayTeamData,
   homeTeamData,
   event,
@@ -12,6 +13,7 @@ export default function GamePreview({
   scoreIsFinal,
   scoreAwayTeam,
   scoreHomeTeam,
+  postSeason,
   errorInFetching
 }) {
   const formatDateShort = function (dateStr) {
@@ -41,10 +43,11 @@ export default function GamePreview({
           <>
 
             <S.DateInfoRow>
-              <p><span>Week {weekNumber}:</span>{" "}
+              <div><span>Week {weekNumber}:</span>{" "}
                 {formatDate(event.date)}{" "}
-              </p>
-              <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} >
+                {postSeason && <p className="playoffs-game-name">{formatPlayoffsGamesNames(Number(weekNumber))}</p>}
+              </div>
+              <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} style={{ textDecoration: "none" }}>
                 <p className="play-by-play">PLAY BY PLAY</p>
               </Link>
             </S.DateInfoRow>
@@ -77,10 +80,14 @@ export default function GamePreview({
                     {scoreIsFinal ? (
                       <>
                         {scoreAwayTeam < scoreHomeTeam
-                          ? <S.TextColorLost>LOST</S.TextColorLost>
+                          ? <S.TextWonTieLost>
+                            <span className='lost'>LOST</span>
+                          </S.TextWonTieLost>
                           : scoreAwayTeam === scoreHomeTeam
-                            ? "TIE"
-                            : <S.TextColorWon>WON</S.TextColorWon>}
+                            ? <S.TextWonTieLost>TIE</S.TextWonTieLost>
+                            : <S.TextWonTieLost>
+                              <span className='won'>WON</span>
+                            </S.TextWonTieLost>}
                       </>
                     ) : (
                       ""
@@ -116,10 +123,14 @@ export default function GamePreview({
                     {scoreIsFinal ? (
                       <>
                         {scoreAwayTeam > scoreHomeTeam
-                          ? <S.TextColorLost>LOST</S.TextColorLost>
+                          ? <S.TextWonTieLost>
+                            <span className='lost'>LOST</span>
+                          </S.TextWonTieLost>
                           : scoreAwayTeam === scoreHomeTeam
-                            ? "TIE"
-                            : <S.TextColorWon>WON</S.TextColorWon>}
+                            ? <S.TextWonTieLost>TIE</S.TextWonTieLost>
+                            : <S.TextWonTieLost>
+                              <span className='won'>WON</span>
+                            </S.TextWonTieLost>}
                       </>
                     ) : (
                       ""

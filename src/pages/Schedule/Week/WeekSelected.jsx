@@ -84,7 +84,7 @@ export default function WeekSelected({ weekNo }) {
                           event={game}
                           key={`${game.id}-${Math.random().toString()}`}
                           weekNo={weekNo}
-                          type="details"
+                          type="week-list-game"
                         />
                       )
                     })}
