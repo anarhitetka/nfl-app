@@ -12,6 +12,10 @@ S.TeamsOnByeContainer = styled.div`
   margin: auto 10%;
   font-size: 12px;
   color: #4c8bcf;
+  @media (min-width: 901px) {
+    padding-left: 0;
+    text-align: center;
+  }
 `;
 S.AllGamesContainer = styled.div`
   display: flex;
@@ -24,6 +28,10 @@ S.DayHeading = styled.h4`
   padding-left: 9vw;
   margin: 25px 0 15px 0;
   color: #013369;
+  @media (min-width: 901px) {
+    padding-left: 0;
+    text-align: center;
+  }
 `;
 S.GamesByDayGroup = styled.div`
   display: flex;

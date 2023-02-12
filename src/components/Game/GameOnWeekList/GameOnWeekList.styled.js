@@ -11,6 +11,9 @@ export const GameContainerLong = styled.div`
   @media (max-width: 255px) {
     width: 70vw;
   }
+  @media (min-width: 901px) {
+    width: 800px;
+  }
 `;
 
 export const GameHeading = styled.div`
@@ -31,6 +34,9 @@ export const GameHeading = styled.div`
   @media (max-width: 350px) {
     flex-direction: column;
     width: 100%;
+  }
+  @media (min-width: 901px) {
+    width: 800px;
   }
 `;
 
@@ -139,6 +145,9 @@ export const TeamLink = styled(Link)`
   color: #013369;
   display: flex;
   align-items: center;
+  .team-abbreviation {
+    font-weight: 600;
+  }
 `;
 
 export const TeamStats = styled.span`

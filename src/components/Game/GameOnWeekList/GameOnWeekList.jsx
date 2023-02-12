@@ -87,7 +87,7 @@ export default function GameOnWeekList({
                           <div>
                             {/* LINK TO TEAM / ABBREVIATION + STATS  */}
                             <S.TeamLink to={`/teams/${awayTeamID}`}>
-                              <span>
+                              <span className="team-abbreviation">
                                 {awayTeamData.data.team.abbreviation}&nbsp;&nbsp;
                               </span>
                               {/* STATS  */}
@@ -167,7 +167,7 @@ export default function GameOnWeekList({
                                   `(${homeTeamData.data.team.record.items[0].summary})`}
                               </S.TeamStats>
 
-                              <span>
+                              <span className="team-abbreviation">
                                 &nbsp;&nbsp;{homeTeamData.data.team.abbreviation}
                               </span>
                             </S.TeamLink>
