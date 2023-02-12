@@ -11,7 +11,7 @@ export const Nav = styled.nav`
   height: 73px;
   padding: 10px 20px;
   background-color: #013369;
-  @media (max-width: 320px) {
+  @media (max-width: 350px) {
     justify-content: center;
     align-items: center;
     div {
@@ -19,7 +19,7 @@ export const Nav = styled.nav`
       flex-direction: column;
     }
   }
-  @media (max-width: 325px) {
+  @media (max-width: 350px) {
     height: 150px;
   }
 `;
@@ -51,7 +51,7 @@ export const NavButton = styled.button`
   &:active {
     border-bottom: none;
   }
-  @media (max-width: 320px) {
+  @media (max-width: 350px) {
     width: 80vw;
     font-size: 12px;
     line-height: 10px;
