@@ -10,12 +10,12 @@ export default function Navbar() {
       </NavLink>
 
       <div>
-        <NavLink to="/weeks">
+        <S.StyledNavLink to="/weeks">
           <S.NavButton>SCHEDULE</S.NavButton>
-        </NavLink>
-        <NavLink to="/teams">
+        </S.StyledNavLink>
+        <S.StyledNavLink to="/teams">
           <S.NavButton>TEAMS</S.NavButton>
-        </NavLink>
+        </S.StyledNavLink>
       </div>
     </S.Nav>
   );

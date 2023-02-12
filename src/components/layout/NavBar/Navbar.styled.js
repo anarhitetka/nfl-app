@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
@@ -19,6 +20,11 @@ export const Nav = styled.nav`
   }
 `;
 
+export const StyledNavLink = styled(NavLink)`
+  padding: 3px;
+  border: none;
+`;
+
 export const NavButton = styled.button`
   background-color: #013369;
   border: 1px solid #013369;
@@ -29,10 +35,9 @@ export const NavButton = styled.button`
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
-  letter-spacing: 2px;
   margin: 5px;
+  letter-spacing: 2px;
   outline: none;
-  padding: 5px;
   text-align: center;
   &:hover {
     background-color: #013369;
