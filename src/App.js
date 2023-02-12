@@ -15,17 +15,16 @@ import { ApiCalls } from "./utils/apiCalls";
 
 function App() {
 
-  // NB: preseason = type 1, regular season = type 2, postseason = type 3, offseason type = 4
+  // const weeksPreSeason = ApiCalls.getWeeksInfoForSeasonType('1');
   const weeksRegularSeason = ApiCalls.getWeeksInfoForSeasonType('2');
   const weeksPostSeason = ApiCalls.getWeeksInfoForSeasonType('3');
+  // const weeksOffSeason = ApiCalls.getWeeksInfoForSeasonType('4');
 
   const allWeeksData = [...weeksRegularSeason.data, ...weeksPostSeason.data];
-  // console.log(allWeeksData)
+
   const weekNo = setCurrentWeekNo(allWeeksData);
-  // console.log(weekNo);
 
   return (
-    // <Router>
     <HashRouter>
       <Routes>
         <Route path="/" element={<LayoutPage />}>
@@ -44,7 +43,6 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </HashRouter>
-    // </Router>
   );
 }
 

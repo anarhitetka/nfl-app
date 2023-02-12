@@ -3,7 +3,10 @@ export function setCurrentWeekNo(weeksData) {
     return new Date() < new Date(week.endDate);
   });
   let weekNo;
-  if (current) weekNo = current + 1;
+  // eslint-disable-next-line
+  if (current == -1) weekNo = 1;
+  // eslint-disable-next-line
+  else if (current != -1) weekNo = current + 1;
 
   return weekNo;
 }

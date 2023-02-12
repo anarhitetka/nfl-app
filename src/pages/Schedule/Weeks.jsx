@@ -20,7 +20,9 @@ export default function Weeks({ weekNo, allWeeksData }) {
   return (
     <S.MainContainer>
       <S.TabBar>
+        {/* {allWeeksData.length === 23 && */}
         <MUIScrollableTabBar weeksData={allWeeksData} currentWeek={weekNo} />
+        {/* } */}
       </S.TabBar>
       <Outlet />
     </S.MainContainer>

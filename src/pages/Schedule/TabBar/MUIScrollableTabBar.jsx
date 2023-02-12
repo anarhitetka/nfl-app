@@ -9,8 +9,6 @@ import { Typography } from "@mui/material";
 
 export default function MUIScrollableTabBar({ weeksData, currentWeek }) {
   const { weekNo } = useParams();
-  // console.log(weekNo)
-  // console.log(weeksData);
   const [value, setValue] = React.useState(0);
 
   useEffect(() => {
