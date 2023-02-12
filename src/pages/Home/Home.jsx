@@ -34,6 +34,8 @@ export default function Home() {
       <div>
       </div>
       <Gronk size={250} color="white" />
+      <div style={{ height: "150px" }}>
+      </div>
     </S.Container>
   );
 }
