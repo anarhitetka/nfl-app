@@ -18,6 +18,9 @@ export const Conference = styled.div`
   @media (max-width: 800px) {
     width: 96vw;
   }
+  @media (min-width: 1050px) {
+    width: 500px;
+  }
 `;
 
 export const Division = styled.div`
