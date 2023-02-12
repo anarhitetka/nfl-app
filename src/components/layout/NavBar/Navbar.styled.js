@@ -8,6 +8,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 73px;
   padding: 10px 20px;
   background-color: #013369;
   @media (max-width: 320px) {
@@ -18,8 +19,8 @@ export const Nav = styled.nav`
       flex-direction: column;
     }
   }
-  @media (min-width: 321px) {
-    height: 73px;
+  @media (max-width: 325px) {
+    height: 150px;
   }
 `;
 
