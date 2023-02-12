@@ -8,6 +8,7 @@ export const PlayByPlayPageContainer = styled.div`
     background: linear-gradient(to top left, #B5BFCA, #EEEEEE);
     min-height:100vh;
     text-align: center;
+    padding-bottom: 15px;
 `;
 
 export const TeamHeader = styled.div`
@@ -35,20 +36,63 @@ export const TeamHeader = styled.div`
     p {
         font-size: 0.8rem;
     }
-    @media (max-width: 770px) {
+
+
+    .img-container {
+        height: 160px;
+        display: flex;
+        align-items: center;
+    }
+    .img-container:hover {
         img {
-            height: 100px;
+            height: 155px;
+        }
+    }
+    .at-sign {
+        padding: 5px;
+        margin-bottom: 40px;
+    }
+    @media (max-width: 770px) {
+        .img-container {
+            height: 120px;
+        }
+        .img-container:hover {
+            img {
+                height: 115px;
+            }
+        }
+        img {
+            height: 110px;
         }
     }
     @media (max-width: 500px) {
+        .img-container {
+            height: 60px;
+        }
+        .img-container:hover {
+            img {
+                height: 55px;
+            }
+        }
         img {
             height: 50px;
         }
         .main-header-teams {
             width: 90vw;
         }
+        .at-sign {
+            margin-bottom: 0;
+        }
     }
     @media (max-width: 350px) {
+        .img-container {
+            height: 80px;
+        }
+        .img-container:hover {
+            img {
+                height: 75px;
+            }
+        }
         img {
             height: 70px;
         }
@@ -57,6 +101,14 @@ export const TeamHeader = styled.div`
         }
     }
     @media (max-width: 200px) {
+        .img-container {
+            height: 35px;
+        }
+        .img-container:hover {
+            img {
+                height: 30px;
+            }
+        }
         img {
             height: 25px;
             margin: 0;
@@ -80,13 +132,18 @@ export const SingleTeamHeaderCard = styled.div`
         margin: 0;
     }
     h5 {
+        width: 80%;
         height: 30px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     position: relative;
     .tooltip {
         position: absolute;
-        top: 65px;
+        top: 85px;
         left: 50%;
         max-width:200px; 
         transform:translate(-50%, 0);
@@ -105,7 +162,9 @@ export const SingleTeamHeaderCard = styled.div`
 
     @media (max-width: 500px) {
         h5 {
-            padding: 5px 5px 15px 5px;
+            height: 50px;
+            padding: 15px 5px;
+            margin-bottom: 10px;
         }
         p {
             padding-top: 10px;

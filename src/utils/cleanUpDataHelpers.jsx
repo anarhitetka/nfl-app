@@ -105,7 +105,7 @@ export function formatPlayoffsGamesNames(weekNum) {
             playoffGameName = "Divisional Round";
             break;
         case 3:
-            playoffGameName = "Conf Championship";
+            playoffGameName = "Conference Championship";
             break;
         case 4:
             playoffGameName = "ProBowl";

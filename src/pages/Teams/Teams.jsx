@@ -1,4 +1,5 @@
 import { ApiCalls } from "../../utils/apiCalls";
+import LinearProgress from '@mui/material/LinearProgress';
 import * as S from "./Teams.styled.js";
 
 export default function Teams() {
@@ -37,6 +38,7 @@ export default function Teams() {
                   <S.Division key={group.id}>
                     <S.DivisionName>{group.groupName}</S.DivisionName>
                     {/* TEAMS  */}
+                    {group.teams.length === 0 && <LinearProgress sx={{ ml: 1.4, mr: 1.4 }} />}
                     {group.teams.map(team => {
                       const { displayName, logos, alternateIds, venue, id } =
                         team;

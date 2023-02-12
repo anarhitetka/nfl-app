@@ -22,14 +22,16 @@ export default function GamePlayByPlay() {
             <S.TeamHeader>
                 <div className="main-header-teams">
                     <S.SingleTeamHeaderCard>
-                        <h5>{awayTeamData.data.team.displayName}</h5>
                         <S.TeamLink to={`/teams/${awayTeamID}`}>
-                            <img
-                                src={awayTeamData.data.team.logos[0].href}
-                                height="150"
-                                alt="team logo"
-                            />
+                            <div className="img-container">
+                                <img
+                                    src={awayTeamData.data.team.logos[0].href}
+                                    height="150"
+                                    alt="team logo"
+                                />
+                            </div>
                         </S.TeamLink>
+                        <h5>{awayTeamData.data.team.displayName.toUpperCase()}</h5>
                         <span className="tooltip">{awayTeamData.data.team.displayName}</span>
                         <p>{awayTeamData.data.team.standingSummary}</p>
                     </S.SingleTeamHeaderCard>
@@ -37,14 +39,16 @@ export default function GamePlayByPlay() {
                     <span className="at-sign">@</span>
 
                     <S.SingleTeamHeaderCard>
-                        <h5>{homeTeamData.data.team.displayName}</h5>
                         <S.TeamLink to={`/teams/${homeTeamID}`}>
-                            <img
-                                src={homeTeamData.data.team.logos[0].href}
-                                height="150"
-                                alt="team logo"
-                            />
+                            <div className="img-container">
+                                <img
+                                    src={homeTeamData.data.team.logos[0].href}
+                                    height="150"
+                                    alt="team logo"
+                                />
+                            </div>
                         </S.TeamLink>
+                        <h5>{homeTeamData.data.team.displayName.toUpperCase()}</h5>
                         <span className="tooltip">{homeTeamData.data.team.displayName}</span>
                         <p>{homeTeamData.data.team.standingSummary}</p>
                     </S.SingleTeamHeaderCard>

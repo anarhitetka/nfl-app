@@ -43,10 +43,17 @@ export default function GameOnTeamSchedule({
           <>
 
             <S.DateInfoRow>
-              <div><span>Week {weekNumber}:</span>{" "}
-                {formatDate(event.date)}{" "}
-                {postSeason && <p className="playoffs-game-name">{formatPlayoffsGamesNames(Number(weekNumber))}</p>}
-              </div>
+              {postSeason && (
+                <div>
+                  <span>{formatPlayoffsGamesNames(Number(weekNumber))}: </span>{formatDate(event.date)}
+                </div>
+              )}
+              {!postSeason && (
+                <div>
+                  <span>Week {weekNumber}:</span>{" "}
+                  {formatDate(event.date)}{" "}
+                </div>
+              )}
               <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} style={{ textDecoration: "none" }}>
                 <p className="play-by-play">PLAY BY PLAY</p>
               </Link>

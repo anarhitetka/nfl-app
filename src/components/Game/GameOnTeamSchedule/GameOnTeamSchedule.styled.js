@@ -20,14 +20,11 @@ export const DateInfoRow = styled.div`
   div > span {
     font-weight: 600;
   }
-  .playoffs-game-name {
-    font-weight: 600;
-    color: #013369;
-  }
   .play-by-play {
     color: #1B65B4;
     text-decoration: none;
     font-size: 12px;
+    font-weight: 600;
     text-align: right;
     min-width: 100px;
     :hover {
