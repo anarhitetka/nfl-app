@@ -8,7 +8,7 @@ S.Container = styled.div`
   display: flex;
   flex-flow: column;
   padding-top: 15vh;
-  height: 91vh;
+  height: calc(85vh - 73px);
   align-items: center;
   background-image: url(${image});
   div {
@@ -19,6 +19,9 @@ S.Container = styled.div`
       height: 20px;
       color: red;
     }
+  }
+  @media (max-width: 321px) {
+    height: calc(85vh - 133px);
   }
 `;
 

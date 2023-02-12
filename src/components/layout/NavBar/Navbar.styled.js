@@ -18,6 +18,9 @@ export const Nav = styled.nav`
       flex-direction: column;
     }
   }
+  @media (min-width: 321px) {
+    height: 73px;
+  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
