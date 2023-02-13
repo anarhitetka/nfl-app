@@ -3,6 +3,7 @@ import { ApiCalls } from "../../../utils/apiCalls";
 import LinearProgress from '@mui/material/LinearProgress';
 import * as S from "./Team.styled";
 import Tabs from "./Tabs/Tabs";
+import TeamHeader from "../../../components/TeamHeader/TeamHeader";
 
 export default function Team() {
   const { teamId } = useParams();
@@ -29,9 +30,9 @@ export default function Team() {
         <div
           style={{ backgroundColor: "#" + teamData.data.team.color, color: "white" }}
         >
-          <S.TeamHeader>
+          {/* <S.TeamHeader>
             <div>
-              <h1>{teamData.data.team.displayName}</h1>
+              <S.TeamName>{teamData.data.team.displayName}</S.TeamName>
               <p>{teamData.data.team.standingSummary}</p>
             </div>
 
@@ -40,20 +41,23 @@ export default function Team() {
               height="150"
               alt="team logo"
             />
-
-
-          </S.TeamHeader>
+          </S.TeamHeader> */}
+          <TeamHeader teamData={teamData} />
         </div>
 
       )}
 
       {/* TABS  */}
-      <Tabs
-        teamId={teamId}
-        eventsRegularSeason={eventsRegularSeason}
-        eventsPostSeason={eventsPostSeason}
-        teamRecords={teamRecords.data.items}
-      />
+      {eventsRegularSeason.isLoading || eventsPostSeason.isLoading || teamRecords.isLoading ? (
+        <LinearProgress />
+      ) : (
+        <Tabs
+          teamId={teamId}
+          eventsRegularSeason={eventsRegularSeason}
+          eventsPostSeason={eventsPostSeason}
+          teamRecords={teamRecords.data.items}
+        />
+      )}
     </S.TeamPageContainer>
   );
 }

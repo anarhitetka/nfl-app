@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-export const TeamPageContainer = styled.div`
-  background: #B5BFCA;
-  background: -webkit-linear-gradient(bottom right, #B5BFCA, #EEEEEE);
-  background: -moz-linear-gradient(bottom right, #B5BFCA, #EEEEEE);
-  background: linear-gradient(to top left, #B5BFCA, #EEEEEE);
-`;
-
 export const TeamHeader = styled.div`
   padding: 10px;
   display: flex;
@@ -31,4 +24,3 @@ export const TeamName = styled.h1`
     font-size: 6vw;
   }
 `;
-
