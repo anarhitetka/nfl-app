@@ -72,6 +72,38 @@ export const PlayRow = styled.div`
         width: 50px;
         text-align: right;
     }
+    .play-abbreviation, 
+    .play-clock {
+        display: flex;
+        align-items: center;
+    }
+
+    position: relative;
+    .tooltip-play-text {
+        position: absolute;
+        top: 45px;
+        left: 50%;
+        width: 100%;
+        transform:translate(-50%, 0);
+        padding:5px 10px;
+        color:#444444;
+        background-color:#fff;
+        font-size:13px;
+        border-radius:3px;
+        z-index:99999999;
+        box-sizing:border-box;
+        box-shadow:0 1px 8px rgba(0,0,0,0.3);
+        opacity:0; 
+        visibility: hidden;
+        transition:opacity 0.8s;
+    }
+    &:hover {
+        .tooltip-play-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
     @media (max-width: 500px) {
         .play-text {
             display: none;

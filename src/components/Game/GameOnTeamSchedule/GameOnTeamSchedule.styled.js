@@ -17,7 +17,7 @@ export const DateInfoRow = styled.div`
     margin: 0;
     padding: 0;
   }
-  div > span {
+  .week-name {
     font-weight: 600;
   }
   .play-by-play {
@@ -33,8 +33,10 @@ export const DateInfoRow = styled.div`
     @media (max-width: 350px) {
       padding-top: 5px;
       text-align: left;
-      
     }
+  }
+  @media (max-width: 700px) {
+    font-size: 0.8rem;
   }
   @media (max-width: 350px) {
     flex-direction: column;

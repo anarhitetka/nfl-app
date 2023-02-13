@@ -41,6 +41,7 @@ export default function ScoringSummary({ scoringPlays, teams, awayTeamID, homeTe
                                                     <p className="play-clock">{play.clock.displayValue}</p>
                                                 </div>
                                                 <p className="play-text">{play.text.toUpperCase()}</p>
+                                                <span className="tooltip-play-text">{play.text.toUpperCase()}</span>
                                             </div>
                                         </div>
                                         <p className="scores">

@@ -190,6 +190,22 @@ export const SingleTeamHeaderCard = styled.div`
     }
 `;
 
+export const WeekInfoHeader = styled.div`
+    font-weight: 600;
+    color: #013369;
+    background-color: rgba(0,0,0,0.15);
+    .week-info-text {
+        padding: 20px;
+        margin: 0;
+    }
+    @media (max-width: 350px) {
+        font-size: 5vw;
+        .week-info-text {
+            padding: 10px;
+        }
+    }
+`;
+
 export const GameHeadline = styled.h4`
     margin: 20px 20px;
     color: #013369;
@@ -200,8 +216,9 @@ export const GameHeadline = styled.h4`
 
 export const TeamLink = styled(Link)`
     text-decoration: none;
-    color: #013369;
+    color: white;
     display: flex;
+    flex-direction: column;
     align-items: center;
 `;
 

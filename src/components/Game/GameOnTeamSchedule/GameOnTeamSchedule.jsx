@@ -45,12 +45,12 @@ export default function GameOnTeamSchedule({
             <S.DateInfoRow>
               {postSeason && (
                 <div>
-                  <span>{formatPlayoffsGamesNames(Number(weekNumber))}: </span>{formatDate(event.date)}
+                  <p><span className="week-name">{formatPlayoffsGamesNames(Number(weekNumber))}: </span></p>{formatDate(event.date)}
                 </div>
               )}
               {!postSeason && (
                 <div>
-                  <span>Week {weekNumber}:</span>{" "}
+                  <span className="week-name">Week {weekNumber}:</span>{" "}
                   {formatDate(event.date)}{" "}
                 </div>
               )}

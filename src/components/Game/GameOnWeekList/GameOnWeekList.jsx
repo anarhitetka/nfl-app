@@ -21,7 +21,7 @@ export default function GameOnWeekList({
       timeStyle: "short",
     })}`;
   };
-  console.log(event)
+
   return (
     <>
       <S.GameContainerLong key={event.id}>

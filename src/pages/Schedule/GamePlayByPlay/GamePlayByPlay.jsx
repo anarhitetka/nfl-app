@@ -16,7 +16,7 @@ export default function GamePlayByPlay() {
     const homeTeamData = from.homeTeamData;
 
     const gameSummaryData = ApiCalls.getGameSummary(eventId);
-
+    console.log(gameSummaryData)
     return (
         <S.PlayByPlayPageContainer>
             <S.TeamHeader>
@@ -30,8 +30,8 @@ export default function GamePlayByPlay() {
                                     alt="team logo"
                                 />
                             </div>
+                            <h5>{awayTeamData.data.team.displayName.toUpperCase()}</h5>
                         </S.TeamLink>
-                        <h5>{awayTeamData.data.team.displayName.toUpperCase()}</h5>
                         <span className="tooltip">{awayTeamData.data.team.displayName}</span>
                         <p>{awayTeamData.data.team.standingSummary}</p>
                     </S.SingleTeamHeaderCard>
@@ -47,8 +47,8 @@ export default function GamePlayByPlay() {
                                     alt="team logo"
                                 />
                             </div>
+                            <h5>{homeTeamData.data.team.displayName.toUpperCase()}</h5>
                         </S.TeamLink>
-                        <h5>{homeTeamData.data.team.displayName.toUpperCase()}</h5>
                         <span className="tooltip">{homeTeamData.data.team.displayName}</span>
                         <p>{homeTeamData.data.team.standingSummary}</p>
                     </S.SingleTeamHeaderCard>
@@ -61,6 +61,15 @@ export default function GamePlayByPlay() {
                         ? <LinearProgress />
                         : (
                             <S.SummaryWrapper>
+
+                                <S.WeekInfoHeader>
+                                    {gameSummaryData.data.header.season.type === 2 && (
+                                        <p className="week-info-text">Week {gameSummaryData.data.header.week}</p>
+                                    )}
+                                    {gameSummaryData.data.header.season.type === 3 && (
+                                        <p className="week-info-text">{gameSummaryData.data.header.gameNote}</p>
+                                    )}
+                                </S.WeekInfoHeader>
                                 <S.GameHeadline>
                                     {gameSummaryData.data.article?.headline}
                                 </S.GameHeadline>
