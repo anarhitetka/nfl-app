@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-import MUIScrollableTabBar from "./TabBar/MUIScrollableTabBar";
+import MUIScrollableTabBar from "./MUIScrollableTabBar/MUIScrollableTabBar";
 
 const S = {};
 S.TabBar = styled.div`

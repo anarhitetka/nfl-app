@@ -1,10 +1,8 @@
 import { useState } from "react"
+import TabsNavbarItem from "../../../components/Tabs/TabsNavbarItem";
+import TabContentItem from "../../../components/Tabs/TabContentItem";
 import TeamSchedule from "./TabsContent/TeamSchedule";
 import TeamStats from "./TabsContent/TeamStats";
-
-import TabsNavbarItem from "../../../../components/Tabs/TabsNavbarItem";
-import TabContentItem from "../../../../components/Tabs/TabContentItem";
-
 import * as S from "./Tabs.styled";
 
 export default function Tabs({
@@ -15,9 +13,6 @@ export default function Tabs({
 }) {
     const [activeTab, setActiveTab] = useState("team-schedule");
 
-    // const handleTabSchedule = () => setActiveTab("team-schedule");
-    // const handleTabStats = () => setActiveTab("team-stats");
-
     const teamTabs = [
         { id: "team-schedule", title: "Schedule" },
         { id: "team-stats", title: "Stats" }
@@ -26,14 +21,6 @@ export default function Tabs({
     return (
         <S.TabsComponentWrapper>
             <S.TabsNavbar>
-                {/* <p
-                    className={activeTab === 'team-schedule' ? "active" : ""}
-                    onClick={handleTabSchedule} >SCHEDULE
-                </p>
-                <p
-                    className={activeTab === 'team-stats' ? "active" : ""}
-                    onClick={handleTabStats} >STATS
-                </p> */}
                 {teamTabs.map(tab => {
                     return (
                         <TabsNavbarItem
@@ -45,7 +32,6 @@ export default function Tabs({
                         />
                     )
                 })}
-
             </S.TabsNavbar>
             <S.TabContent>
                 <TabContentItem

@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { ApiCalls } from "../../../utils/apiCalls";
+import { ApiCalls } from "../../utils/apiCalls";
+import Tabs from "./TeamTabs/Tabs";
+import TeamHeader from "./TeamHeader/TeamHeader";
 import LinearProgress from '@mui/material/LinearProgress';
 import * as S from "./Team.styled";
-import Tabs from "./Tabs/Tabs";
-import TeamHeader from "../../../components/TeamHeader/TeamHeader";
 
 export default function Team() {
   const { teamId } = useParams();
@@ -27,21 +27,7 @@ export default function Team() {
         <LinearProgress />
       ) : (
 
-        <div
-          style={{ backgroundColor: "#" + teamData.data.team.color, color: "white" }}
-        >
-          {/* <S.TeamHeader>
-            <div>
-              <S.TeamName>{teamData.data.team.displayName}</S.TeamName>
-              <p>{teamData.data.team.standingSummary}</p>
-            </div>
-
-            <img
-              src={teamData.data.team.logos[0].href}
-              height="150"
-              alt="team logo"
-            />
-          </S.TeamHeader> */}
+        <div style={{ backgroundColor: "#" + teamData.data.team.color, color: "white" }}>
           <TeamHeader teamData={teamData} />
         </div>
 

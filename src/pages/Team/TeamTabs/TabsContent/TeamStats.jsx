@@ -1,10 +1,52 @@
 import * as React from 'react';
+import { cleanUpJsonTeamRecords } from '../../../../utils/cleanUpDataHelpers';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import * as S from "./TeamRecordsTabsMUI.styled";
+import { CircularProgress } from "@mui/material";
+import styled from "styled-components";
 
-import { cleanUpJsonTeamRecords } from '../../../../../../utils/cleanUpDataHelpers';
+const S = {};
+S.Stats = styled.div`
+    font-size: 0.9rem;
+    min-height: 60vh;
+    .record-description {
+        font-weight: 700;
+        padding-bottom: 3px;
+        border-bottom: 1px solid black;
+    }
+    .stat-line {
+        border-bottom: 1px solid #B5BFCA;
+        display: flex;
+        justify-content: space-between;
+        p {
+            margin: 0;
+            padding: 5px 0;
+        }
+        @media (max-width: 500px) {
+            font-size: 0.7rem;
+        }
+        @media (max-width: 290px) {
+            flex-direction: column;
+        }
+    }
+    .stat-value {
+        font-weight: 500;
+    }
+`;
+
+export default function TeamStats({ teamRecords }) {
+    return (
+        <div style={{ minWidth: "60%", paddingTop: "15px" }}>
+            {teamRecords.isLoading ? (
+                <CircularProgress />
+            ) : (
+                <TeamRecordsTabsMUI teamRecords={teamRecords} />
+            )}
+
+        </div>
+    )
+}
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -33,7 +75,7 @@ function a11yProps(index) {
     };
 }
 
-export default function TeamRecordsTabsMUI({ teamRecords: teamRecordsAll }) {
+function TeamRecordsTabsMUI({ teamRecords: teamRecordsAll }) {
     const [value, setValue] = React.useState(0);
 
     const teamRecords = cleanUpJsonTeamRecords(teamRecordsAll);

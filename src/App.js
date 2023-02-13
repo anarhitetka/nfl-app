@@ -3,11 +3,11 @@ import { HashRouter } from "react-router-dom";
 import LayoutPage from "./components/layout/LayoutPage";
 import Home from "./pages/Home/Home";
 import Teams from "./pages/Teams/Teams";
-import Team from "./pages/Teams/Team/Team";
+import Team from "./pages/Team/Team";
 import Weeks from "./pages/Schedule/Weeks";
 import WeekGames from "./pages/Schedule/Week/WeekGames";
 import WeekSelected from "./pages/Schedule/Week/WeekSelected";
-import GamePlayByPlay from "./pages/Schedule/GamePlayByPlay/GamePlayByPlay";
+import GamePage from "./pages/Game/GamePage";
 import ErrorPage from "./pages/Error/ErrorPage";
 
 import { setCurrentWeekNo } from "./utils/setCurrentWeek";
@@ -31,7 +31,7 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="teams" element={<Teams />} />
           <Route path="teams/:teamId" element={<Team />} />
-          <Route path="games/:eventId" element={<GamePlayByPlay />} />
+          <Route path="games/:eventId" element={<GamePage />} />
           <Route
             path="weeks"
             element={<Weeks weekNo={weekNo} allWeeksData={allWeeksData} />}
