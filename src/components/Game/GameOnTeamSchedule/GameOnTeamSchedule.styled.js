@@ -125,6 +125,10 @@ export const TextWonTieLost = styled.span`
   .lost {
     color: red;
   }
+  .live-game {
+    font-weight: 600;
+    color: red;
+  }
 `;
 
 export const TextColorLost = styled.span`

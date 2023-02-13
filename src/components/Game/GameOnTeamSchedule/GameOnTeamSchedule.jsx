@@ -83,8 +83,11 @@ export default function GameOnTeamSchedule({
                     ) : (
                       <span>{formatDateShort(event.date)}</span>
                     )}
-
-                    {scoreIsFinal ? (
+                    {event.competitions[0].liveAvailable ? (
+                      <S.TextWonTieLost>
+                        <span className="live-game" >-LIVE-</span>
+                      </S.TextWonTieLost>
+                    ) : scoreIsFinal ? (
                       <>
                         {scoreAwayTeam < scoreHomeTeam
                           ? <S.TextWonTieLost>
