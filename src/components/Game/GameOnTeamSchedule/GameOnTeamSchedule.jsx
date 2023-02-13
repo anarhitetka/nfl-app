@@ -129,22 +129,28 @@ export default function GameOnTeamSchedule({
                       <span>{formatDateShort(event.date)}</span>
                     )}
 
+                    {event.competitions[0].liveAvailable ? (
+                      <S.TextWonTieLost>
+                        <span className="live-game" >-LIVE-</span>
+                      </S.TextWonTieLost>
+                    ) :
+                      scoreIsFinal ? (
+                        <>
+                          {scoreAwayTeam > scoreHomeTeam
+                            ? <S.TextWonTieLost>
+                              <span className='lost'>LOST</span>
+                            </S.TextWonTieLost>
+                            : scoreAwayTeam === scoreHomeTeam
+                              ? <S.TextWonTieLost>TIE</S.TextWonTieLost>
+                              : <S.TextWonTieLost>
+                                <span className='won'>WON</span>
+                              </S.TextWonTieLost>}
+                        </>
+                      ) : (
+                        ""
+                      )
+                    }
 
-                    {scoreIsFinal ? (
-                      <>
-                        {scoreAwayTeam > scoreHomeTeam
-                          ? <S.TextWonTieLost>
-                            <span className='lost'>LOST</span>
-                          </S.TextWonTieLost>
-                          : scoreAwayTeam === scoreHomeTeam
-                            ? <S.TextWonTieLost>TIE</S.TextWonTieLost>
-                            : <S.TextWonTieLost>
-                              <span className='won'>WON</span>
-                            </S.TextWonTieLost>}
-                      </>
-                    ) : (
-                      ""
-                    )}
                   </div>
                 </S.ScoreRowCompetitorDetails>
               )}
