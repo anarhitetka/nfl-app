@@ -16,7 +16,7 @@ export default function GamePlayByPlay() {
     const homeTeamData = from.homeTeamData;
 
     const gameSummaryData = ApiCalls.getGameSummary(eventId);
-    console.log(gameSummaryData)
+
     return (
         <S.PlayByPlayPageContainer>
             <S.TeamHeader>
@@ -69,10 +69,9 @@ export default function GamePlayByPlay() {
                                     {gameSummaryData.data.header.season.type === 3 && (
                                         <p className="week-info-text">{gameSummaryData.data.header.gameNote}</p>
                                     )}
+                                    <p className="article-headline">{gameSummaryData.data.article?.headline}</p>
                                 </S.WeekInfoHeader>
-                                <S.GameHeadline>
-                                    {gameSummaryData.data.article?.headline}
-                                </S.GameHeadline>
+
                                 {gameSummaryData.data.scoringPlays
                                     ? <ScoringSummary
                                         scoringPlays={gameSummaryData.data.scoringPlays}

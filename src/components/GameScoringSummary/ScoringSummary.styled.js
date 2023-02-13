@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SummaryContainer = styled.div`
     background-color: white;
-    padding: 0 10px;
+    padding: 0 10px 10px 10px;
     margin: 0 10px;
     border-radius: 3px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3); 
@@ -81,7 +81,7 @@ export const PlayRow = styled.div`
     position: relative;
     .tooltip-play-text {
         position: absolute;
-        top: 45px;
+        top: 30px;
         left: 50%;
         width: 100%;
         transform:translate(-50%, 0);
@@ -107,6 +107,11 @@ export const PlayRow = styled.div`
     @media (max-width: 500px) {
         .play-text {
             display: none;
+        }
+        .play-abbreviation {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: grey;
         }
     }
     @media (max-width: 270px) {
