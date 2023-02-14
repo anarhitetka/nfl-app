@@ -18,11 +18,17 @@ export const TeamHeader = styled.div`
     margin: auto 30px;
   }
   flex-wrap: wrap;
-  @media (max-width: 520px) {
+  @media (max-width: 580px) {
     img {
       height: 70px;
     }
     font-size: 0.7rem;
+  }
+`;
+
+export const TeamName = styled.h1`
+  @media (max-width: 300px) {
+    font-size: 6vw;
   }
 `;
 

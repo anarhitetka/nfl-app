@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { ApiCalls } from "../../../utils/apiCalls";
+import { ApiCalls } from "../../utils/apiCalls";
+import Tabs from "./TeamTabs/Tabs";
+import TeamHeader from "./TeamHeader/TeamHeader";
 import LinearProgress from '@mui/material/LinearProgress';
 import * as S from "./Team.styled";
-import Tabs from "./Tabs/Tabs";
 
 export default function Team() {
   const { teamId } = useParams();
@@ -26,34 +27,23 @@ export default function Team() {
         <LinearProgress />
       ) : (
 
-        <div
-          style={{ backgroundColor: "#" + teamData.data.team.color, color: "white" }}
-        >
-          <S.TeamHeader>
-            <div>
-              <h1>{teamData.data.team.displayName}</h1>
-              <p>{teamData.data.team.standingSummary}</p>
-            </div>
-
-            <img
-              src={teamData.data.team.logos[0].href}
-              height="150"
-              alt="team logo"
-            />
-
-
-          </S.TeamHeader>
+        <div style={{ backgroundColor: "#" + teamData.data.team.color, color: "white" }}>
+          <TeamHeader teamData={teamData} />
         </div>
 
       )}
 
       {/* TABS  */}
-      <Tabs
-        teamId={teamId}
-        eventsRegularSeason={eventsRegularSeason}
-        eventsPostSeason={eventsPostSeason}
-        teamRecords={teamRecords.data.items}
-      />
+      {eventsRegularSeason.isLoading || eventsPostSeason.isLoading || teamRecords.isLoading ? (
+        <LinearProgress />
+      ) : (
+        <Tabs
+          teamId={teamId}
+          eventsRegularSeason={eventsRegularSeason}
+          eventsPostSeason={eventsPostSeason}
+          teamRecords={teamRecords.data.items}
+        />
+      )}
     </S.TeamPageContainer>
   );
 }

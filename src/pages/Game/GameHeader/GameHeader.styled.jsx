@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const PlayByPlayPageContainer = styled.div`
-    background: #B5BFCA;
-    background: -webkit-linear-gradient(bottom right, #B5BFCA, #EEEEEE);
-    background: -moz-linear-gradient(bottom right, #B5BFCA, #EEEEEE);
-    background: linear-gradient(to top left, #B5BFCA, #EEEEEE);
-    min-height:100vh;
-    text-align: center;
-    padding-bottom: 15px;
-`;
-
 export const TeamHeader = styled.div`
     font-size: 1.2rem;
     padding: 10px;
@@ -190,52 +180,10 @@ export const SingleTeamHeaderCard = styled.div`
     }
 `;
 
-export const WeekInfoHeader = styled.div`
-    font-weight: 700;
-    color: #013369;
-    background-color: rgba(1, 51, 105,0.15);
-    .week-info-text {
-        padding: 20px 10px 10px 10px;
-        margin: 0;
-    }
-    .article-headline {
-        margin: 0;
-        padding-bottom: 10px;
-        font-weight: 400;
-    }
-    @media (max-width: 500px) {
-        .article-headline {
-            font-size: 0.9rem;
-            padding: 0 20px 10px 20px;
-        }
-    }
-    @media (max-width: 350px) {
-        font-size: 5vw;
-        .week-info-text {
-            padding: 10px;
-        }
-        .article-headline {
-            font-size: 4vw;
-        }
-    }
-    @media (min-width: 1000px) {
-        width: 100vw;
-    }
-`;
-
 export const TeamLink = styled(Link)`
     text-decoration: none;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-export const SummaryWrapper = styled.div`
-    @media (min-width: 1000px) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
 `;

@@ -1,4 +1,4 @@
-import Game from "../../../../../components/Game/Game";
+import GameCardForTeam from "./GameCardForTeam";
 import styled from "styled-components";
 
 const S = {};
@@ -24,12 +24,10 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
             <S.SeasonContainer>
                 {eventsRegularSeason.map((event) => {
                     return (
-                        <Game
-                            event={event}
+                        <GameCardForTeam
                             key={`game-${event.id}-team-${teamId}`}
-                            weekNo={true}
+                            event={event}
                             teamId={teamId}
-                            type="team-game"
                             postSeason={false}
                         />
                     );
@@ -40,12 +38,10 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
                 {eventsPostSeason.length > 0 && (
                     eventsPostSeason.map((event) => {
                         return (
-                            <Game
+                            <GameCardForTeam
+                                key={`game-${event.id}-team-${teamId}`}
                                 event={event}
-                                key={`game-${event.id}---team-${teamId}`}
-                                weekNo={true}
                                 teamId={teamId}
-                                type="team-game"
                                 postSeason={true}
                             />
 
