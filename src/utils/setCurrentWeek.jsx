@@ -7,6 +7,5 @@ export function setCurrentWeekNo(weeksData) {
   if (current == -1) weekNo = 1;
   // eslint-disable-next-line
   else if (current != -1) weekNo = current + 1;
-
   return weekNo;
 }

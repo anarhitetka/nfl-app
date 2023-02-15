@@ -233,12 +233,12 @@ export const ApiCalls = {
     getTeamEvents: (teamId) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/teams/${teamId}/events`),
 
     // GET ALL EVENTS FOR A SELECTED WEEK {weekNo}:
-    getEventsForWeek: (weekNo) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/${weekNo <= 18 ? 2 : 3
-        }/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}/events`),
+    getEventsForWeek: (weekNo, durationRegSeason) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/${weekNo <= durationRegSeason ? 2 : 3
+        }/weeks/${weekNo <= durationRegSeason ? weekNo : weekNo - durationRegSeason}/events`),
 
     // GET TEAMS ON BYE FOR {weekNo}
     // Each team has one bye week between Weeks 6 and 14 (regular season)
-    getTeamsOnByeForWeekNo: (weekNo) => requests.useGetAllTeamsOnBye(`${_core}/seasons/${getCurrentSeason()}/types/${weekNo <= 18 ? 2 : 3}/weeks/${weekNo <= 18 ? weekNo : weekNo - 18}`),
+    getTeamsOnByeForWeekNo: (weekNo, durationRegSeason) => requests.useGetAllTeamsOnBye(`${_core}/seasons/${getCurrentSeason()}/types/${weekNo <= durationRegSeason ? 2 : 3}/weeks/${weekNo <= durationRegSeason ? weekNo : weekNo - durationRegSeason}`),
 
     // GET INFO FOR ALL WEEKS IN the / preseason type 1, regular season type 2, postseason type 3, offseason type 4:
     getWeeksInfoForSeasonType: (seasonType) => requests.useGetAll(`${_core}/seasons/${getCurrentSeason()}/types/${seasonType}/weeks/`),
@@ -267,4 +267,6 @@ export const ApiCalls = {
     // GET TEAM RECORDS (playoff status, stats, records...)
     getTeamRecords: (teamId) => requests.useGet(`${_core}/seasons/${getCurrentSeason()}/types/2/teams/${teamId}/record?lang=en&region=us`),
 
+    // generic useGet
+    getDataFromUrl: (url) => requests.useGet(url),
 };

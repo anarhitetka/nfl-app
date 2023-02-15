@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
 import { ApiCalls } from '../../../../utils/apiCalls';
-import { formatPlayoffsGamesNames } from '../../../../utils/cleanUpDataHelpers';
 import LinearProgress from '@mui/material/LinearProgress';
 import * as S from "./GameCardForTeam.styled";
 
-export default function GameCardForTeam({ event, teamId, postSeason }) {
-
+export default function GameCardForTeam({ event, teamId }) {
     const {
         scoreAwayTeam, scoreHomeTeam, scoreIsFinal, homeTeamID, awayTeamID,
     } = ApiCalls.getTeamsInfoForEvent(event.$ref);
 
     const awayTeamData = ApiCalls.getTeamData(awayTeamID);
     const homeTeamData = ApiCalls.getTeamData(homeTeamID);
+    const weekText = ApiCalls.getDataFromUrl(event.week.$ref);
 
     const formatDateShort = function (dateStr) {
         return `${new Date(dateStr).toLocaleString(undefined, {
@@ -26,11 +25,6 @@ export default function GameCardForTeam({ event, teamId, postSeason }) {
         })}`;
     };
 
-    const weekNumber = event.week.$ref.substring(
-        event.week.$ref.lastIndexOf("/") + 1,
-        event.week.$ref.indexOf("?")
-    );
-
     return (
         <>
             <S.GameContainer>
@@ -40,17 +34,9 @@ export default function GameCardForTeam({ event, teamId, postSeason }) {
                     <>
 
                         <S.DateInfoRow>
-                            {postSeason && (
-                                <div>
-                                    <p><span className="week-name">{formatPlayoffsGamesNames(Number(weekNumber))}: </span></p>{formatDate(event.date)}
-                                </div>
-                            )}
-                            {!postSeason && (
-                                <div>
-                                    <span className="week-name">Week {weekNumber}:</span>{" "}
-                                    {formatDate(event.date)}{" "}
-                                </div>
-                            )}
+                            <div>
+                                <p><span className="week-name">{weekText.data.text}: </span></p>{formatDate(event.date)}
+                            </div>
                             <Link to={`/games/${event.id}`} state={{ from: { awayTeamID, homeTeamID, awayTeamData, homeTeamData } }} style={{ textDecoration: "none" }}>
                                 <p className="play-by-play">PLAY BY PLAY</p>
                             </Link>

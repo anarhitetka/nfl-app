@@ -16,7 +16,7 @@ S.MainContainer = styled.div`
   background: linear-gradient(to top left, #B5BFCA, #EEEEEE);
 `;
 
-export default function Weeks({ weekNo, allWeeksData }) {
+export default function Weeks({ weekNo, allWeeksData, durationRegSeason }) {
   return (
     <S.MainContainer>
       <S.TabBar>

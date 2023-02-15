@@ -5,10 +5,10 @@ import GameCard from "./GameCard/GameCard";
 import { CircularProgress } from "@mui/material";
 import * as S from "./WeekSelected.styled";
 
-export default function WeekSelected({ weekNo }) {
+export default function WeekSelected({ weekNo, durationRegSeason }) {
 
-  const allGamesData = ApiCalls.getEventsForWeek(weekNo);
-  const teamsOnBye = ApiCalls.getTeamsOnByeForWeekNo(weekNo);
+  const allGamesData = ApiCalls.getEventsForWeek(weekNo, durationRegSeason);
+  const teamsOnBye = ApiCalls.getTeamsOnByeForWeekNo(weekNo, durationRegSeason);
   const groupGamesByDayOfTheWeek = groupByDayOfTheWeek(allGamesData.data);
 
   const formatDate = function (dateStr) {
