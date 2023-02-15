@@ -23,6 +23,7 @@ function App() {
   const allWeeksData = [...weeksRegularSeason.data, ...weeksPostSeason.data];
 
   const weekNo = setCurrentWeekNo(allWeeksData);
+  const durationRegSeason = weeksRegularSeason.data.length;
 
   return (
     <HashRouter>
@@ -34,10 +35,10 @@ function App() {
           <Route path="games/:eventId" element={<GamePage />} />
           <Route
             path="weeks"
-            element={<Weeks weekNo={weekNo} allWeeksData={allWeeksData} />}
+            element={<Weeks weekNo={weekNo} allWeeksData={allWeeksData} durationRegSeason={durationRegSeason} />}
           >
             <Route index element={<WeekSelected weekNo={weekNo} />} />
-            <Route path=":weekNo" element={<WeekGames />} />
+            <Route path=":weekNo" element={<WeekGames durationRegSeason={durationRegSeason} />} />
           </Route>
         </Route>
         <Route path="*" element={<ErrorPage />} />

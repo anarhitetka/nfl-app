@@ -28,7 +28,6 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
                             key={`game-${event.id}-team-${teamId}`}
                             event={event}
                             teamId={teamId}
-                            postSeason={false}
                         />
                     );
                 })}
@@ -42,7 +41,6 @@ export default function TeamSchedule({ teamId, eventsRegularSeason, eventsPostSe
                                 key={`game-${event.id}-team-${teamId}`}
                                 event={event}
                                 teamId={teamId}
-                                postSeason={true}
                             />
 
                         );
